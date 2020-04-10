@@ -6,12 +6,12 @@ const logger = require('morgan');
 const cookieParser = require('cookie-parser');
 const session = require('cookie-session');
 const bodyParser = require('body-parser');
-//const LocalStrategy = require('passport-local').Strategy;
+const LocalStrategy = require('passport-local').Strategy;
 const flash = require('connect-flash');
 
 const router = require("express").Router();
 const routes = require("./routes");
-const User = require('./models/user');
+const User = require("./models/user");
 
 const PORT = process.env.PORT || 3001;
 const app = express();
@@ -34,7 +34,7 @@ app.use(passport.session());
 
 // https://github.com/saintedlama/passport-local-mongoose
 // Simplified Passport/Passport-Local Configuration
-passport.use(User.createStrategy());
+passport.use(new LocalStrategy(User.authenticate()));
 
 // use static serialize and deserialize of model for passport session support
 passport.serializeUser(User.serializeUser());

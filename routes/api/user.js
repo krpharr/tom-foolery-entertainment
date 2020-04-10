@@ -1,9 +1,10 @@
 const router = require("express").Router();
 const request = require('request');
-const User = require("../models/user.js");
+const User = require("../../models/user");
 const passport = require('passport');
 
-//get all users from database ?
+//get all users from database ? = "/user"
+// mogoose cose needs to be moved to contollers for userController
 router.get("/", (req, res) => {
   User.find({})
     .sort({ date: -1 })
@@ -16,7 +17,8 @@ router.get("/", (req, res) => {
 });
 
 router.get('/register', function(req, res) {
-  res.render('register', {});
+  //res.render('register', {});
+  // is this needed here - prob just a page routed to by react with register form 
 });
 
 router.post('/register', function(req, res, next) {
@@ -27,7 +29,7 @@ router.post('/register', function(req, res, next) {
       return next(err);
     }
     console.log('user registered!');
-    res.redirect('/');
+    //res.redirect('/');
   });
 });
 

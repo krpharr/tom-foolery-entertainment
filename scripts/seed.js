@@ -21,7 +21,7 @@ const bandSeed = [{
     name: "The Police",
   },
   {
-    name: "The Rush",
+    name: "Rush",
   }
 ];
 
