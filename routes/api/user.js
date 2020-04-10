@@ -19,6 +19,7 @@ router.get("/", (req, res) => {
 router.get('/register', function(req, res) {
   //res.render('register', {});
   // is this needed here - prob just a page routed to by react with register form 
+  console.log("register form");
 });
 
 router.post('/register', function(req, res, next) {
