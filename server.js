@@ -10,7 +10,7 @@ const bodyParser = require('body-parser');
 const flash = require('connect-flash');
 
 const router = require("express").Router();
-const routes = require("./routes/api");
+const routes = require("./routes");
 const User = require('./models/user');
 
 const PORT = process.env.PORT || 3001;
