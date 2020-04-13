@@ -30,7 +30,8 @@ router.post('/register', function(req, res, next) {
       return next(err);
     }
     console.log('user registered!');
-    //res.redirect('/');
+    // res.redirect('/');
+    res.json({ username: req.body.username, password: "********" });
   });
 });
 
