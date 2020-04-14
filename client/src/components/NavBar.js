@@ -1,4 +1,5 @@
 import React from 'react';
+import { useHistory } from "react-router-dom";
 import clsx from 'clsx';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 import Drawer from '@material-ui/core/Drawer';
@@ -81,6 +82,13 @@ export default function NavBar() {
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
 
+  const history = useHistory();
+  const handleMenuItemClick = (text) => {
+    console.log(text);
+    history.push(`/${text.toLowerCase().replace(" ", "")}`);
+    handleDrawerClose();
+  };
+
   const handleDrawerOpen = () => {
     setOpen(true);
   };
@@ -128,17 +136,17 @@ export default function NavBar() {
         </div>
         <Divider />
         <List>
-          {['Inbox', 'Starred', 'Send email', 'Drafts'].map((text, index) => (
-            <ListItem button key={text}>
-              <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
-              <ListItemText primary={text} />
+          {['Home', 'About', 'Events', 'Bands', 'Contact Us'].map((text, index) => (
+            <ListItem button key={text} onClick={() => handleMenuItemClick(text)}>
+                <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
+                <ListItemText primary={text}/>
             </ListItem>
           ))}
         </List>
         <Divider />
         <List>
-          {['All mail', 'Trash', 'Spam'].map((text, index) => (
-            <ListItem button key={text}>
+          {['Login'].map((text, index) => (
+            <ListItem button key={text} onClick={() => handleMenuItemClick(text)}>
               <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
               <ListItemText primary={text} />
             </ListItem>
