@@ -1,10 +1,10 @@
 const path = require("path");
 const router = require("express").Router();
-const bandRoutes = require("./bands");
+const bandRoutes = require("./band");
 const userRoutes = require("./user");
 
 // Band routes
-router.use("/bands", bandRoutes);
+router.use("/band", bandRoutes);
 // user authentication w passport
 router.use("/user", userRoutes);
 

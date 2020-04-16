@@ -25,9 +25,9 @@ const bandSeed = [{
   }
 ];
 
-db.Bands
+db.Band
   .remove({})
-  .then(() => db.Bands.collection.insertMany(bandSeed))
+  .then(() => db.Band.collection.insertMany(bandSeed))
   .then(data => {
     console.log(data.result.n + " records inserted!");
     process.exit(0);

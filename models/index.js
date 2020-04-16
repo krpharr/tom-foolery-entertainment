@@ -1,3 +1,3 @@
 module.exports = {
-  Bands: require("./bands")
+  Band: require("./band")
 };
