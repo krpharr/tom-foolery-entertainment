@@ -24,28 +24,35 @@ router.get('/register', function(req, res) {
 
 router.post('/register', function(req, res, next) {
   console.log('registering user');
-  User.register(new User({ username: req.body.username }), req.body.password, function(err) {
+  User.register(new User({ username: req.body.username, type: req.body.type }), req.body.password, function(err) {
     if (err) {
       console.log('error while user register!', err);
       return next(err);
     }
     console.log('user registered!');
     // res.redirect('/');
-    res.json({ username: req.body.username, password: "********" });
+    res.json({ username: req.body.username, type: req.body.type, password: "********" });
   });
 });
 
 router.get('/login', function(req, res) {
-  res.render('login', { user: req.user, message: req.flash('error') });
+  // console.log(res.data);
+  res.json({ user: req.user.username, message: req.flash('error') });
+  //res.render('login', { user: req.user, message: req.flash('error') });
 });
 
 router.post('/login', passport.authenticate('local', { failureRedirect: '/login', failureFlash: true }), function(req, res) {
-  res.redirect('/');
+  // console.log(res.data);
+  const { username, type } = req.user;
+  res.json({ username: req.user.username, type: req.user.type });
+  // res.json({ username: req.body.username });
+  // res.redirect('/');
 });
 
 router.get('/logout', function(req, res) {
   req.logout();
-  res.redirect('/');
+  res.json({ user: req.user, message: req.flash('error') });
+  // res.redirect('/');
 });
 
 module.exports = router;

@@ -8,6 +8,8 @@ import About from "./pages/About";
 import Events from "./pages/Events";
 import Bands from "./pages/Bands";
 import ContactUs from "./pages/ContactUs";
+import Login from "./pages/Login";
+import Admin from "./pages/Admin";
 import StickyFooter from "./components/StickyFooter";
 
 const useStyles = makeStyles((theme) => ({
@@ -34,6 +36,8 @@ function App() {
             <Route exact path="/events" component={Events} />
             <Route exact path="/bands" component={Bands} />
             <Route exact path="/contactus" component={ContactUs} />
+            <Route exact path="/login" component={Login} />
+            <Route exact path="/admin" component={Admin} />
             {/* <Route exact path="/search" component={Search} />
             <Route exact path="/saved" component={Saved} />
             <NoMatch /> */}
