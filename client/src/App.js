@@ -10,6 +10,8 @@ import Bands from "./pages/Bands";
 import ContactUs from "./pages/ContactUs";
 import Login from "./pages/Login";
 import Admin from "./pages/Admin";
+import ClientPage from "./pages/Client";
+import Bandleader from "./pages/Bandleader";
 import StickyFooter from "./components/StickyFooter";
 
 const useStyles = makeStyles((theme) => ({
@@ -38,6 +40,8 @@ function App() {
             <Route exact path="/contactus" component={ContactUs} />
             <Route exact path="/login" component={Login} />
             <Route exact path="/admin" component={Admin} />
+            <Route exact path="/client" component={ClientPage} />
+            <Route exact path="/bandleader" component={Bandleader} />
             {/* <Route exact path="/search" component={Search} />
             <Route exact path="/saved" component={Saved} />
             <NoMatch /> */}

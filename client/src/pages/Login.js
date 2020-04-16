@@ -51,9 +51,16 @@ export default function Login() {
     userAPI.login(username, password).then(res => {
       const {username, type} = res.data;
       console.log(username, type);
-      if(type === "admin"){
-        history.push(`/admin`);
-      }
+      // history.push(`/${type}`);
+      const str = `/${type}`;
+      history.push(str);
+      // if(type === "admin"){
+      //   history.push(`/admin`);
+      // }else if (type === "client"){
+      //   history.push(`/client`);
+      // }else if (type === "bandleader"){
+      //   history.push(`/bandleader`);
+      // }
     });
   };
 
