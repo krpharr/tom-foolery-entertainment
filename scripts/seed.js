@@ -93,7 +93,7 @@ const bandSeed = [{
   {
     name: "Duran Duran",
     leader: "simonlebon",
-    description: "Delivering the 80's classics.  No event to large or small.",
+    description: "Delivering the 80's classics.  No event too large or small.",
     images: ["https://i.pinimg.com/736x/83/eb/7a/83eb7a1f45f8232f67b21bf54b9674fd.jpg"],
     videos: ["https://youtu.be/5JlbqWTlN2E"],
     priceRange: [1000000, 10000000],

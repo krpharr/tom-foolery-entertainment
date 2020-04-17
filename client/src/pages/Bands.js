@@ -1,24 +1,66 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import Container from '@material-ui/core/Container';
 import { makeStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
+import Grid from '@material-ui/core/Grid';
+import BandCard from "../components/BandCard";
+import bandAPI from "../utils/bandAPI";
 
 const useStyles = makeStyles((theme) => ({
   main: {
     marginTop: theme.spacing(8),
     marginBottom: theme.spacing(2),
+  },
+  cardGrid: {
+    paddingTop: theme.spacing(8),
+    paddingBottom: theme.spacing(8),
+  },
+  card: {
+    display: 'flex',
+    flexDirection: 'column',
+  },
+  cardMedia: {
+    paddingTop: '56.25%', // 16:9
+  },
+  cardContent: {
+    flexGrow: 1,
   }
 }));
 
 function Bands(){
-  
   const classes = useStyles();
 
+  const [bands, setBands] = useState();
+
+  useEffect(() => {
+    bandAPI.getAll().then(res => {
+      console.log(res.data);
+      setBands(res.data);
+    });
+  }, []);
+  
+  const mapBands = () => {
+    if(bands === undefined)return;
+    const bandsMap = bands.map(band => {
+      return(
+        <Grid item key={band._id} xs={12} sm={12} md={6} lg={4} xl={3}>
+          <BandCard {...band} className={classes.card} />
+        </Grid>
+      );
+    });
+    return bandsMap;
+  };
+  
   return(
-    <Container component="main" className={classes.main} maxWidth="sm">
+    <Container component="main" className={classes.main} maxWidth="xl">
       <Typography variant="h2" component="h1" gutterBottom>
         Bands Page 
       </Typography>
+      <Container className={classes.cardGrid} maxWidth="lg">
+        <Grid container spacing={4}>
+          {mapBands()}
+        </Grid>
+      </Container>      
     </Container>      
   );
 };
