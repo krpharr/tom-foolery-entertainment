@@ -7,7 +7,7 @@ router.route("/")
   .get(bandController.findAll)
   .post(bandController.create);
 
-// Matches with "/api/books/:id"
+// Matches with "/api/band/:id"
 router
   .route("/:id")
   .get(bandController.findById)

@@ -1,4 +1,9 @@
 module.exports = {
+  Agent: require("./agent"),
   Band: require("./band"),
-  // User: require("./user")
+  Bandleader: require("./bandleader"),
+  Client: require("./client"),
+  Event: require("./event"),
+  Review: require("./review")
+    // User: require("./user")
 };
