@@ -113,18 +113,6 @@ const bandSeed = [{
     reviews: [],
     upcomingEvents: [],
     pastEvents: []
-  },
-  {
-    name: "Backstreet Boys",
-    leader: "loupearlman",
-    description: "Does not get much worse than this.",
-    images: ["https://static.billboard.com/files/media/Backstreet-Boys-1997-portrait-billboard-1548-768x433.jpg"],
-    videos: ["https://youtu.be/jJ-ueetuZOk"],
-    priceRange: [1000000, 10000000],
-    genres: ["90's"],
-    reviews: [],
-    upcomingEvents: [],
-    pastEvents: []
   }
 ];
 

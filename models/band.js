@@ -8,7 +8,7 @@ const bandSchema = new Schema({
     trim: true,
     required: "Band must havea name"
   },
-  leaderId: {
+  leader: {
     type: String,
     trim: true,
     required: "Band must have a leader."
@@ -25,10 +25,6 @@ const bandSchema = new Schema({
   videos: {
     type: Array,
     required: "Band must have at least one video in array"
-  },
-  songlist: {
-    type: String, //link to document
-    trim: true,
   },
   priceRange: {
     type: Array, //[0] low - [1] high
