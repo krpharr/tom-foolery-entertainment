@@ -1,11 +1,20 @@
 const path = require("path");
 const router = require("express").Router();
+const agentRoutes = require("./agent");
 const bandRoutes = require("./band");
+const bandleaderRoutes = require("./bandleader");
+const clientRoutes = require("./client");
+const eventRoutes = require("./event");
+const reviewRoutes = require("./review");
 const userRoutes = require("./user");
 
-// Band routes
+
+router.use("/agent", agentRoutes);
 router.use("/band", bandRoutes);
-// user authentication w passport
+router.use("/bandleader", bandleaderRoutes);
+router.use("/client", clientRoutes);
+router.use("/event", eventRoutes);
+router.use("/review", reviewRoutes);
 router.use("/user", userRoutes);
 
 // If no API routes are hit, send the React app
