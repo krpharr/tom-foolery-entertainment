@@ -14,8 +14,6 @@ import Container from '@material-ui/core/Container';
 import userAPI from "../utils/userAPI";
 import { useHistory } from "react-router-dom";
 
-
-
 const useStyles = makeStyles((theme) => ({
   paper: {
     marginTop: theme.spacing(8),

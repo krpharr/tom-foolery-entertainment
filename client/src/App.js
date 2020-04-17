@@ -7,6 +7,7 @@ import Home from "./pages/Home";
 import About from "./pages/About";
 import Events from "./pages/Events";
 import Bands from "./pages/Bands";
+import Band from "./pages/Band";
 import ContactUs from "./pages/ContactUs";
 import Login from "./pages/Login";
 import Admin from "./pages/Admin";
@@ -37,6 +38,7 @@ function App() {
             <Route exact path="/about" component={About} />
             <Route exact path="/events" component={Events} />
             <Route exact path="/bands" component={Bands} />
+            <Route exact path="/band" component={Band} />
             <Route exact path="/contactus" component={ContactUs} />
             <Route exact path="/login" component={Login} />
             <Route exact path="/admin" component={Admin} />
