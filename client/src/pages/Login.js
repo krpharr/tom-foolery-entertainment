@@ -14,7 +14,16 @@ import Container from '@material-ui/core/Container';
 import userAPI from "../utils/userAPI";
 import { useHistory } from "react-router-dom";
 
+const Background = "assets/images/jens-thekkeveettil-dBWvUqBoOU8-unsplash.jpg";
+
 const useStyles = makeStyles((theme) => ({
+  main: {
+    marginBottom: theme.spacing(2),
+    height: "100vh",
+    backgroundImage: `url(${Background})`,
+    backgroundSize: "cover",
+    backgroundPosition: "center"
+  },
   paper: {
     marginTop: theme.spacing(8),
     display: 'flex',
@@ -49,21 +58,14 @@ export default function Login() {
     userAPI.login(username, password).then(res => {
       const {username, type} = res.data;
       console.log(username, type);
-      // history.push(`/${type}`);
       const str = `/${type}`;
       history.push(str);
-      // if(type === "admin"){
-      //   history.push(`/admin`);
-      // }else if (type === "client"){
-      //   history.push(`/client`);
-      // }else if (type === "bandleader"){
-      //   history.push(`/bandleader`);
-      // }
     });
   };
 
   return (
-    <Container component="main" maxWidth="xs">
+    <Container component="main" className={classes.main} maxWidth="xl">
+      <Container component="main" maxWidth="xs">
       <CssBaseline />
       <div className={classes.paper}>
         <Avatar className={classes.avatar}>
@@ -122,6 +124,8 @@ export default function Login() {
           </Grid>
         </form>
       </div>
+      </Container>
     </Container>
+  
   );
 }

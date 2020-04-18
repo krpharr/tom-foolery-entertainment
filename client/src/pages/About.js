@@ -33,7 +33,7 @@ function About(){
   const classes = useStyles();
 
   return(
-    <Container component="main" className={classes.main} maxWidth="sm">
+    <Container component="main" className={classes.main} maxWidth="xl">
       <Grid container className={classes.gridContainer}>
         <Grid item xs={12}>
         <Typography className={classes.aboutText} variant="h4" component="h1" gutterBottom>

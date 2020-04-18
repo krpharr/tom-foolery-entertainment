@@ -40,7 +40,7 @@ function Events(){
   const classes = useStyles();
 
   return(
-    <Container component="main" className={classes.main} maxWidth="sm">
+    <Container component="main" className={classes.main} maxWidth="xl">
       <Typography variant="h2" component="h1" gutterBottom>
         Events Page 
       </Typography>
