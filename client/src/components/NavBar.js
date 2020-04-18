@@ -29,7 +29,9 @@ const useStyles = makeStyles((theme) => ({
       easing: theme.transitions.easing.sharp,
       duration: theme.transitions.duration.leavingScreen,
     }),
-    backgroundColor: "transparent",
+    backgroundColor: "rgb(0,0,0,0.4)",
+    
+    color: "#FB0EE1",
   },
   appBarShift: {
     width: `calc(100% - ${drawerWidth}px)`,
@@ -41,6 +43,14 @@ const useStyles = makeStyles((theme) => ({
   },
   title: {
     flexGrow: 1,
+    color: "yellow",
+    fontFamily: "Monoton"
+  },
+  helperTxt: {
+    flexGrow: 1,
+    color: "#FB0EE1",
+    fontFamily: "Monoton",
+    float: "right"
   },
   hide: {
     display: 'none',
@@ -107,8 +117,8 @@ export default function NavBar() {
         })}
       >
         <Toolbar>
-          <Typography variant="h6" noWrap className={classes.title}>
-            Tom Foolery Entertainment
+          <Typography variant="h5" noWrap className={classes.title}>
+            TOM FOOLERY
           </Typography>
           <IconButton
             color="inherit"
@@ -117,6 +127,9 @@ export default function NavBar() {
             onClick={handleDrawerOpen}
             className={clsx(open && classes.hide)}
           >
+            <Typography variant="h6" noWrap className={classes.helperTxt}>
+              menu
+            </Typography>
             <MenuIcon />
           </IconButton>
         </Toolbar>
