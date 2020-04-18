@@ -8,7 +8,6 @@ const eventRoutes = require("./event");
 const reviewRoutes = require("./review");
 const userRoutes = require("./user");
 
-
 router.use("/agent", agentRoutes);
 router.use("/band", bandRoutes);
 router.use("/bandleader", bandleaderRoutes);
