@@ -2,11 +2,36 @@ import React from "react";
 import Container from '@material-ui/core/Container';
 import { makeStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
+import Grid from '@material-ui/core/Grid';
+import EventCard from "../components/EventCard";
+import events from "../data/events";
+
+const Background = "assets/images/dylan-nolte-Vfd_WzJN6Zg-unsplash.jpg";
+
 
 const useStyles = makeStyles((theme) => ({
   main: {
-    marginTop: theme.spacing(8),
+    // marginTop: theme.spacing(8),
     marginBottom: theme.spacing(2),
+    // height: "100vh",
+    backgroundImage: `url(${Background})`,
+    backgroundSize: "cover",
+    // backgroundRepeat: "no-repeat",
+    backgroundPosition: "center"
+  },
+  cardGrid: {
+    paddingTop: theme.spacing(8),
+    paddingBottom: theme.spacing(8),
+  },
+  card: {
+    display: 'flex',
+    flexDirection: 'column',
+  },
+  cardMedia: {
+    paddingTop: '56.25%', // 16:9
+  },
+  cardContent: {
+    flexGrow: 1,
   }
 }));
 
@@ -19,6 +44,17 @@ function Events(){
       <Typography variant="h2" component="h1" gutterBottom>
         Events Page 
       </Typography>
+      <Container className={classes.cardGrid} maxWidth="lg">
+        <Grid container spacing={4}>
+          {events.map((event, index) => {
+            return(
+              <Grid item key={index} xs={12} sm={12} md={6} lg={4} xl={3}>
+                <EventCard className={classes.card} {...event}/>
+              </Grid>             
+            );
+          })}
+        </Grid>
+      </Container>   
     </Container>      
   );
 };

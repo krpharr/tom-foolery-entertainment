@@ -6,10 +6,17 @@ import Grid from '@material-ui/core/Grid';
 import BandCard from "../components/BandCard";
 import bandAPI from "../utils/bandAPI";
 
+const Background = "assets/images/mahdi-b7gjIMzLJZc-unsplash.jpg";
+
 const useStyles = makeStyles((theme) => ({
   main: {
-    marginTop: theme.spacing(8),
+    // marginTop: theme.spacing(8),
     marginBottom: theme.spacing(2),
+    // height: "100vh",
+    backgroundImage: `url(${Background})`,
+    backgroundSize: "cover",
+    // backgroundRepeat: "no-repeat",
+    backgroundPosition: "center"
   },
   cardGrid: {
     paddingTop: theme.spacing(8),
