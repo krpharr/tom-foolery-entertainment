@@ -9,12 +9,13 @@ const useStyles = makeStyles((theme) => ({
   root: {
   },
   main: {
-    marginTop: theme.spacing(7),
+    // marginTop: theme.spacing(7),
     marginBottom: theme.spacing(2),
     height: "100vh",
     backgroundImage: `url(${Background})`,
     backgroundSize: "cover",
-    backgroundPosition: "center"
+    backgroundRepeat: "no-repeat"
+    // backgroundPosition: "center"
   }
 }));
 
