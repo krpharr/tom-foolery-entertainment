@@ -13,6 +13,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import userAPI from "../utils/userAPI";
 import { useHistory } from "react-router-dom";
+import moment from "moment";
 
 const Background = "assets/images/jens-thekkeveettil-dBWvUqBoOU8-unsplash.jpg";
 
@@ -45,6 +46,11 @@ const useStyles = makeStyles((theme) => ({
   submit: {
     margin: theme.spacing(3, 0, 2),
   },
+  textField: {
+    marginLeft: theme.spacing(1),
+    marginRight: theme.spacing(1),
+    width: 200,
+  }
 }));
 
 export default function ContactUs() {
@@ -109,6 +115,7 @@ export default function ContactUs() {
             id="email"
             label="Email Address"
             name="email"
+            type="email"
             autoComplete="email"
             autoFocus
           />
@@ -123,17 +130,37 @@ export default function ContactUs() {
             autoComplete="phone"
           />
           <TextField
+            id="date"
+            label="Date of Event"
+            type="date"
+            // defaultValue={moment().add(2, 'days').format("YYYY-MM-DD")}
+            className={classes.textField}
+            InputLabelProps={{
+              shrink: true,
+            }}
+          />
+          <TextField
+            id="time"
+            label="Start Time"
+            type="time"
+            // defaultValue="20:00"
+            className={classes.textField}
+            InputLabelProps={{
+              shrink: true,
+            }}
+            inputProps={{
+              step: 300, // 5 min
+            }}
+          />          
+          <TextField
             variant="outlined"
             margin="normal"
             fullWidth
-            name="date"
-            label="Event Date"
-            type="date"
-            id="date"
-          />
-          <FormControlLabel
-            control={<Checkbox value="remember" color="primary" />}
-            label="Remember me"
+            name="location"
+            label="Address of Event"
+            type="address"
+            id="location"
+            autoComplete="location"
           />
           <Button
             type="submit"
@@ -142,20 +169,8 @@ export default function ContactUs() {
             color="primary"
             className={classes.submit}
           >
-            Sign In
+            Submit
           </Button>
-          <Grid container>
-            <Grid item xs>
-              <Link href="#" variant="body2">
-                Forgot password?
-              </Link>
-            </Grid>
-            <Grid item>
-              <Link href="#" variant="body2">
-                {"Don't have an account? Sign Up"}
-              </Link>
-            </Grid>
-          </Grid>
         </form>
       </div>
       </Container>
