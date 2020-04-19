@@ -11,7 +11,7 @@ const Background = "assets/images/mahdi-b7gjIMzLJZc-unsplash.jpg";
 const useStyles = makeStyles((theme) => ({
   main: {
     // marginTop: theme.spacing(8),
-    marginBottom: theme.spacing(2),
+    // marginBottom: theme.spacing(2),
     // height: "100vh",
     backgroundImage: `url(${Background})`,
     backgroundSize: "cover",

@@ -11,7 +11,7 @@ const useStyles = makeStyles((theme) => ({
   },
   main: {
     // marginTop: theme.spacing(7),
-    marginBottom: theme.spacing(2),
+    // marginBottom: theme.spacing(2),
     height: "100vh",
     backgroundImage: `url(${Background})`,
     backgroundSize: "cover",

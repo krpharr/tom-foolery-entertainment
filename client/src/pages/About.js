@@ -10,7 +10,7 @@ const Background = "assets/images/marcela-laskoski-YrtFlrLo2DQ-unsplash.jpg";
 const useStyles = makeStyles((theme) => ({
   main: {
     // marginTop: theme.spacing(8),
-    marginBottom: theme.spacing(2),
+    // marginBottom: theme.spacing(2),
     height: "100vh",
     backgroundImage: `url(${Background})`,
     backgroundSize: "cover",
@@ -21,6 +21,11 @@ const useStyles = makeStyles((theme) => ({
     marginTop: theme.spacing(8),
     marginBottom: theme.spacing(2),
 
+  },
+  headerText: {
+    color: "white",
+    // paddingTop: theme.spacing(8),
+    textAlign: "center"
   },
   aboutText: {
     color: "white"
@@ -36,7 +41,7 @@ function About(){
     <Container component="main" className={classes.main} maxWidth="xl">
       <Grid container className={classes.gridContainer}>
         <Grid item xs={12}>
-        <Typography className={classes.aboutText} variant="h4" component="h1" gutterBottom>
+        <Typography className={classes.headerText} variant="h4" component="h1" gutterBottom>
           About Us 
         </Typography>
         <Typography className={classes.aboutText}  component="p" gutterBottom>      

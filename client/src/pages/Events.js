@@ -12,7 +12,7 @@ const Background = "assets/images/dylan-nolte-Vfd_WzJN6Zg-unsplash.jpg";
 const useStyles = makeStyles((theme) => ({
   main: {
     // marginTop: theme.spacing(8),
-    marginBottom: theme.spacing(2),
+    // marginBottom: theme.spacing(2),
     // height: "100vh",
     backgroundImage: `url(${Background})`,
     backgroundSize: "cover",
@@ -20,7 +20,7 @@ const useStyles = makeStyles((theme) => ({
     backgroundPosition: "center"
   },
   cardGrid: {
-    paddingTop: theme.spacing(8),
+    paddingTop: theme.spacing(2),
     paddingBottom: theme.spacing(8),
   },
   card: {
@@ -32,6 +32,11 @@ const useStyles = makeStyles((theme) => ({
   },
   cardContent: {
     flexGrow: 1,
+  },
+  headerTxt: {
+    color: "white",
+    paddingTop: theme.spacing(8),
+    textAlign: "center"
   }
 }));
 
@@ -41,8 +46,8 @@ function Events(){
 
   return(
     <Container component="main" className={classes.main} maxWidth="xl">
-      <Typography variant="h2" component="h1" gutterBottom>
-        Events Page 
+      <Typography className={classes.headerTxt} variant="h4" component="h1" gutterBottom>
+        Events  
       </Typography>
       <Container className={classes.cardGrid} maxWidth="lg">
         <Grid container spacing={4}>

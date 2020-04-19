@@ -19,7 +19,7 @@ const Background = "assets/images/jens-thekkeveettil-dBWvUqBoOU8-unsplash.jpg";
 
 const useStyles = makeStyles((theme) => ({
   main: {
-    marginBottom: theme.spacing(2),
+    // marginBottom: theme.spacing(2),
     // height: "100vh",
     backgroundImage: `url(${Background})`,
     // backgroundSize: "cover",
