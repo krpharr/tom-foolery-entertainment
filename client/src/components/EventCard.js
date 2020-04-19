@@ -14,7 +14,7 @@ const useStyles = makeStyles({
   },
 });
 
-export default function EventCard() {
+export default function EventCard(props) {
   const classes = useStyles();
 
   return (
@@ -22,29 +22,20 @@ export default function EventCard() {
       <CardActionArea>
         <CardMedia
           component="img"
-          alt="Contemplative Reptile"
+          alt={props.type}
           height="140"
-          image="https://picsum.photos/345/140"
-          title="Contemplative Reptile"
+          image={props.image}
+          title={props.type}
         />
         <CardContent>
           <Typography gutterBottom variant="h5" component="h2">
-            Lizard
+            {props.type}
           </Typography>
           <Typography variant="body2" color="textSecondary" component="p">
-            Lizards are a widespread group of squamate reptiles, with over 6,000 species, ranging
-            across all continents except Antarctica
+           {props.description}
           </Typography>
         </CardContent>
       </CardActionArea>
-      <CardActions>
-        <Button size="small" color="primary">
-          Share
-        </Button>
-        <Button size="small" color="primary">
-          Learn More
-        </Button>
-      </CardActions>
     </Card>
   );
 }
