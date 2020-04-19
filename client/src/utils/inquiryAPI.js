@@ -9,5 +9,8 @@ export default {
   },
   post: function(inquiryObj) {
     return axios.post("api/inquiry", inquiryObj);
+  },
+  update: function(id, inquiryObj) {
+    return axios.put(`api/inquiry/${id}`, inquiryObj);
   }
 };

@@ -116,9 +116,28 @@ const bandSeed = [{
   }
 ];
 
+const agentSeed = [
+  { firstName: "Honey", lastName: "Cassam", email: "hcassam0@google.it", phone: "722-518-7455", avatar: "https://robohash.org/voluptasrecusandaead.png?size=150x150&set=set1" },
+  { firstName: "Westley", lastName: "Dougary", email: "wdougary1@state.tx.us", phone: "903-666-6887", avatar: "https://robohash.org/totamitaquedoloremque.png?size=150x150&set=set1" },
+  { firstName: "Joane", lastName: "Dever", email: "jdever2@biglobe.ne.jp", phone: "413-957-5444", avatar: "https://robohash.org/inciduntexnecessitatibus.png?size=150x150&set=set1" },
+  { firstName: "Gail", lastName: "Dalrymple", email: "gdalrymple3@buzzfeed.com", phone: "270-363-6260", avatar: "https://robohash.org/voluptasiddolores.png?size=150x150&set=set1" }
+];
+
 db.Band
   .remove({})
   .then(() => db.Band.collection.insertMany(bandSeed))
+  .then(data => {
+    console.log(data.result.n + " records inserted!");
+    process.exit(0);
+  })
+  .catch(err => {
+    console.error(err);
+    process.exit(1);
+  });
+
+db.Agent
+  .remove({})
+  .then(() => db.Agent.collection.insertMany(agentSeed))
   .then(data => {
     console.log(data.result.n + " records inserted!");
     process.exit(0);

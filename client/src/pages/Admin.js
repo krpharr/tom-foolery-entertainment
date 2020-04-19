@@ -1,7 +1,8 @@
-import React from "react";
+import React from 'react';
 import Container from '@material-ui/core/Container';
 import { makeStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
+import InquiryCRUD from '../components/InquiryCRUD';
 
 const useStyles = makeStyles((theme) => ({
   main: {
@@ -19,6 +20,7 @@ function Admin(){
       <Typography variant="h2" component="h1" gutterBottom>
         Admin Page 
       </Typography>
+      <InquiryCRUD />
     </Container>      
   );
 };

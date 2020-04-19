@@ -31,8 +31,9 @@ const agentSchema = new Schema({
   },
   userId: {
     type: String,
-    trim: true,
-    required: "userId required for Agent"
+  },
+  avatar: {
+    type: String
   }
 });
 
