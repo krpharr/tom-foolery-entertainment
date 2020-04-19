@@ -11,7 +11,7 @@ import InfoIcon from '@material-ui/icons/Info';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
-import userAPI from "../utils/userAPI";
+import inquiryAPI from "../utils/inquiryAPI";
 import { useHistory } from "react-router-dom";
 import moment from "moment";
 
@@ -61,16 +61,24 @@ export default function ContactUs() {
 
   const handleSubmit = (event) =>{
     event.preventDefault();
-    // contactAPI(event.target.username.value, event.target.password.value);
+    const inquiryObj = {
+      firstName: event.target.firstname.value,
+      lastName: event.target.lastname.value,
+      email: event.target.email.value,
+      phone: event.target.phone.value,
+      date: event.target.date.value,
+      startTime: event.target.time.value,
+      location: event.target.location.value
+    }
+    console.log(inquiryObj);
+    contactAPI(inquiryObj);
   };
 
-  const contactAPI = (username, password) => {
-    // userAPI.login(username, password).then(res => {
-    //   const {username, type} = res.data;
-    //   console.log(username, type);
-    //   const str = `/${type}`;
-    //   history.push(str);
-    // });
+  const contactAPI = (inquiryObj) => {
+    inquiryAPI.post(inquiryObj).then(res => {
+      console.log(res);
+      console.log(res.data);
+    });
   };
 
   return (
@@ -125,7 +133,6 @@ export default function ContactUs() {
             fullWidth
             name="phone"
             label="Phone"
-            type="phone"
             id="phone"
             autoComplete="phone"
           />
@@ -158,7 +165,6 @@ export default function ContactUs() {
             fullWidth
             name="location"
             label="Address of Event"
-            type="address"
             id="location"
             autoComplete="location"
           />

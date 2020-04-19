@@ -4,6 +4,7 @@ module.exports = {
   Bandleader: require("./bandleader"),
   Client: require("./client"),
   Event: require("./event"),
+  Inquiry: require("./inquiry"),
   Review: require("./review")
     // User: require("./user")
 };
