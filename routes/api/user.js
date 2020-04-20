@@ -36,8 +36,13 @@ router.post('/register', function(req, res, next) {
 });
 
 router.get('/login', function(req, res) {
-  // console.log(res.data);
-  res.json({ user: req.user.username, message: req.flash('error') });
+  console.log(req.user);
+  if (req.user === undefined) {
+    return res.json({});
+  } else {
+    return res.json({ user: req.user.username, type: req.user.type });
+  }
+  // res.json({ user: req.user.username, message: req.flash('error') });
   //res.render('login', { user: req.user, message: req.flash('error') });
 });
 
@@ -51,7 +56,8 @@ router.post('/login', passport.authenticate('local', { failureRedirect: '/login'
 
 router.get('/logout', function(req, res) {
   req.logout();
-  res.json({ user: req.user, message: req.flash('error') });
+  const userObj = req.user === null ? { user: "", type: "" } : { user: req.user, type: req.user.type };
+  res.json(userObj);
   // res.redirect('/');
 });
 
