@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import { BrowserRouter as Router, Route, Switch, useHistory, useLocation, Redirect } from "react-router-dom";
 import CssBaseline from '@material-ui/core/CssBaseline';
 import { makeStyles } from '@material-ui/core/styles';
 import NavBar from "./components/NavBar";
@@ -14,7 +14,7 @@ import Admin from "./pages/Admin";
 import ClientPage from "./pages/Client";
 import Bandleader from "./pages/Bandleader";
 import StickyFooter from "./components/StickyFooter";
-import userAPI from "./utils/userAPI";
+import userAuth from "./utils/userAuth";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -24,41 +24,10 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-const userAuth = {
-  isAuthenticated: false,
-  authenticate(cb) {
-    userAPI.auth().then(res => {
-      console.log(res.data.user);
-      userAuth.result(res.data, cb);
-    });
-  },
-  signout(cb) {
-    userAPI.logout().then(res => {
-      console.log(res.data.user);
-      userAuth.result(res.data, cb);
-    });
-  },
-  result(res, cb) {
-    console.log("result",res);
-    userAuth.isAuthenticated = res.user ?  true : false;     
-    userAuth.user = res;
-    cb({authenticated: userAuth.isAuthenticated, user: userAuth.user});
-  },
-  user: {
-    username: "",
-    type: ""
-  },
-  setUser(username, type) {
-    this.user = {
-      username: username,
-      type: type
-    }
-  }
-};
 
-userAuth.signout((res)=>{
-  console.log("logged in: ", res);
-});
+// userAuth.signout((res)=>{
+//   console.log("logged in: ", res);
+// });
 
 // userAuth.authenticate((res)=>{
 //   console.log("logged in: ", res);

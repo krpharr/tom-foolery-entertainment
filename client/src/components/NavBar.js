@@ -17,6 +17,7 @@ import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import InboxIcon from '@material-ui/icons/MoveToInbox';
 import MailIcon from '@material-ui/icons/Mail';
+import LoginButton from "../components/LoginButton";
 
 const drawerWidth = 240;
 
@@ -120,6 +121,7 @@ export default function NavBar() {
           <Typography variant="h5" noWrap className={classes.title}>
             TOM FOOLERY
           </Typography>
+          <LoginButton />
           <IconButton
             color="inherit"
             aria-label="open drawer"

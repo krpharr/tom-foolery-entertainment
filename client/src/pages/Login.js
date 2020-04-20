@@ -13,6 +13,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import userAPI from "../utils/userAPI";
 import { useHistory } from "react-router-dom";
+import userAuth from "../utils/userAuth";
 
 const Background = "assets/images/jens-thekkeveettil-dBWvUqBoOU8-unsplash.jpg";
 
@@ -58,8 +59,11 @@ export default function Login() {
     userAPI.login(username, password).then(res => {
       const {username, type} = res.data;
       console.log(username, type);
-      const str = `/${type}`;
-      history.push(str);
+      userAuth.authenticate(res => {
+        console.log(res);
+        const str = `/${type}`;
+        history.push(str);
+      });
     });
   };
 
