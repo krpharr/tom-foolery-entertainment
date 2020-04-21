@@ -110,7 +110,7 @@ export default function ContactUs() {
   const mapBands = () => {
     const bandMap = bands.map((band, index) => {
       return(
-        <MenuItem key={index} value={band.id}>{band.name}</MenuItem>
+        <MenuItem key={index} value={band.name}>{band.name}</MenuItem>
       );
     });
     return bandMap;

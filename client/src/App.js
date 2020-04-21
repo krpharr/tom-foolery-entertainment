@@ -12,6 +12,7 @@ import ContactUs from "./pages/ContactUs";
 import ThankYou from "./pages/ThankYou";
 import Login from "./pages/Login";
 import Admin from "./pages/Admin";
+import Agent from "./pages/Agent";
 import ClientPage from "./pages/Client";
 import Bandleader from "./pages/Bandleader";
 import StickyFooter from "./components/StickyFooter";
@@ -47,6 +48,9 @@ function App() {
             <Route exact path="/login" component={Login} />
             <PrivateRoute path="/admin">
               <Admin type={"admin"} />
+            </PrivateRoute>
+            <PrivateRoute path="/agent">
+              <Agent type={"agent"} />
             </PrivateRoute>
             <PrivateRoute path="/client">
               <ClientPage type={"client"}/>

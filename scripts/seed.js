@@ -116,48 +116,48 @@ const bandSeed = [{
   }
 ];
 
-const agentSeed = [
-  { firstName: "Honey", lastName: "Cassam", email: "hcassam0@google.it", phone: "722-518-7455", avatar: "https://robohash.org/voluptasrecusandaead.png?size=150x150&set=set1" },
-  { firstName: "Westley", lastName: "Dougary", email: "wdougary1@state.tx.us", phone: "903-666-6887", avatar: "https://robohash.org/totamitaquedoloremque.png?size=150x150&set=set1" },
-  { firstName: "Joane", lastName: "Dever", email: "jdever2@biglobe.ne.jp", phone: "413-957-5444", avatar: "https://robohash.org/inciduntexnecessitatibus.png?size=150x150&set=set1" },
-  { firstName: "Gail", lastName: "Dalrymple", email: "gdalrymple3@buzzfeed.com", phone: "270-363-6260", avatar: "https://robohash.org/voluptasiddolores.png?size=150x150&set=set1" }
+// const agentSeed = [
+//   { firstName: "Honey", lastName: "Cassam", email: "hcassam0@google.it", phone: "722-518-7455", avatar: "https://robohash.org/voluptasrecusandaead.png?size=150x150&set=set1" },
+//   { firstName: "Westley", lastName: "Dougary", email: "wdougary1@state.tx.us", phone: "903-666-6887", avatar: "https://robohash.org/totamitaquedoloremque.png?size=150x150&set=set1" },
+//   { firstName: "Joane", lastName: "Dever", email: "jdever2@biglobe.ne.jp", phone: "413-957-5444", avatar: "https://robohash.org/inciduntexnecessitatibus.png?size=150x150&set=set1" },
+//   { firstName: "Gail", lastName: "Dalrymple", email: "gdalrymple3@buzzfeed.com", phone: "270-363-6260", avatar: "https://robohash.org/voluptasiddolores.png?size=150x150&set=set1" }
+// ];
+
+
+
+const inquirySeed = [{ firstName: "Vinni", lastName: "Guarin", email: "vguarin0@bandcamp.com", phone: "1997282197", eventType: "Private", band: "The Rolling Stones", numHours: 4, date: "05/09/2020", startTime: "2:11", location: "02276 Buhler Street", read: false, deleted: false, createdAt: Date.now() },
+  { firstName: "Marmaduke", lastName: "Sturch", email: "msturch1@patch.com", phone: "1601271710", eventType: "Corporate", band: "The Temptations", numHours: 6, date: "07/08/2021", startTime: "21:35", location: "17 Corben Plaza", read: false, deleted: false, createdAt: Date.now() },
+  { firstName: "Shaylyn", lastName: "O' Scallan", email: "soscallan3@pinterest.com", phone: "3292691578", eventType: "Concert", band: "George Jones and Tammy Wynette", numHours: 1.5, date: "09/24/2020", startTime: "6:23", location: "096 Valley Edge Lane", read: false, deleted: false, createdAt: Date.now() },
+  { firstName: "Chrotoem", lastName: "Antoniewski", email: "cantoniewski4@live.com", phone: "7461700805", eventType: "Wedding", band: "Buddy Guy", numHours: 4, date: "04/19/2022", startTime: "11:26", location: "9 Mayfield Crossing", read: false, deleted: false, createdAt: Date.now() },
+  { firstName: "Gwynne", lastName: "Crighton", email: "gcrighton5@ifeng.com", phone: "5329219507", eventType: "Corporate", band: "Count Basie Orcrestra", numHours: 4.5, date: "10/05/2020", startTime: "20:38", location: "192 Arkansas Road", read: false, deleted: false, createdAt: Date.now() },
+  { firstName: "Valeria", lastName: "Hindhaugh", email: "vhindhaugh6@mapy.cz", phone: "3932408398", eventType: "Concert", band: "Peter Tosh", numHours: 5, date: "12/04/2021", startTime: "22:42", location: "68153 Marquette Court", read: false, deleted: false, createdAt: Date.now() },
+  { firstName: "Mordecai", lastName: "Huffey", email: "mhuffey7@time.com", phone: "3934598656", eventType: "Private", band: "Peter Tosh", numHours: 6, date: "08/15/2021", startTime: "19:58", location: "47694 Waxwing Junction", read: false, deleted: false, createdAt: Date.now() },
+  { firstName: "Darrell", lastName: "Bolderson", email: "dbolderson8@goo.ne.jp", phone: "2928482665", eventType: "Concert", band: "Duran Duran", numHours: 6, date: "08/14/2020", startTime: "14:14", location: "27008 Evergreen Plaza", read: false, deleted: false, createdAt: Date.now() }
 ];
 
-const inquirySeed = [{ firstName: "Vinni", lastName: "Guarin", email: "vguarin0@bandcamp.com", phone: "1997282197", date: "05/09/2020", startTime: "2:11", location: "02276 Buhler Street", read: false, deleted: false, createdAt: Date.now() },
-  { firstName: "Marmaduke", lastName: "Sturch", email: "msturch1@patch.com", phone: "1601271710", date: "07/08/2021", startTime: "21:35", location: "17 Corben Plaza", read: false, deleted: false, createdAt: Date.now() },
-  { firstName: "Kaiser", lastName: "Redshaw", email: "kredshaw2@alexa.com", phone: "7749301566", date: "08/19/2021", startTime: "15:03", location: "78 Anniversary Park", read: false, deleted: false, createdAt: Date.now() },
-  { firstName: "Shaylyn", lastName: "O' Scallan", email: "soscallan3@pinterest.com", phone: "3292691578", date: "09/24/2020", startTime: "6:23", location: "096 Valley Edge Lane", read: false, deleted: false, createdAt: Date.now() },
-  { firstName: "Chrotoem", lastName: "Antoniewski", email: "cantoniewski4@live.com", phone: "7461700805", date: "04/19/2022", startTime: "11:26", location: "9 Mayfield Crossing", read: false, deleted: false, createdAt: Date.now() },
-  { firstName: "Gwynne", lastName: "Crighton", email: "gcrighton5@ifeng.com", phone: "5329219507", date: "10/05/2020", startTime: "20:38", location: "192 Arkansas Road", read: false, deleted: false, createdAt: Date.now() },
-  { firstName: "Valeria", lastName: "Hindhaugh", email: "vhindhaugh6@mapy.cz", phone: "3932408398", date: "12/04/2021", startTime: "22:42", location: "68153 Marquette Court", read: false, deleted: false, createdAt: Date.now() },
-  { firstName: "Mordecai", lastName: "Huffey", email: "mhuffey7@time.com", phone: "3934598656", date: "08/15/2021", startTime: "19:58", location: "47694 Waxwing Junction", read: false, deleted: false, createdAt: Date.now() },
-  { firstName: "Darrell", lastName: "Bolderson", email: "dbolderson8@goo.ne.jp", phone: "2928482665", date: "08/14/2020", startTime: "14:14", location: "27008 Evergreen Plaza", read: false, deleted: false, createdAt: Date.now() },
-  { firstName: "Cristine", lastName: "O'Glessane", email: "coglessane9@printfriendly.com", phone: "4268719346", date: "05/03/2022", startTime: "18:28", location: "695 American Ash Plaza", read: false, deleted: false, createdAt: Date.now() }
-];
+// db.Band
+//   .remove({})
+//   .then(() => db.Band.collection.insertMany(bandSeed))
+//   .then(data => {
+//     console.log(data.result.n + " records inserted!");
+//     process.exit(0);
+//   })
+//   .catch(err => {
+//     console.error(err);
+//     process.exit(1);
+//   });
 
-db.Band
-  .remove({})
-  .then(() => db.Band.collection.insertMany(bandSeed))
-  .then(data => {
-    console.log(data.result.n + " records inserted!");
-    process.exit(0);
-  })
-  .catch(err => {
-    console.error(err);
-    process.exit(1);
-  });
-
-db.Agent
-  .remove({})
-  .then(() => db.Agent.collection.insertMany(agentSeed))
-  .then(data => {
-    console.log(data.result.n + " records inserted!");
-    process.exit(0);
-  })
-  .catch(err => {
-    console.error(err);
-    process.exit(1);
-  });
+// db.Agent
+//   .remove({})
+//   .then(() => db.Agent.collection.insertMany(agentSeed))
+//   .then(data => {
+//     console.log(data.result.n + " records inserted!");
+//     process.exit(0);
+//   })
+//   .catch(err => {
+//     console.error(err);
+//     process.exit(1);
+//   });
 
 db.Inquiry
   .remove({})

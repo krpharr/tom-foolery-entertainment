@@ -29,7 +29,7 @@ const agentSchema = new Schema({
     trim: true,
     required: "phone required for Agent"
   },
-  userId: {
+  username: {
     type: String,
   },
   avatar: {

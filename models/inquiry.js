@@ -24,7 +24,7 @@ const inquirySchema = new Schema({
   eventType: {
     type: String
   },
-  bandId: {
+  band: {
     type: String
   },
   date: {
