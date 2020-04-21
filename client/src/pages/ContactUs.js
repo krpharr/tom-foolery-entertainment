@@ -68,7 +68,7 @@ export default function ContactUs() {
 
   const history = useHistory();
 
-  const [event, setEvent] = useState("");
+  const [eventType, setEvent] = useState("");
   const [band, setBand] = useState("");
   const [length, setLength] = useState(4);
 
@@ -79,8 +79,11 @@ export default function ContactUs() {
       lastName: event.target.lastname.value,
       email: event.target.email.value,
       phone: event.target.phone.value,
+      eventType: eventType,
+      bandId: band,
       date: event.target.date.value,
       startTime: event.target.time.value,
+      numHours: length,
       location: event.target.location.value
     }
     console.log(inquiryObj);
@@ -90,14 +93,15 @@ export default function ContactUs() {
   const contactAPI = (inquiryObj) => {
     inquiryAPI.post(inquiryObj).then(res => {
       console.log(res);
-      console.log(res.data);
+      // redirect to thank you page
+      history.push("/thankyou");
     });
   };
 
   const mapEvents = () => {
     const eventMap = events.map((event, index) => {
       return(
-        <MenuItem key={index} value={event.id}>{event.singular}</MenuItem>
+        <MenuItem key={index} value={event.singular}>{event.singular}</MenuItem>
       );
     });
     return eventMap;
@@ -122,6 +126,7 @@ export default function ContactUs() {
   };
 
   const handleEventChange = (event) => {
+    console.log(event.target.value);
     setEvent(event.target.value);
   };
 
@@ -194,7 +199,7 @@ export default function ContactUs() {
             <Select
               labelId="event-select-label"
               id="event"
-              value={event}
+              value={eventType}
               onChange={handleEventChange}
             >
               {mapEvents()}

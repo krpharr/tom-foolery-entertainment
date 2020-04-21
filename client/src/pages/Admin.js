@@ -31,9 +31,9 @@ function Admin(){
         <Grid item xs={12} md={6}>
           <InquiryCRUD />
         </Grid>
-        <Grid item xs={12} md={6}>
+        {/* <Grid item xs={12} md={6}>
           <UserCRUD />
-        </Grid>
+        </Grid> */}
       </Grid>
     </Container>      
   );

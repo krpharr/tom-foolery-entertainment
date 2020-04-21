@@ -9,6 +9,7 @@ import Events from "./pages/Events";
 import Bands from "./pages/Bands";
 import Band from "./pages/Band";
 import ContactUs from "./pages/ContactUs";
+import ThankYou from "./pages/ThankYou";
 import Login from "./pages/Login";
 import Admin from "./pages/Admin";
 import ClientPage from "./pages/Client";
@@ -42,6 +43,7 @@ function App() {
             <Route exact path="/bands" component={Bands} />
             <Route exact path="/band" component={Band} />
             <Route exact path="/contactus" component={ContactUs} />
+            <Route exact path="/thankyou" component={ThankYou} />
             <Route exact path="/login" component={Login} />
             <PrivateRoute path="/admin">
               <Admin type={"admin"} />
