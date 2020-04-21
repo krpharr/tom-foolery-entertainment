@@ -15,6 +15,7 @@ import ClientPage from "./pages/Client";
 import Bandleader from "./pages/Bandleader";
 import StickyFooter from "./components/StickyFooter";
 import userAuth from "./utils/userAuth";
+import PrivateRoute from "./components/PrivateRoute";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -51,9 +52,15 @@ function App() {
             <Route exact path="/band" component={Band} />
             <Route exact path="/contactus" component={ContactUs} />
             <Route exact path="/login" component={Login} />
-            <Route exact path="/admin" component={Admin} />
-            <Route exact path="/client" component={ClientPage} />
-            <Route exact path="/bandleader" component={Bandleader} />
+            <PrivateRoute path="/admin">
+              <Admin type={"admin"} />
+            </PrivateRoute>
+            <PrivateRoute path="/client">
+              <ClientPage type={"client"}/>
+            </PrivateRoute>
+            <PrivateRoute path="/bandleader">
+              <Bandleader type={"bandleader"}/>
+            </PrivateRoute>            
             {/* <Route exact path="/search" component={Search} />
             <Route exact path="/saved" component={Saved} />
             <NoMatch /> */}
