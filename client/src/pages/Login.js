@@ -30,6 +30,9 @@ const useStyles = makeStyles((theme) => ({
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
+    backgroundColor: "white",
+    borderRadius: "10px",
+    padding: "8px"
   },
   avatar: {
     margin: theme.spacing(1),
