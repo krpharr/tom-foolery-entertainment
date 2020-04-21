@@ -14,7 +14,15 @@ import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 
 const useStyles = makeStyles((theme) => ({
-
+  // main: {
+  //   padding: "8px",
+  //   border: "1px solid black",
+  //   borderRadius: "10px"
+  // },
+  // display: {
+  //   height: "50vh",
+  //   overflow: "scroll"
+  // }
 }));
 
 function UserCRUD() {
@@ -22,24 +30,38 @@ function UserCRUD() {
   const classes = useStyles();
 
   const [users, setUsers] = useState();
-
-  const [open, setOpen] = React.useState(false);
+  const [open, setOpen] = useState(false);
+  const [update, setUpdate] = useState(0);
 
   const handleClickOpen = () => {
     setOpen(true);
   };
 
   const handleClose = (event) => {
-    console.log(event);
+    // console.log(event);
     setOpen(false);
+  };
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    const userObj = {
+      username: event.target.username.value,
+      password: event.target.password.value,
+      type: event.target.type.value
+    }
+    userAPI.create(userObj).then(res => {
+      console.log(res);
+      handleClose();
+      setUpdate(update + 1);
+    });
+    
   };
 
   useEffect(() => {
     userAPI.getAll().then(res => {
-      console.log(res.data);
       setUsers(res.data);
     });
-  }, []);
+  }, [update]);
 
   const mapUsers = () => {
     if(users === undefined)return;
@@ -56,49 +78,54 @@ function UserCRUD() {
 
   return (
     <div>
+      users
+      <Button variant="outlined" color="primary" onClick={handleClickOpen}>
+        New User
+      </Button>
       <Container>
-        users
-        <Button variant="outlined" color="primary" onClick={handleClickOpen}>
-          New User
-        </Button>
-        {mapUsers()}
+         {mapUsers()}
       </Container>
       <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title">
-        <DialogTitle id="form-dialog-title">Create New User</DialogTitle>
-        <DialogContent>
-          <TextField
-            autoFocus
-            margin="dense"
-            id="username"
-            label="Username"
-            type="text"
-            fullWidth
-          />
-          <TextField
-            autoFocus
-            margin="dense"
-            id="password"
-            label="Password"
-            type="password"
-            fullWidth
-          />
-          <TextField
-            autoFocus
-            margin="dense"
-            id="type"
-            label="User type"
-            type="text"
-            fullWidth
-          />
-        </DialogContent>
-        <DialogActions>
-          <Button onClick={handleClose} color="primary">
-            Cancel
-          </Button>
-          <Button onClick={handleClose} color="primary">
-            Create
-          </Button>
-        </DialogActions>
+        <form 
+          noValidate 
+          onSubmit={(event) => handleSubmit(event)}
+        >
+          <DialogTitle id="form-dialog-title">Create New User</DialogTitle>
+          <DialogContent>
+            <TextField
+              autoFocus
+              margin="dense"
+              id="username"
+              label="Username"
+              type="text"
+              fullWidth
+            />
+            <TextField
+              autoFocus
+              margin="dense"
+              id="password"
+              label="Password"
+              type="password"
+              fullWidth
+            />
+            <TextField
+              autoFocus
+              margin="dense"
+              id="type"
+              label="User type"
+              type="text"
+              fullWidth
+            />
+          </DialogContent>
+          <DialogActions>
+            <Button onClick={handleClose} color="primary">
+              Cancel
+            </Button>
+            <Button type="submit" color="primary">
+              Create
+            </Button>
+          </DialogActions>
+        </form>
       </Dialog>
     </div>
   );

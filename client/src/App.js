@@ -25,15 +25,6 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-
-// userAuth.signout((res)=>{
-//   console.log("logged in: ", res);
-// });
-
-// userAuth.authenticate((res)=>{
-//   console.log("logged in: ", res);
-// });
-
 function App() {
 
   const classes = useStyles();

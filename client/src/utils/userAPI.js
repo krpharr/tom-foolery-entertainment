@@ -12,5 +12,8 @@ export default {
   },
   auth: function() {
     return axios.get("api/user/login");
+  },
+  create: function(userObj) {
+    return axios.post("api/user/register", userObj);
   }
 };

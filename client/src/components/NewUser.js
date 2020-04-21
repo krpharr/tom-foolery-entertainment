@@ -18,11 +18,12 @@ export default function NewUser() {
     setOpen(false);
   };
 
+  const handleSubmit = () => {
+
+  };
+
   return (
-    <div>
-      <Button variant="outlined" color="primary" onClick={handleClickOpen}>
-        Open form dialog
-      </Button>
+    <form noValidate onSubmit={handleSubmit}>
       <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title">
         <DialogTitle id="form-dialog-title">Subscribe</DialogTitle>
         <DialogContent>
@@ -48,6 +49,6 @@ export default function NewUser() {
           </Button>
         </DialogActions>
       </Dialog>
-    </div>
+    </form>
   );
 }

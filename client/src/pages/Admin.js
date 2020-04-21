@@ -11,6 +11,10 @@ const useStyles = makeStyles((theme) => ({
   main: {
     marginTop: theme.spacing(8),
     // marginBottom: theme.spacing(2),
+  },
+  crudWindow: {
+    height: "50vh",
+    overflow: "scroll"
   }
 }));
 
