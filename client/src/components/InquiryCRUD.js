@@ -31,7 +31,10 @@ function InquiryCRUD() {
 
   const mapInquiries = () => {
     if(inquiries === undefined || agents === undefined)return;
-    const inquiriesMap = inquiries.map(inquiry => {
+    const filtered = inquiries.filter(inquiry => {
+      return inquiry.deleted === false;
+    });
+    const inquiriesMap = filtered.map(inquiry => {
       return(
         <Grid item key={inquiry._id} >
           <InquiryCard {...inquiry} agents={agents}/>

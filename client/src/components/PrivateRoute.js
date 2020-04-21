@@ -3,7 +3,7 @@ import {Route, Redirect} from "react-router-dom";
 import userAuth from "../utils/userAuth";
 
 function PrivateRoute({ children, ...rest }) {
-  console.log(children);
+  // console.log(children);
   return (
     <Route
       {...rest}

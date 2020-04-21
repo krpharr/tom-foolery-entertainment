@@ -77,22 +77,31 @@ export default function InquiryCard(props) {
     <Card className={classes.root}>
       <CardContent>
         <Typography variant="body2" component="p">
-          {`${props.firstName} ${props.lastName}`}
+          {`Name: ${props.firstName} ${props.lastName}`}
         </Typography>
         <Typography variant="body2" component="p">
-          {props.email}
+          {`Email: ${props.email}`}
         </Typography>
         <Typography variant="body2" component="p">
-          {props.phone}
+          {`Phone: ${props.phone}`}
         </Typography>
         <Typography variant="body2" component="p">
-          {props.date}
+          {`Event: ${props.eventType}`}
         </Typography>
         <Typography variant="body2" component="p">
-          {props.startTime}
+          {`Band id: ${props.bandId}`}
         </Typography>
         <Typography variant="body2" component="p">
-          {props.location}
+          {`Event date: ${props.date}`}
+        </Typography>
+        <Typography variant="body2" component="p">
+          {`Start time: ${props.startTime}`}
+        </Typography>
+        <Typography variant="body2" component="p">
+          {`Event length (hours) ${props.numHours}`}
+        </Typography>
+        <Typography variant="body2" component="p">
+          {`Event location: ${props.location}`}
         </Typography>
       </CardContent>
       <CardActions>
