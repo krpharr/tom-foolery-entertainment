@@ -21,11 +21,20 @@ const inquirySchema = new Schema({
   phone: {
     type: Number,
   },
+  eventType: {
+    type: String
+  },
+  bandId: {
+    type: String
+  },
   date: {
     type: String,
   },
   startTime: {
     type: String,
+  },
+  numHours: {
+    type: Number
   },
   location: {
     type: String,

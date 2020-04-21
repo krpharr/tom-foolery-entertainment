@@ -3,6 +3,14 @@ import Container from '@material-ui/core/Container';
 import { makeStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid';
+import bandAPI from '../utils/bandAPI';
+
+bandAPI.getAll().then(res => {
+  const lstorage = res.data.map(band => {
+    return {id: band._id, name: band.name};
+  });
+  localStorage.setItem("bands",JSON.stringify(lstorage));
+});
 
 const Background = "assets/images/aditya-chinchure-ZhQCZjr9fHo-unsplash.jpg";
 

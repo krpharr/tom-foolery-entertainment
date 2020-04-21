@@ -1,9 +1,13 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import TextField from '@material-ui/core/TextField';
+import FormControl from '@material-ui/core/FormControl';
+import InputLabel from '@material-ui/core/InputLabel';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
+import Select from '@material-ui/core/Select';
+import MenuItem from '@material-ui/core/MenuItem';
 import Checkbox from '@material-ui/core/Checkbox';
 import Link from '@material-ui/core/Link';
 import Grid from '@material-ui/core/Grid';
@@ -12,8 +16,13 @@ import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import inquiryAPI from "../utils/inquiryAPI";
+import bandAPI from "../utils/bandAPI";
 import { useHistory } from "react-router-dom";
 import moment from "moment";
+import events from "../data/events";
+
+const bands = JSON.parse(localStorage.getItem("bands"));
+const lengths = [2,2.5,3,3.5,4,4.5,5,5.5,6];
 
 const Background = "assets/images/jens-thekkeveettil-dBWvUqBoOU8-unsplash.jpg";
 
@@ -59,6 +68,10 @@ export default function ContactUs() {
 
   const history = useHistory();
 
+  const [event, setEvent] = useState("");
+  const [band, setBand] = useState("");
+  const [length, setLength] = useState(4);
+
   const handleSubmit = (event) =>{
     event.preventDefault();
     const inquiryObj = {
@@ -80,6 +93,46 @@ export default function ContactUs() {
       console.log(res.data);
     });
   };
+
+  const mapEvents = () => {
+    const eventMap = events.map((event, index) => {
+      return(
+        <MenuItem key={index} value={event.id}>{event.singular}</MenuItem>
+      );
+    });
+    return eventMap;
+  };
+  
+  const mapBands = () => {
+    const bandMap = bands.map((band, index) => {
+      return(
+        <MenuItem key={index} value={band.id}>{band.name}</MenuItem>
+      );
+    });
+    return bandMap;
+  };
+
+  const mapHours = () => {
+    const lengthMap = lengths.map((l, index) => {
+      return(
+        <MenuItem key={index} value={l}>{l}</MenuItem>
+      );
+    });
+    return lengthMap;
+  };
+
+  const handleEventChange = (event) => {
+    setEvent(event.target.value);
+  };
+
+  const handleBandChange = (event) => {
+    setBand(event.target.value);
+  };
+
+  const handleLengthChange = (event) => {
+    setLength(event.target.value);
+  };
+
 
   return (
     <Container component="main" className={classes.main} maxWidth="xl">
@@ -136,10 +189,33 @@ export default function ContactUs() {
             id="phone"
             autoComplete="phone"
           />
+          <FormControl className={classes.formControl} fullWidth>
+            <InputLabel id="event-select-label">Event Type</InputLabel>
+            <Select
+              labelId="event-select-label"
+              id="event"
+              value={event}
+              onChange={handleEventChange}
+            >
+              {mapEvents()}
+            </Select>
+          </FormControl>
+          <FormControl className={classes.formControl} fullWidth>
+            <InputLabel id="band-select-label">Select Band</InputLabel>
+            <Select
+              labelId="band-select-label"
+              id="band"
+              value={band}
+              onChange={handleBandChange}
+            >
+              {mapBands()}
+            </Select>
+          </FormControl>
           <TextField
             id="date"
             label="Date of Event"
             type="date"
+            required
             // defaultValue={moment().add(2, 'days').format("YYYY-MM-DD")}
             className={classes.textField}
             InputLabelProps={{
@@ -150,6 +226,7 @@ export default function ContactUs() {
             id="time"
             label="Start Time"
             type="time"
+            required
             // defaultValue="20:00"
             className={classes.textField}
             InputLabelProps={{
@@ -158,12 +235,24 @@ export default function ContactUs() {
             inputProps={{
               step: 300, // 5 min
             }}
-          />          
+          />
+          <FormControl className={classes.formControl} fullWidth>
+            <InputLabel id="length-select-label">Length of Event (hours)</InputLabel>
+            <Select
+              labelId="length-select-label"
+              id="length"
+              value={length}
+              onChange={handleLengthChange}
+            >
+              {mapHours()}
+            </Select>
+          </FormControl>                    
           <TextField
             variant="outlined"
             margin="normal"
             fullWidth
             name="location"
+            required
             label="Address of Event"
             id="location"
             autoComplete="location"
