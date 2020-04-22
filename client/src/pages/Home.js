@@ -30,7 +30,7 @@ const useStyles = makeStyles((theme) => ({
     // paddingTop: theme.spacing(32),
     // paddingBottom: theme.spacing(8),
     position: "relative",
-    top: "80vh",
+    top: "76vh",
     bottom: "40px"
   },
   logo: {

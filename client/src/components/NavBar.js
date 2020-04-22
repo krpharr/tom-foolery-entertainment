@@ -15,9 +15,17 @@ import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
+import HomeIcon from '@material-ui/icons/Home';
+import EventIcon from '@material-ui/icons/Event';
+import LibraryMusicIcon from '@material-ui/icons/LibraryMusic';
+import InfoIcon from '@material-ui/icons/Info';
+import ContactSupportIcon from '@material-ui/icons/ContactSupport';
 import InboxIcon from '@material-ui/icons/MoveToInbox';
 import MailIcon from '@material-ui/icons/Mail';
 import LoginButton from "../components/LoginButton";
+import PropTypes from 'prop-types';
+import Hidden from '@material-ui/core/Hidden';
+import withWidth from '@material-ui/core/withWidth';
 
 const drawerWidth = 240;
 
@@ -30,7 +38,7 @@ const useStyles = makeStyles((theme) => ({
       easing: theme.transitions.easing.sharp,
       duration: theme.transitions.duration.leavingScreen,
     }),
-    backgroundColor: "rgb(0,0,0,0.4)",
+    backgroundColor: "rgb(0.4,29,47.7,0.6)",
     
     color: "#FB0EE1",
   },
@@ -58,10 +66,12 @@ const useStyles = makeStyles((theme) => ({
   },
   drawer: {
     width: drawerWidth,
-    flexShrink: 0,
+    flexShrink: 0
   },
   drawerPaper: {
     width: drawerWidth,
+    backgroundColor: "#137CD6",
+    color: "#01D488"
   },
   drawerHeader: {
     display: 'flex',
@@ -87,9 +97,13 @@ const useStyles = makeStyles((theme) => ({
     }),
     marginRight: 0,
   },
+  icons: {
+    color: "#01D488"
+  }
 }));
 
-export default function NavBar() {
+function NavBar(props) {
+  const { width } = props;
   const classes = useStyles();
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
@@ -129,9 +143,11 @@ export default function NavBar() {
             onClick={handleDrawerOpen}
             className={clsx(open && classes.hide)}
           >
-            <Typography variant="h6" noWrap className={classes.helperTxt}>
-              menu
-            </Typography>
+            <Hidden smDown>
+              <Typography variant="h6" noWrap className={classes.helperTxt}>
+                menu
+              </Typography>
+            </Hidden>
             <MenuIcon />
           </IconButton>
         </Toolbar>
@@ -152,15 +168,29 @@ export default function NavBar() {
         </div>
         <Divider />
         <List>
+          {[['Home', <HomeIcon/>], ['About', <InfoIcon/>], ['Events', <EventIcon/>], ['Bands', <LibraryMusicIcon/>], ['Contact Us', <ContactSupportIcon/>]].map((text, index) => (
+            <ListItem button key={text[0]} onClick={() => handleMenuItemClick(text[0])}>
+                <ListItemIcon className={classes.icons}>{text[1]}</ListItemIcon>
+                <ListItemText primary={text[0]}/>
+            </ListItem>
+          ))}
+        </List>
+        {/* <List>
           {['Home', 'About', 'Events', 'Bands', 'Contact Us'].map((text, index) => (
             <ListItem button key={text} onClick={() => handleMenuItemClick(text)}>
                 <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
                 <ListItemText primary={text}/>
             </ListItem>
           ))}
-        </List>
+        </List> */}
         <Divider />
       </Drawer>
     </div>
   );
 }
+
+NavBar.propTypes = {
+  width: PropTypes.oneOf(['lg', 'md', 'sm', 'xl', 'xs']).isRequired,
+};
+
+export default withWidth()(NavBar);
