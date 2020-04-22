@@ -16,3 +16,5 @@ env.development.local
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+
+/client/public/assets/images/old
