@@ -31,7 +31,7 @@ router.post('/register', function(req, res, next) {
     }
     console.log('user registered!');
     // res.redirect('/');
-    res.json({ username: req.body.username, type: req.body.type, password: "********" });
+    res.json({ username: req.body.username, type: req.body.type });
   });
 });
 

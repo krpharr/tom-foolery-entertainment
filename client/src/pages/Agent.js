@@ -8,6 +8,8 @@ import agentAPI from "../utils/agentAPI";
 import userAuth from "../utils/userAuth";
 import AgentContactCard from "../components/AgentContactCard";
 
+
+
 const useStyles = makeStyles((theme) => ({
   main: {
     marginTop: theme.spacing(8),
@@ -20,6 +22,7 @@ function Agent(){
   const classes = useStyles();
 
   const [inquiries, setInquiries] = useState();
+  const [agentId, setAgentId] = useState();
 
   useEffect(() => {
     agentAPI.getAll().then(res => {
@@ -27,13 +30,14 @@ function Agent(){
       let f = res.data.filter(agent => {
         return agent.username = userAuth.user.user;
       });
-      const agentId = f[0]._id;
+      const id = f[0]._id;
+      setAgentId(id);
       console.log(agentId);
       inquiryAPI.getAll().then(res => {
         console.log(res.data);
         console.log(agentId);
         const filtered = res.data.filter(inq => {
-          return inq.agentId === agentId;
+          return inq.agentId === id;
         });
         console.log(filtered);
         setInquiries(filtered);
@@ -43,20 +47,21 @@ function Agent(){
   }, []);
 
   const mapInquiries = () => {
-    if(inquiries === undefined)return;
+    if(inquiries === undefined || agentId === undefined)return;
     const filtered = inquiries.filter(inquiry => {
       return inquiry.deleted === false;
     });
     const inquiriesMap = filtered.map(inquiry => {
       return(
         <Grid item key={inquiry._id} >
-          <AgentContactCard {...inquiry} />
+          <AgentContactCard {...inquiry} agentId={agentId}/>
         </Grid>
       );
     });
     return inquiriesMap;
   };
-    
+
+
 
   return(
     <Container component="main" className={classes.main} maxWidth="sm">
