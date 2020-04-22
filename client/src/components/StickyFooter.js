@@ -8,19 +8,6 @@ import { FormHelperText } from '@material-ui/core';
 
 const insta = '<div>Icons made by <a href="https://www.flaticon.com/authors/freepik" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div>'
 
-function Copyright() {
-  return (
-    <Typography variant="body2" color="textSecondary">
-      {'Copyright © '}
-      <Link color="inherit" href="https://tom-foolery-entertainment.herokuapp.com/">
-        Tom Foolery Entertainment
-      </Link>{' '}
-      {new Date().getFullYear()}
-      {'.'}
-    </Typography>
-  );
-}
-
 const useStyles = makeStyles((theme) => ({
   footer: {
     padding: theme.spacing(3, 2),
@@ -43,6 +30,12 @@ const useStyles = makeStyles((theme) => ({
     display: "flex",
     justifyContent: "space-around",
     paddingBottom: "16px"
+  },
+  copyright: {
+    color: "white"
+  },
+  copyrightLink: {
+    color: "yellow"
   }
 }));
 
@@ -70,7 +63,14 @@ export default function StickyFooter() {
               </Grid>
             </Grid>
           </Grid>
-          <Copyright />
+          <Typography variant="body2" className={classes.copyright}>
+            {'Copyright © '}
+            <Link className={classes.copyrightLink} href="https://tom-foolery-entertainment.herokuapp.com/">
+              Tom Foolery Entertainment
+            </Link>{' '}
+            {new Date().getFullYear()}
+            {'.'}
+          </Typography>
         </Container>
       </footer>
   );

@@ -20,8 +20,6 @@ import EventIcon from '@material-ui/icons/Event';
 import LibraryMusicIcon from '@material-ui/icons/LibraryMusic';
 import InfoIcon from '@material-ui/icons/Info';
 import ContactSupportIcon from '@material-ui/icons/ContactSupport';
-import InboxIcon from '@material-ui/icons/MoveToInbox';
-import MailIcon from '@material-ui/icons/Mail';
 import LoginButton from "../components/LoginButton";
 import PropTypes from 'prop-types';
 import Hidden from '@material-ui/core/Hidden';
@@ -175,14 +173,6 @@ function NavBar(props) {
             </ListItem>
           ))}
         </List>
-        {/* <List>
-          {['Home', 'About', 'Events', 'Bands', 'Contact Us'].map((text, index) => (
-            <ListItem button key={text} onClick={() => handleMenuItemClick(text)}>
-                <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
-                <ListItemText primary={text}/>
-            </ListItem>
-          ))}
-        </List> */}
         <Divider />
       </Drawer>
     </div>

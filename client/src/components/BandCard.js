@@ -37,7 +37,10 @@ export default function BandCard(props) {
         />
         <CardContent>
           <Typography gutterBottom variant="h5" component="h2">
-          {props.name}
+            {props.name}
+          </Typography>
+          <Typography gutterBottom variant="body1" color="textSecondary" component="h2">
+            {props.genres[0]}
           </Typography>
           <Typography variant="body2" color="textSecondary" component="p">
             {props.description}

@@ -31,7 +31,9 @@ const useStyles = makeStyles((theme) => ({
     // paddingBottom: theme.spacing(8),
     position: "relative",
     top: "76vh",
-    bottom: "40px"
+    bottom: "40px",
+    display: "flex",
+    justifyContent: "space-around"
   },
   logo: {
     width: "100%"
