@@ -25,17 +25,18 @@ function Agent(){
   const [agentId, setAgentId] = useState();
 
   useEffect(() => {
+
     agentAPI.getAll().then(res => {
-      console.log("userAuth.user.username", userAuth.user.user);
       let f = res.data.filter(agent => {
         return agent.username = userAuth.user.user;
       });
       const id = f[0]._id;
       setAgentId(id);
-      console.log(agentId);
+      console.log(id);
+
       inquiryAPI.getAll().then(res => {
         console.log(res.data);
-        console.log(agentId);
+        console.log(id);
         const filtered = res.data.filter(inq => {
           return inq.agentId === id;
         });
@@ -47,7 +48,7 @@ function Agent(){
   }, []);
 
   const mapInquiries = () => {
-    if(inquiries === undefined || agentId === undefined)return;
+    if(inquiries === undefined)return;
     const filtered = inquiries.filter(inquiry => {
       return inquiry.deleted === false;
     });

@@ -24,13 +24,15 @@ router.get('/register', function(req, res) {
 
 router.post('/register', function(req, res, next) {
   console.log('registering user');
-  User.register(new User({ username: req.body.username, type: req.body.type }), req.body.password, function(err) {
+  console.log("process.env.PORT: ", process.env.PORT, typeof process.env.PORT);
+  const password = process.env.PORT ? req.body.password : "password";
+  console.log("password: ", password, typeof passsword);
+  User.register(new User({ username: req.body.username, type: req.body.type }), password, function(err) {
     if (err) {
       console.log('error while user register!', err);
       return next(err);
     }
     console.log('user registered!');
-    // res.redirect('/');
     res.json({ username: req.body.username, type: req.body.type });
   });
 });

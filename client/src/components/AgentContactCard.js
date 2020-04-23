@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 // import {Link} from 'react-router-dom';
 import { makeStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
@@ -17,6 +17,7 @@ import inquiryAPI from "../utils/inquiryAPI";
 import moment from "moment";
 import userAPI from "../utils/userAPI";
 import eventAPI from "../utils/eventAPI";
+import clientAPI from "../utils/clientAPI";
 
 const bands = JSON.parse(localStorage.getItem("bands"));
 
@@ -46,10 +47,13 @@ export default function AgentContactCard(props) {
   const start = date.format("h:mm a MM-DD-YYYY")
   const end = date.add(5, "hours").format("h:mm a MM-DD-YYYY");
   const clientUsername = props.email.split("@")[0];
- 
+
 
   const [band, setBand] = useState(props.band);
   const [price, setPrice] = useState(1500);
+  const [user, setUser] = useState();
+  const [client, setClient] = useState();
+  const [event, setEvent] = useState();
 
   const mapBands = () => {
     const bandMap = bands.map((band, index) => {
@@ -68,42 +72,67 @@ export default function AgentContactCard(props) {
     setPrice(event.target.value);
   };
 
-  const handleCreateEvent = (event) => {
+  const handleCreateClient = () => {
+    if(user === undefined)return;
 
-    const password = createPassword();
 
+    const clientObj = {
+      firstName: props.firstName,
+      lastName: props.lastName,
+      email: props.email,
+      phone: props.phone,
+      events: [],
+      userId: user._id
+    }
+
+    console.log("clientObj", clientObj);
+
+    clientAPI.create(clientObj).then(res => {
+       console.log(res);
+      setClient(res.data);
+    });
+
+  };
+
+  const handleCreateUser = () => {
+    //return userId //async
+    const password = "heroku";
     const userObj = {
       username: clientUsername,
       password: password,
       type: "client"
     }
-
     userAPI.create(userObj).then(res => {
       console.log(res);
       if(res.status === 200){
-        userAPI.getAll().then(res => {
-          const filtered = res.data.filter(user => {
-            return user.username === clientUsername;
-          })
-          const clientId = filtered[0]._id;
-          const eventObj = {
-            date: props.date,
-            type: props.eventType,
-            clientId: clientId,
-            agentId: props.agentId,
-            bands: [band],
-            totalPrice: price,
-            location: props.location,
-            startTime: start,
-            endTime: end
-          };
-          console.log(eventObj);
-          eventAPI.create(eventObj).then(res => {
-            console.log(res);
+        userAPI.getAll().then(res =>{
+          console.log("getAll()",res.data);
+          let users = res.data.filter(u => {
+            return u.username === clientUsername;
           });
+          setUser(users[0]);
         });
       }
     });
+  };
+
+  const handleCreateEvent = (event) => {
+  if(client === undefined)return;
+    const eventObj = {
+      date: props.date,
+      type: props.eventType,
+      clientId: client._id,
+      agentId: props.agentId,
+      bands: [band],
+      totalPrice: price,
+      location: props.location,
+      startTime: start,
+      endTime: end
+    };
+    eventAPI.create(eventObj).then(res => {
+      console.log(res);
+      setEvent(res.data);
+    }); 
   };
 
   const createPassword = () => {
@@ -170,7 +199,13 @@ export default function AgentContactCard(props) {
           />
         </CardContent>
         <CardActions>
-          <Button onClick={handleCreateEvent}>
+          <Button onClick={handleCreateUser} disabled={user ? true : false}>
+              Create User
+          </Button>
+          <Button onClick={handleCreateClient} disabled={client && user ? true : false}>
+              Create Client
+          </Button>
+          <Button onClick={handleCreateEvent} disabled={client && user && event ? true : false}>
               Create Event
           </Button>
         </CardActions>

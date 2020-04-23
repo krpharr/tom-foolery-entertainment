@@ -23,10 +23,7 @@ const clientSchema = new Schema({
     trim: true,
     required: "phone number required for Client"
   },
-  currentEvents: {
-    type: Array
-  },
-  pastEvents: {
+  events: {
     type: Array
   },
   userId: {
