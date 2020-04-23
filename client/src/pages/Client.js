@@ -3,6 +3,7 @@ import Container from '@material-ui/core/Container';
 import { makeStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid';
+import Button from '@material-ui/core/Button';
 import ClientEventCard from '../components/ClientEventCard';
 import clientAPI from "../utils/clientAPI";
 import userAPI from "../utils/userAPI";
@@ -16,6 +17,9 @@ const useStyles = makeStyles((theme) => ({
   main: {
     marginTop: theme.spacing(8),
     // marginBottom: theme.spacing(2),
+  },
+  refreshButton: {
+    margin: "0 0 8px"
   }
 }));
 
@@ -29,7 +33,7 @@ function Client(){
   const [events, setEvents] = useState();
   const [current, setCurrent] = useState();
   const [past, setPast]= useState();
-  
+  const [update, setUpdate] = useState(0);
   useEffect(() => {
 
     if(events === undefined){
@@ -52,7 +56,7 @@ function Client(){
       sortEvents();
     }
 
-  }, [events]);  
+  }, [events, update]);  
 
   const sortEvents = () => {
     // if(events === undefined || client === undefined)return;
@@ -94,7 +98,10 @@ function Client(){
     );
   };
 
- 
+ const handleRefresh = () => {
+   setEvents(undefined);
+   setUpdate(update + 1);
+ }
 
   return(
     <Container component="main" className={classes.main} maxWidth="sm">
@@ -102,10 +109,15 @@ function Client(){
         Client Page {` ${userAuth.user.user}`}
       </Typography>
       <Grid container>
+        <Grid item xs={3}>
+          <Button className={classes.refreshButton} onClick={handleRefresh}variant="contained" color="primary">
+           Refresh
+         </Button>
+        </Grid>
         <Grid item xs={12} md={10} xl={6}>
          {tabDisplay()}
         </Grid>
-      </Grid>     
+       </Grid>     
     </Container>      
   );
 };
