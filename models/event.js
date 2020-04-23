@@ -16,6 +16,9 @@ const eventSchema = new Schema({
     type: String,
     required: "clientId required for Event"
   },
+  clientUsername: {
+    type: String
+  },
   agentId: {
     type: String,
     required: "agentId required for Event"

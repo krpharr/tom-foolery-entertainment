@@ -30,6 +30,10 @@ const clientSchema = new Schema({
     type: String,
     trim: true,
     required: "userId required for Client"
+  },
+  username: {
+    type: String,
+    required: "username required for Client"
   }
 });
 

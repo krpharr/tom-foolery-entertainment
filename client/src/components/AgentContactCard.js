@@ -108,7 +108,8 @@ export default function AgentContactCard(props) {
       email: props.email,
       phone: props.phone,
       events: [],
-      userId: user._id
+      userId: user._id,
+      username: clientUsername
     }
 
     console.log("clientObj", clientObj);
@@ -148,6 +149,7 @@ export default function AgentContactCard(props) {
       date: props.date,
       type: props.eventType,
       clientId: client._id,
+      clientUsername: clientUsername,
       agentId: props.agentId,
       bands: [band],
       totalPrice: price,

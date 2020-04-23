@@ -4,6 +4,7 @@ import Container from '@material-ui/core/Container';
 import { makeStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 import bandAPI from "../utils/bandAPI";
+import eventsAPI from "../utils/eventAPI";
 
 const useStyles = makeStyles((theme) => ({
   main: {
@@ -21,19 +22,34 @@ function Band(){
   const classes = useStyles();
 
   const [info, setInfo] = useState();
+  const [reviews, setReviews] = useState();
 
   let query = useQuery();
   let id = query.get("id");
 
   useEffect(() => {
-    bandAPI.getById(id).then(res => {
-      console.log(res.data);
-      setInfo(res.data);
-    });
-  }, []);
+
+    if(info === undefined){
+      bandAPI.getById(id).then(res => {
+        console.log(res.data);
+        setInfo(res.data);
+      });
+    }else{
+      eventsAPI.getAll().then(res => {
+        const filtered = res.data.filter(event => {
+          return event.bands[0] === info.name && event.review;
+        });      
+        const reviewArray = filtered.map(event => {
+          return `${event.review} - ${event.clientUsername}`;
+        });
+        setReviews(reviewArray);
+      }); 
+    }
+
+  }, [info]);
 
   const displayInfo = () => {
-    if(info === undefined)return;
+    if(info === undefined || reviews === undefined)return;
     return(
       <div>
         <img src={info.images[0]} alt={info.name}></img>
@@ -44,7 +60,7 @@ function Band(){
         <iframe width="420" height="315"
           src={info.videos[0]}>
         </iframe> 
-        <ul>{info.reviews.map((review, index) => {
+        <ul>{reviews.map((review, index) => {
             return(
               <li key={index}>
                 <p>{review}</p>
