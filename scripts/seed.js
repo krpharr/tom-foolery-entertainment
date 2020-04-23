@@ -125,10 +125,13 @@ const agentSeed = [
 
 
 
-const inquirySeed = [{ firstName: "Vinni", lastName: "Guarin", email: "vguarin0@bandcamp.com", phone: "1997282197", eventType: "Private", band: "The Rolling Stones", numHours: 4, date: "05/09/2020", startTime: "2:11", location: "02276 Buhler Street", read: false, deleted: false, createdAt: Date.now() },
+const inquirySeed = [{ firstName: "Vinni", lastName: "Guarin", email: "vguarin0@bandcamp.com", phone: "1997282197", eventType: "Private", band: "The Rolling Stones", numHours: 4, date: "05/09/2018", startTime: "2:11", location: "02276 Buhler Street", read: false, deleted: false, createdAt: Date.now() },
   { firstName: "Marmaduke", lastName: "Sturch", email: "msturch1@patch.com", phone: "1601271710", eventType: "Corporate", band: "The Temptations", numHours: 6, date: "07/08/2021", startTime: "21:35", location: "17 Corben Plaza", read: false, deleted: false, createdAt: Date.now() },
-  { firstName: "Shaylyn", lastName: "O' Scallan", email: "soscallan3@pinterest.com", phone: "3292691578", eventType: "Concert", band: "George Jones and Tammy Wynette", numHours: 1.5, date: "09/24/2020", startTime: "6:23", location: "096 Valley Edge Lane", read: false, deleted: false, createdAt: Date.now() },
-  { firstName: "Chrotoem", lastName: "Antoniewski", email: "cantoniewski4@live.com", phone: "7461700805", eventType: "Wedding", band: "Buddy Guy", numHours: 4, date: "04/19/2022", startTime: "11:26", location: "9 Mayfield Crossing", read: false, deleted: false, createdAt: Date.now() },
+  { firstName: "Marmaduke", lastName: "Sturch", email: "msturch1@patch.com", phone: "1601271710", eventType: "Corporate", band: "The Temptations", numHours: 6, date: "07/08/2020", startTime: "21:35", location: "17 Corben Plaza", read: false, deleted: false, createdAt: Date.now() },
+  { firstName: "Marmaduke", lastName: "Sturch", email: "msturch1@patch.com", phone: "1601271710", eventType: "Corporate", band: "The Temptations", numHours: 6, date: "07/08/2019", startTime: "21:35", location: "17 Corben Plaza", read: false, deleted: false, createdAt: Date.now() },
+  { firstName: "Marmaduke", lastName: "Sturch", email: "msturch1@patch.com", phone: "1601271710", eventType: "Corporate", band: "The Temptations", numHours: 6, date: "07/08/2018", startTime: "21:35", location: "17 Corben Plaza", read: false, deleted: false, createdAt: Date.now() },
+  { firstName: "Shaylyn", lastName: "O' Scallan", email: "soscallan3@pinterest.com", phone: "3292691578", eventType: "Concert", band: "George Jones and Tammy Wynette", numHours: 1.5, date: "09/24/2019", startTime: "6:23", location: "096 Valley Edge Lane", read: false, deleted: false, createdAt: Date.now() },
+  { firstName: "Chrotoem", lastName: "Antoniewski", email: "cantoniewski4@live.com", phone: "7461700805", eventType: "Wedding", band: "Buddy Guy", numHours: 4, date: "04/19/2018", startTime: "11:26", location: "9 Mayfield Crossing", read: false, deleted: false, createdAt: Date.now() },
   { firstName: "Gwynne", lastName: "Crighton", email: "gcrighton5@ifeng.com", phone: "5329219507", eventType: "Corporate", band: "Count Basie Orcrestra", numHours: 4.5, date: "10/05/2020", startTime: "20:38", location: "192 Arkansas Road", read: false, deleted: false, createdAt: Date.now() },
   { firstName: "Valeria", lastName: "Hindhaugh", email: "vhindhaugh6@mapy.cz", phone: "3932408398", eventType: "Concert", band: "Peter Tosh", numHours: 5, date: "12/04/2021", startTime: "22:42", location: "68153 Marquette Court", read: false, deleted: false, createdAt: Date.now() },
   { firstName: "Mordecai", lastName: "Huffey", email: "mhuffey7@time.com", phone: "3934598656", eventType: "Private", band: "Peter Tosh", numHours: 6, date: "08/15/2021", startTime: "19:58", location: "47694 Waxwing Junction", read: false, deleted: false, createdAt: Date.now() },
@@ -159,14 +162,14 @@ const inquirySeed = [{ firstName: "Vinni", lastName: "Guarin", email: "vguarin0@
 //     process.exit(1);
 //   });
 
-// db.Inquiry
-//   .remove({})
-//   .then(() => db.Inquiry.collection.insertMany(inquirySeed))
-//   .then(data => {
-//     console.log(data.result.n + " records inserted!");
-//     process.exit(0);
-//   })
-//   .catch(err => {
-//     console.error(err);
-//     process.exit(1);
-//   });
+db.Inquiry
+  .remove({})
+  .then(() => db.Inquiry.collection.insertMany(inquirySeed))
+  .then(data => {
+    console.log(data.result.n + " records inserted!");
+    process.exit(0);
+  })
+  .catch(err => {
+    console.error(err);
+    process.exit(1);
+  });

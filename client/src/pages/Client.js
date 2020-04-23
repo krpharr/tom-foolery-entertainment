@@ -9,6 +9,7 @@ import userAPI from "../utils/userAPI";
 import eventAPI from "../utils/eventAPI";
 import userAuth from "../utils/userAuth";
 import moment from 'moment';
+import ClientTabs from "../components/ClientTabs";
 
 
 const useStyles = makeStyles((theme) => ({
@@ -18,46 +19,82 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
+
+
 function Client(){
   
   const classes = useStyles();
 
   const [client, setClient] = useState();
   const [events, setEvents] = useState();
+  const [current, setCurrent] = useState();
+  const [past, setPast]= useState();
    
-
   useEffect(() => {
 
-    eventAPI.getAll().then(events => {
-      clientAPI.getAll().then(res => {
-        console.log("res.data", res.data);
-        const clientArray = res.data.filter(client => {
-          return client.email.split("@")[0] === userAuth.user.user;
-        });
-        setClient(clientArray[0]._id);
-        const filtered = events.data.filter(event =>{
-          return event.clientId === clientArray[0]._id;
-        });
-        console.log("filtered: ", filtered)
-        setEvents(filtered);  
-      })
-     });
-  }, []);  
+    if(events === undefined){
+      eventAPI.getAll().then(events => {
+        clientAPI.getAll().then(res => {
+          console.log("res.data", res.data);
+          const clientArray = res.data.filter(client => {
+            return client.email.split("@")[0] === userAuth.user.user;
+          });
+          setClient(clientArray[0]._id);
+          const filtered = events.data.filter(event =>{
+            return event.clientId === clientArray[0]._id;
+          });
+          console.log("filtered: ", filtered)
+          setEvents(filtered);  
+        })
+       });
+    }else {
+      console.log("sortEvents")
+      sortEvents();
+    }
 
-  const mapEvents = () => {
-    if(events === undefined || client === undefined)return;
+  }, [events]);  
+
+  const sortEvents = () => {
+    // if(events === undefined || client === undefined)return;
     // const filtered = events.filter(events => {
     //   return events.deleted === false;
     // });
-    const eventsMap = events.map(event => {
+    const today = moment();
+    const past = events.filter(event => {
+      return moment(event.date).isBefore(today);
+    });
+    setPast(past);
+    const current = events.filter(event => {
+      return moment(event.date).isSameOrAfter(today);
+    });
+    setCurrent(current);    
+
+    console.log("past" ,past);
+    console.log("current", current);
+  };
+
+  const mapEvents = (eventArray) => {
+    if(events === undefined || eventArray === undefined)return;
+    const eventsMap = eventArray.map((event, index) => {
       return(
-        <Grid item key={event._id} >
-          <ClientEventCard {...event}/>
-        </Grid>
+          <ClientEventCard key={index} {...event}/>
       );
     });
     return eventsMap;
+  };  
+
+  const tabDisplay = () =>{
+    if(events === undefined)return;
+    const props = {
+      current: mapEvents(current),
+      past: mapEvents(past)
+    };
+    return(
+      <ClientTabs {...props}/>
+    );
   };
+
+
 
   return(
     <Container component="main" className={classes.main} maxWidth="sm">
@@ -65,8 +102,8 @@ function Client(){
         Client Page {` ${userAuth.user.user}`}
       </Typography>
       <Grid container>
-        <Grid item xs={12} md={6}>
-          {mapEvents()}
+        <Grid item xs={12} md={10} xl={6}>
+         {tabDisplay()}
         </Grid>
       </Grid>     
     </Container>      

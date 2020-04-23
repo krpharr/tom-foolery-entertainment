@@ -55,6 +55,32 @@ export default function AgentContactCard(props) {
   const [client, setClient] = useState();
   const [event, setEvent] = useState();
 
+  useEffect(() => {
+    if(user === undefined){
+      userAPI.getAll().then(res =>{
+        console.log("getAll()",res.data);
+        let users = res.data.filter(u => {
+          return u.username === clientUsername;
+        });
+        console.log("search for existing first", users[0])
+        setUser(users[0]);
+      });      
+    }else{
+
+    }
+    if(client === undefined){
+      clientAPI.getAll().then(res =>{
+        console.log("getAll()",res.data);
+        let clients = res.data.filter(c => {
+          return c.email === email;
+        });
+        console.log("search for existing clients first", clients[0])
+        setClient(clients[0]);
+      });      
+    }
+
+  }, [user]);  
+
   const mapBands = () => {
     const bandMap = bands.map((band, index) => {
       return(

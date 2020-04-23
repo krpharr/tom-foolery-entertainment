@@ -69,10 +69,6 @@ export default function ClientEventCard(props) {
         <Typography variant="body2" component="p">
           {`Event: ${props.type}`}
         </Typography>
-
-        <Typography variant="body2" component="p">
-          {`Event: ${props.type}`}
-        </Typography>
         {agentContainer()}
         <Typography variant="body2" component="p">
           {`Band: ${props.bands[0]}`}
