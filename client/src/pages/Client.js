@@ -104,17 +104,17 @@ function Client(){
  }
 
   return(
-    <Container component="main" className={classes.main} maxWidth="sm">
+    <Container component="main" className={classes.main} minWidth="xs" maxWidth="xl">
       <Typography variant="h2" component="h1" gutterBottom>
         Client Page {` ${userAuth.user.user}`}
       </Typography>
-      <Grid container>
-        <Grid item xs={3}>
+      <Grid container >
+        <Grid item>
           <Button className={classes.refreshButton} onClick={handleRefresh}variant="contained" color="primary">
            Refresh
          </Button>
         </Grid>
-        <Grid item xs={12} md={10} xl={6}>
+        <Grid item xs={12}>
          {tabDisplay()}
         </Grid>
        </Grid>     

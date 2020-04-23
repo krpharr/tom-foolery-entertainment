@@ -41,7 +41,7 @@ function a11yProps(index) {
 const useStyles = makeStyles((theme) => ({
   root: {
     backgroundColor: theme.palette.background.paper,
-    width: 500,
+    width: "98vw",
   },
 }));
 
@@ -56,7 +56,6 @@ export default function ClientTabs(props) {
   };
 
   const handleChangeIndex = (index) => {
-    props.updateCards();
     setValue(index);
   };
 
