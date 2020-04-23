@@ -40,6 +40,9 @@ const eventSchema = new Schema({
   endTime: {
     type: Date,
     required: "End time is required for Event"
+  },
+  review: {
+    type: String
   }
 });
 

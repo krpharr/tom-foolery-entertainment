@@ -56,6 +56,7 @@ export default function ClientTabs(props) {
   };
 
   const handleChangeIndex = (index) => {
+    props.updateCards();
     setValue(index);
   };
 

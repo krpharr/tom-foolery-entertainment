@@ -72,7 +72,7 @@ export default function AgentContactCard(props) {
       clientAPI.getAll().then(res =>{
         console.log("getAll()",res.data);
         let clients = res.data.filter(c => {
-          return c.email === email;
+          return c.email === props.email;
         });
         console.log("search for existing clients first", clients[0])
         setClient(clients[0]);

@@ -29,7 +29,7 @@ function Client(){
   const [events, setEvents] = useState();
   const [current, setCurrent] = useState();
   const [past, setPast]= useState();
-   
+  
   useEffect(() => {
 
     if(events === undefined){
@@ -94,7 +94,7 @@ function Client(){
     );
   };
 
-
+ 
 
   return(
     <Container component="main" className={classes.main} maxWidth="sm">

@@ -6,5 +6,8 @@ export default {
   },
   create: function(eventObj) {
     return axios.post("api/event", eventObj);
+  },
+  update: function(id, eventObj) {
+    return axios.put(`api/event/${id}`, eventObj);
   }
 };
