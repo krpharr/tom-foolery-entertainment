@@ -118,7 +118,7 @@ function Agent(){
   return(
     <Container component="main" className={classes.main} maxWidth="xl">
       <Typography variant="h2" component="h1" gutterBottom>
-        Agent Page {` ${userAuth.user.user}`}
+        Agent Page - {` ${userAuth.user.user}`}
       </Typography>
       <Grid container>
         <Grid item xs={12}>

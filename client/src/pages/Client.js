@@ -106,7 +106,7 @@ function Client(){
   return(
     <Container component="main" className={classes.main} maxWidth="xl">
       <Typography variant="h2" component="h1" gutterBottom>
-        Client Page {` ${userAuth.user.user}`}
+        Client Page - {` ${userAuth.user.user}`}
       </Typography>
       <Grid container >
         <Grid item>

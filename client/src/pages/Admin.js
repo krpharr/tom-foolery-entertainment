@@ -10,6 +10,7 @@ import Button from '@material-ui/core/Button';
 import InquiryCard from "../components/InquiryCard";
 import inquiryAPI from "../utils/inquiryAPI";
 import agentAPI from "../utils/agentAPI";
+import userAuth from "../utils/userAuth";
 
 const useStyles = makeStyles((theme) => ({
   main: {
@@ -83,7 +84,7 @@ function Admin(){
   return(
     <Container component="main" className={classes.main} maxWidth="xl">
       <Typography variant="h2" component="h1" gutterBottom>
-        Admin Page 
+        Admin Page - {` ${userAuth.user.user}`}
       </Typography>
       <Grid container>
         <Grid item xs={12}>

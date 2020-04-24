@@ -14,7 +14,7 @@ import FormControl from '@material-ui/core/FormControl';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Checkbox from '@material-ui/core/Checkbox';
 import Select from '@material-ui/core/Select';
-import inquiryAPI from "../utils/inquiryAPI";
+import clientAPI from "../utils/clientAPI";
 import moment from "moment";
 
 const useStyles = makeStyles((theme) => ({
@@ -40,13 +40,20 @@ export default function ClientEventCard(props) {
   const today = moment();
 
   const [agent, setAgent] = useState();
+  const [client, setClient] = useState();
   const [review, setReview] = useState();
   const [updated, setUpdated] = useState(false);
   
   useEffect(() => {
+
     agentAPI.getById(props.agentId).then(agent => {
       setAgent(agent.data); 
     });
+
+    clientAPI.getById(props.clientId).then(res => {
+      setClient(res.data);
+    });
+
     setReview(props.review);
   }, []);   
 
@@ -79,6 +86,23 @@ export default function ClientEventCard(props) {
     );
   };
 
+  const clientContainer = () => {
+    if(client === undefined)return;
+    return(
+      <div>
+        <Typography variant="body2" component="p">
+          {`Client: ${client.firstName} ${client.lastName}`}
+        </Typography>
+        <Typography variant="body2" component="p">
+          {`Email: ${client.email}`}
+        </Typography>
+        <Typography variant="body2" component="p">
+          {`Phone: ${client.phone}`}
+        </Typography>      
+      </div>  
+    );
+  };
+
   return (
     <Card className={classes.root}>
       <CardContent>
@@ -89,6 +113,7 @@ export default function ClientEventCard(props) {
           {`Event: ${props.type}`}
         </Typography>
         {agentContainer()}
+        {clientContainer()}
         <Typography variant="body2" component="p">
           {`Band: ${props.bands[0]}`}
         </Typography>
