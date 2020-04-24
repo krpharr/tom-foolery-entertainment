@@ -19,7 +19,7 @@ const useStyles = makeStyles((theme) => ({
     backgroundPosition: "center"
   },
   cardGrid: {
-    paddingTop: theme.spacing(8),
+    paddingTop: theme.spacing(2),
     paddingBottom: theme.spacing(8),
   },
   card: {
@@ -31,6 +31,11 @@ const useStyles = makeStyles((theme) => ({
   },
   cardContent: {
     flexGrow: 1,
+  },
+  headerTxt: {
+    color: "white",
+    paddingTop: theme.spacing(8),
+    textAlign: "center"
   }
 }));
 
@@ -60,8 +65,8 @@ function Bands(){
   
   return(
     <Container component="main" className={classes.main} maxWidth="xl">
-      <Typography variant="h2" component="h1" gutterBottom>
-        Bands Page 
+      <Typography className={classes.headerTxt}  variant="h4" component="h1" gutterBottom>
+        Our Bands 
       </Typography>
       <Container className={classes.cardGrid} maxWidth="lg">
         <Grid container spacing={4}>

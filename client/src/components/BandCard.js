@@ -12,6 +12,9 @@ import { useHistory } from "react-router-dom";
 const useStyles = makeStyles({
   root: {
     maxWidth: 345,
+  },
+  bandName: {
+    height: "64px"
   }
 });
 
@@ -36,7 +39,7 @@ export default function BandCard(props) {
           title={props.name}
         />
         <CardContent>
-          <Typography gutterBottom variant="h5" component="h2">
+          <Typography gutterBottom variant="h5" component="h2" className={classes.bandName}>
             {props.name}
           </Typography>
           <Typography gutterBottom variant="body1" color="textSecondary" component="h2">

@@ -4,7 +4,6 @@ module.exports = {
   findAll: function(req, res) {
     db.Agent
       .find({})
-      .sort({ date: -1 })
       .then(dbAgent => {
         res.json(dbAgent);
       })

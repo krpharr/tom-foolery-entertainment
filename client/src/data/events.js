@@ -17,14 +17,14 @@ const events = [{
     type: "Private",
     singular: "Private",
     image: "assets/images/samantha-gades-fIHozNWfcvs-unsplash.jpg",
-    description: "Hire one of our vetted entertainers to wow your guests at your special private events."
+    description: "Hire one of our vetted entertainers to wow your guests at your special private events. Birthdays, reunions, fancy dinners, and anything and everything that could use prime entertainment."
   },
   {
     id: 3,
     type: "Concerts",
     singular: "Concert",
     image: "assets/images/alexander-popov-hTv8aaPziOQ-unsplash.jpg",
-    description: "We provide the best band worldwide for concert venues, fesivals and clubs.  No event too large or small."
+    description: "We provide the best band worldwide for concert venues, fesivals and clubs.  Wish us, you can rest assured the band will show up and perform on time. No event too large or small."
   }
 ];
 
