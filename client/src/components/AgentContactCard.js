@@ -160,6 +160,9 @@ export default function AgentContactCard(props) {
     eventAPI.create(eventObj).then(res => {
       console.log(res);
       setEvent(res.data);
+      inquiryAPI.update(props._id, {deleted: true}).then(res =>{
+        console.log(props._id, "marked deleted")
+      });
     }); 
   };
 

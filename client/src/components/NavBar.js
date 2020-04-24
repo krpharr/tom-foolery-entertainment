@@ -166,7 +166,7 @@ function NavBar(props) {
         </div>
         <Divider />
         <List>
-          {[['Home', <HomeIcon/>], ['About', <InfoIcon/>], ['Events', <EventIcon/>], ['Bands', <LibraryMusicIcon/>], ['Contact Us', <ContactSupportIcon/>]].map((text, index) => (
+          {[['Home', <HomeIcon/>], ['Events', <EventIcon/>], ['Bands', <LibraryMusicIcon/>], ['Contact Us', <ContactSupportIcon/>], ['About', <InfoIcon/>]].map((text, index) => (
             <ListItem button key={text[0]} onClick={() => handleMenuItemClick(text[0])}>
                 <ListItemIcon className={classes.icons}>{text[1]}</ListItemIcon>
                 <ListItemText primary={text[0]}/>

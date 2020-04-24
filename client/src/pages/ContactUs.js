@@ -80,7 +80,7 @@ export default function ContactUs() {
       email: event.target.email.value,
       phone: event.target.phone.value,
       eventType: eventType,
-      bandId: band,
+      band: band,
       date: event.target.date.value,
       startTime: event.target.time.value,
       numHours: length,
