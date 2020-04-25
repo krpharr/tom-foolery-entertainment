@@ -160,14 +160,14 @@ const inquirySeed = [{ firstName: "Vinni", lastName: "Guarin", email: "vguarin0@
 //     process.exit(1);
 //   });
 
-db.Inquiry
-  .remove({})
-  .then(() => db.Inquiry.collection.insertMany(inquirySeed))
-  .then(data => {
-    console.log(data.result.n + " records inserted!");
-    process.exit(0);
-  })
-  .catch(err => {
-    console.error(err);
-    process.exit(1);
-  });
+// db.Inquiry
+//   .remove({})
+//   .then(() => db.Inquiry.collection.insertMany(inquirySeed))
+//   .then(data => {
+//     console.log(data.result.n + " records inserted!");
+//     process.exit(0);
+//   })
+//   .catch(err => {
+//     console.error(err);
+//     process.exit(1);
+//   });
