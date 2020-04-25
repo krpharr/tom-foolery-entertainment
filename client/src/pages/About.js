@@ -12,7 +12,7 @@ const useStyles = makeStyles((theme) => ({
   main: {
     // marginTop: theme.spacing(8),
     // marginBottom: theme.spacing(2),
-    // height: "90vh",
+    height: "90vh",
     backgroundImage: `url(${Background})`,
     // backgroundSize: "cover",
     backgroundRepeat: "repeat-y",
