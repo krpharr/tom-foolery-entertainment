@@ -35,19 +35,25 @@ function Agent(){
 
   useEffect(() => {
 
-    agentAPI.getAll().then(res => {
-      let f = res.data.filter(agent => {
-        return agent.username = userAuth.user.user;
+    if(agentId === undefined){
+      agentAPI.getAll().then(res => {
+        let f = res.data.filter(agent => {
+          return agent.username === userAuth.user.user;
+        });
+        const id = f[0]._id;
+        setAgentId(id);
+        console.log("Agent id: ",id);
+        setUpdate(update + 1);
       });
-      const id = f[0]._id;
-      setAgentId(id);
-      console.log(id);
+    }
+
+    if(agentId !== undefined){
 
       inquiryAPI.getAll().then(res => {
         console.log(res.data);
-        console.log(id);
+        console.log(agentId);
         const filtered = res.data.filter(inq => {
-          return inq.agentId === id && inq.deleted === false;
+          return inq.agentId === agentId && inq.deleted === false;
         });
         console.log(filtered);
         setInquiries(filtered);
@@ -56,8 +62,9 @@ function Agent(){
       eventAPI.getAll().then(res => {
         console.log(res.data);
         const filtered = res.data.filter(event => {
-          return event.agentId === id;
+          return event.agentId === agentId;
         });
+        console.log(filtered);
         setEvents(filtered);
         const past = filtered.filter(event => {
           return moment(event.date).isBefore(moment());
@@ -68,9 +75,7 @@ function Agent(){
         });
         setCurrent(current);
       });
-
-    });
-
+    }
   }, [update]);
 
   const mapEvents = (eventArray) => {
