@@ -6,7 +6,6 @@ import Grid from '@material-ui/core/Grid';
 import Button from '@material-ui/core/Button';
 import ClientEventCard from '../components/ClientEventCard';
 import clientAPI from "../utils/clientAPI";
-import userAPI from "../utils/userAPI";
 import eventAPI from "../utils/eventAPI";
 import userAuth from "../utils/userAuth";
 import moment from 'moment';
@@ -16,20 +15,17 @@ import ClientTabs from "../components/ClientTabs";
 const useStyles = makeStyles((theme) => ({
   main: {
     marginTop: theme.spacing(8),
-    // marginBottom: theme.spacing(2),
   },
   refreshButton: {
     margin: "0 0 8px"
   }
 }));
 
-
-
 function Client(){
   
   const classes = useStyles();
 
-  const [client, setClient] = useState();
+  // const [client, setClient] = useState();
   const [events, setEvents] = useState();
   const [current, setCurrent] = useState();
   const [past, setPast]= useState();
@@ -39,30 +35,23 @@ function Client(){
     if(events === undefined){
       eventAPI.getAll().then(events => {
         clientAPI.getAll().then(res => {
-          console.log("res.data", res.data);
           const clientArray = res.data.filter(client => {
             return client.email.split("@")[0] === userAuth.user.user;
           });
-          setClient(clientArray[0]._id);
+          // setClient(clientArray[0]._id);
           const filtered = events.data.filter(event =>{
             return event.clientId === clientArray[0]._id;
           });
-          console.log("filtered: ", filtered)
           setEvents(filtered);  
         })
        });
     }else {
-      console.log("sortEvents")
       sortEvents();
     }
 
   }, [events, update]);  
 
   const sortEvents = () => {
-    // if(events === undefined || client === undefined)return;
-    // const filtered = events.filter(events => {
-    //   return events.deleted === false;
-    // });
     const today = moment();
     const past = events.filter(event => {
       return moment(event.date).isBefore(today);
@@ -72,9 +61,6 @@ function Client(){
       return moment(event.date).isSameOrAfter(today);
     });
     setCurrent(current);    
-
-    console.log("past" ,past);
-    console.log("current", current);
   };
 
   const mapEvents = (eventArray) => {

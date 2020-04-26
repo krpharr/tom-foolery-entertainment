@@ -1,5 +1,3 @@
-//https://github.com/saintedlama/passport-local-mongoose
-
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 const passportLocalMongoose = require('passport-local-mongoose');

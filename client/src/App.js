@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter as Router, Route, Switch, useHistory, useLocation, Redirect } from "react-router-dom";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import CssBaseline from '@material-ui/core/CssBaseline';
 import { makeStyles } from '@material-ui/core/styles';
 import NavBar from "./components/NavBar";
@@ -16,7 +16,6 @@ import Agent from "./pages/Agent";
 import ClientPage from "./pages/Client";
 import Bandleader from "./pages/Bandleader";
 import StickyFooter from "./components/StickyFooter";
-import userAuth from "./utils/userAuth";
 import PrivateRoute from "./components/PrivateRoute";
 
 const useStyles = makeStyles((theme) => ({
@@ -58,9 +57,6 @@ function App() {
             <PrivateRoute path="/bandleader">
               <Bandleader type={"bandleader"}/>
             </PrivateRoute>            
-            {/* <Route exact path="/search" component={Search} />
-            <Route exact path="/saved" component={Saved} />
-            <NoMatch /> */}
           </Switch>
           <StickyFooter />
         </div>

@@ -10,12 +10,8 @@ const Background = "assets/images/mahdi-b7gjIMzLJZc-unsplash.jpg";
 
 const useStyles = makeStyles((theme) => ({
   main: {
-    // marginTop: theme.spacing(8),
-    // marginBottom: theme.spacing(2),
-    // height: "100vh",
     backgroundImage: `url(${Background})`,
     backgroundSize: "cover",
-    // backgroundRepeat: "no-repeat",
     backgroundPosition: "center"
   },
   cardGrid: {
@@ -46,7 +42,6 @@ function Bands(){
 
   useEffect(() => {
     bandAPI.getAll().then(res => {
-      console.log(res.data);
       setBands(res.data);
     });
   }, []);

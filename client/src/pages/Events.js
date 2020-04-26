@@ -8,15 +8,10 @@ import events from "../data/events";
 
 const Background = "assets/images/dylan-nolte-Vfd_WzJN6Zg-unsplash.jpg";
 
-
 const useStyles = makeStyles((theme) => ({
   main: {
-    // marginTop: theme.spacing(8),
-    // marginBottom: theme.spacing(2),
-    //  height: "100%",
     backgroundImage: `url(${Background})`,
     backgroundSize: "cover",
-    // backgroundRepeat: "no-repeat",
     backgroundPosition: "center"
   },
   cardGrid: {
@@ -63,6 +58,5 @@ function Events(){
     </Container>      
   );
 };
-
 
 export default Events;

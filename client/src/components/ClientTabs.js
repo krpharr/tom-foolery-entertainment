@@ -72,7 +72,6 @@ export default function ClientTabs(props) {
         >
           <Tab label="Current Events" {...a11yProps(0)} />
           <Tab label="Past Events" {...a11yProps(1)} />
-          {/* <Tab label="Item Three" {...a11yProps(2)} /> */}
         </Tabs>
       </AppBar>
       <SwipeableViews

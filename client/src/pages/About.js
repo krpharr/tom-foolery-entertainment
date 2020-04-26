@@ -10,11 +10,8 @@ const Background = "assets/images/marcela-laskoski-YrtFlrLo2DQ-unsplash.jpg";
 
 const useStyles = makeStyles((theme) => ({
   main: {
-    // marginTop: theme.spacing(8),
-    // marginBottom: theme.spacing(2),
     height: "90vh",
     backgroundImage: `url(${Background})`,
-    // backgroundSize: "cover",
     backgroundRepeat: "repeat-y",
     backgroundPosition: "center"
   },
@@ -25,7 +22,6 @@ const useStyles = makeStyles((theme) => ({
   },
   headerText: {
     color: "white",
-    // paddingTop: theme.spacing(8),
     textAlign: "center"
   },
   aboutText: {
@@ -49,20 +45,18 @@ function About(){
 
   useEffect(()=>{
     agentAPI.getAll().then(res => {  
-      console.log(res.data);
       setAgents(res.data);
     });
   },[]);
 
   const mapAgents = () => {
     if(agents === undefined)return;
-    console.log("mapAgents ", agents)
     const agentMap = agents.map((agent, index) => {
       return (
         <Grid container key={index}>
           <Grid item xs={12} md={8} xl={6} className={classes.agent}>
             <Grid item xs={3}>
-              <img src={agent.avatar} className={classes.avatar}></img>
+              <img src={agent.avatar} className={classes.avatar} alt="avatar"></img>
             </Grid>
             <Grid item xs={6}>
               <h4>{`${agent.firstName} ${agent.lastName}`}</h4>
@@ -88,7 +82,7 @@ function About(){
             lorem ipsum dolor sit amet consectetur adipisicing elit. Corrupti doloribus, error quaerat sed maiores debitis ipsa 
             id dolorem delectus non recusandae natus incidunt eos dolore unde eaque provident voluptas corporis!       
         </Typography>
-          <img src="https://pbs.twimg.com/profile_images/1237550450/mstom_400x400.jpg" width="100px"></img>
+          <img src="https://pbs.twimg.com/profile_images/1237550450/mstom_400x400.jpg" width="100px" alt={"tom"}></img>
           {mapAgents()}
           {/* <Grid container>
               <Grid item xs={12} md={8} xl={6} className={classes.agent}>

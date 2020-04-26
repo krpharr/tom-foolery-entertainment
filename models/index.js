@@ -6,5 +6,4 @@ module.exports = {
   Event: require("./event"),
   Inquiry: require("./inquiry"),
   Review: require("./review")
-    // User: require("./user")
 };

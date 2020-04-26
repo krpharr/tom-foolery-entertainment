@@ -8,12 +8,6 @@ import eventAPI from "../utils/eventAPI";
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import TextField from '@material-ui/core/TextField';
-import InputLabel from '@material-ui/core/InputLabel';
-import MenuItem from '@material-ui/core/MenuItem';
-import FormControl from '@material-ui/core/FormControl';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import Checkbox from '@material-ui/core/Checkbox';
-import Select from '@material-ui/core/Select';
 import clientAPI from "../utils/clientAPI";
 import moment from "moment";
 
@@ -64,7 +58,6 @@ export default function ClientEventCard(props) {
 
   const handleSetReview = (event) => {
     eventAPI.update(props._id, {review: review}).then(res => {
-      console.log("update review", res.data);
       setUpdated(true);
     });
   };

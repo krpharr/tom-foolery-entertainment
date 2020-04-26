@@ -4,7 +4,6 @@ import Container from '@material-ui/core/Container';
 import { makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
-import Typography from '@material-ui/core/Typography';
 import bandAPI from "../utils/bandAPI";
 import eventsAPI from "../utils/eventAPI";
 
@@ -12,8 +11,6 @@ const Background = "assets/images/aditya-chinchure-ZhQCZjr9fHo-unsplash.jpg";
 
 const useStyles = makeStyles((theme) => ({
   main: {
-    // marginTop: theme.spacing(10),
-    // marginBottom: theme.spacing(2),
     backgroundImage: `url(${Background})`,
     backgroundSize: "cover",
     backgroundRepeat: "no-repeat",
@@ -24,7 +21,6 @@ const useStyles = makeStyles((theme) => ({
     marginTop: theme.spacing(10),
     paddingBottom: "16px",
     marginBottom: "16px",
-    // minWidth: "300px",
     maxWidth: "690px"
   },
   bandInfo: {
@@ -50,7 +46,6 @@ function Band(){
 
     if(info === undefined){
       bandAPI.getById(id).then(res => {
-        console.log(res.data);
         setInfo(res.data);
       });
     }else{

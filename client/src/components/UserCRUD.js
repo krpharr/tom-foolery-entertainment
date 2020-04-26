@@ -1,7 +1,5 @@
 import React, { useState, useEffect } from "react";
 import Container from '@material-ui/core/Container';
-import { makeStyles } from '@material-ui/core/styles';
-import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid';
 import UserCard from "./UserCard";
 import userAPI from "../utils/userAPI";
@@ -10,24 +8,10 @@ import TextField from '@material-ui/core/TextField';
 import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
-import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 
-const useStyles = makeStyles((theme) => ({
-  // main: {
-  //   padding: "8px",
-  //   border: "1px solid black",
-  //   borderRadius: "10px"
-  // },
-  // display: {
-  //   height: "50vh",
-  //   overflow: "scroll"
-  // }
-}));
 
 function UserCRUD() {
-
-  const classes = useStyles();
 
   const [users, setUsers] = useState();
   const [open, setOpen] = useState(false);
@@ -38,7 +22,6 @@ function UserCRUD() {
   };
 
   const handleClose = (event) => {
-    // console.log(event);
     setOpen(false);
   };
 
@@ -50,7 +33,6 @@ function UserCRUD() {
       type: event.target.type.value
     }
     userAPI.create(userObj).then(res => {
-      console.log(res);
       handleClose();
       setUpdate(update + 1);
     });

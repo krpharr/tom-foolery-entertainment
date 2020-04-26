@@ -54,9 +54,6 @@ export default function BandCard(props) {
         <Button size="small" color="primary" onClick={() => bandPage()}>
           Band Page
         </Button>
-        {/* <Button size="small" color="primary">
-          Learn More
-        </Button> */}
       </CardActions>
     </Card>
   );

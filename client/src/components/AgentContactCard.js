@@ -1,5 +1,4 @@
 import React, {useState, useEffect} from 'react';
-// import {Link} from 'react-router-dom';
 import { makeStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import CardActions from '@material-ui/core/CardActions';
@@ -10,8 +9,6 @@ import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
 import FormControl from '@material-ui/core/FormControl';
 import TextField from '@material-ui/core/TextField';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import Checkbox from '@material-ui/core/Checkbox';
 import Select from '@material-ui/core/Select';
 import inquiryAPI from "../utils/inquiryAPI";
 import moment from "moment";
@@ -58,11 +55,9 @@ export default function AgentContactCard(props) {
   useEffect(() => {
     if(user === undefined){
       userAPI.getAll().then(res =>{
-        console.log("getAll()",res.data);
         let users = res.data.filter(u => {
           return u.username === clientUsername;
         });
-        console.log("search for existing first", users[0])
         setUser(users[0]);
       });      
     }else{
@@ -70,11 +65,9 @@ export default function AgentContactCard(props) {
     }
     if(client === undefined){
       clientAPI.getAll().then(res =>{
-        console.log("getAll()",res.data);
         let clients = res.data.filter(c => {
           return c.email === props.email;
         });
-        console.log("search for existing clients first", clients[0])
         setClient(clients[0]);
       });      
     }
@@ -112,17 +105,14 @@ export default function AgentContactCard(props) {
       username: clientUsername
     }
 
-    console.log("clientObj", clientObj);
 
     clientAPI.create(clientObj).then(res => {
-       console.log(res);
       setClient(res.data);
     });
 
   };
 
   const handleCreateUser = () => {
-    //return userId //async
     const password = "heroku";
     const userObj = {
       username: clientUsername,
@@ -130,10 +120,8 @@ export default function AgentContactCard(props) {
       type: "client"
     }
     userAPI.create(userObj).then(res => {
-      console.log(res);
       if(res.status === 200){
         userAPI.getAll().then(res =>{
-          console.log("getAll()",res.data);
           let users = res.data.filter(u => {
             return u.username === clientUsername;
           });
@@ -158,10 +146,9 @@ export default function AgentContactCard(props) {
       endTime: end
     };
     eventAPI.create(eventObj).then(res => {
-      console.log(res);
       setEvent(res.data);
       inquiryAPI.update(props._id, {deleted: true}).then(res =>{
-        console.log(props._id, "marked deleted")
+      
       });
     }); 
   };

@@ -13,12 +13,9 @@ import eventAPI from "../utils/eventAPI";
 import AgentTabs from "../components/AgentTabs";
 import moment from "moment";
 
-
-
 const useStyles = makeStyles((theme) => ({
   main: {
     marginTop: theme.spacing(8),
-    // marginBottom: theme.spacing(2),
   }
 }));
 
@@ -42,7 +39,6 @@ function Agent(){
         });
         const id = f[0]._id;
         setAgentId(id);
-        console.log("Agent id: ",id);
         setUpdate(update + 1);
       });
     }
@@ -50,21 +46,16 @@ function Agent(){
     if(agentId !== undefined){
 
       inquiryAPI.getAll().then(res => {
-        console.log(res.data);
-        console.log(agentId);
         const filtered = res.data.filter(inq => {
           return inq.agentId === agentId && inq.deleted === false;
         });
-        console.log(filtered);
         setInquiries(filtered);
       });
 
       eventAPI.getAll().then(res => {
-        console.log(res.data);
         const filtered = res.data.filter(event => {
           return event.agentId === agentId;
         });
-        console.log(filtered);
         setEvents(filtered);
         const past = filtered.filter(event => {
           return moment(event.date).isBefore(moment());

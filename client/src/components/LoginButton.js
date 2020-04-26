@@ -1,7 +1,6 @@
 import React from "react";
 import {useHistory} from "react-router-dom";
 import userAuth from "../utils/userAuth";
-import Login from "../pages/Login";
 
 function LoginButton() {
   let history = useHistory();
@@ -20,7 +19,6 @@ function LoginButton() {
       <p>
         <button        
           onClick={() => {
-          // userAuth.signout(() => history.push("/login"));
           history.push("/login");
         }}>
           Login

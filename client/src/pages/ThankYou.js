@@ -11,17 +11,12 @@ const useStyles = makeStyles((theme) => ({
   root: {
   },
   main: {
-    // marginTop: theme.spacing(7),
-    // marginBottom: theme.spacing(2),
     height: "100vh",
     backgroundImage: `url(${Background})`,
     backgroundSize: "cover",
     backgroundRepeat: "no-repeat"
-    // backgroundPosition: "center"
   },
   logoGrid: {
-    // paddingTop: theme.spacing(32),
-    // paddingBottom: theme.spacing(8),
     position: "relative",
     top: "60vh",
     bottom: "40px"
@@ -51,7 +46,7 @@ function ThankYou(){
       </Grid>
       <Grid container className={classes.logoGrid}>
          <Grid item xs={12} lg={8}>
-             <img src="assets/images/logo.1.png" className={classes.logo}></img>
+             <img src="assets/images/logo.1.png" className={classes.logo} alt={"logo"}></img>
          </Grid>
       </Grid>
     </Container>      

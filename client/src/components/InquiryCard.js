@@ -3,7 +3,6 @@ import { makeStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
-import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
@@ -12,7 +11,6 @@ import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Checkbox from '@material-ui/core/Checkbox';
 import Select from '@material-ui/core/Select';
 import inquiryAPI from "../utils/inquiryAPI";
-import moment from "moment";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -41,25 +39,23 @@ export default function InquiryCard(props) {
   const handleReadChange = (event) => {
     const check = read ? false : true;
     setRead(check);
-    console.log(event.target.id, read);
     inquiryAPI.update(event.target.id, {read: check}).then(res => {
-      console.log(res.data);
+    
     });
   }; 
 
   const handleDeletedChange = (event) => {
     const check = deleted ? false : true;
     setDeleted(check);
-    console.log(event.target.id, deleted);
     inquiryAPI.update(event.target.id, {deleted: check}).then(res => {
-      console.log(res.data);
+    
     });
   }; 
 
   const handleAgentChange = (event) => {
     setAgent(event.target.value);
     inquiryAPI.update(props._id, {agentId: event.target.value}).then(res => {
-      console.log(res.data);
+    
     });
   };
 

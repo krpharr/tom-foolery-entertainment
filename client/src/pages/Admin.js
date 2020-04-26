@@ -3,7 +3,6 @@ import Container from '@material-ui/core/Container';
 import { makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
-import InquiryCRUD from '../components/InquiryCRUD';
 import UserCRUD from "../components/UserCRUD";
 import AdminTabs from "../components/AdminTabs";
 import Button from '@material-ui/core/Button';
@@ -15,7 +14,6 @@ import userAuth from "../utils/userAuth";
 const useStyles = makeStyles((theme) => ({
   main: {
     marginTop: theme.spacing(8),
-    // marginBottom: theme.spacing(2),
   },
   crudWindow: {
     height: "50vh",
@@ -27,7 +25,7 @@ function Admin(){
   
   const classes = useStyles();
 
-  const [inquiries, setInquiries] = useState();
+  // const [inquiries, setInquiries] = useState();
   const [read, setRead] = useState();
   const [unread, setUnread] = useState();
   const [agents, setAgents] = useState();
@@ -35,18 +33,16 @@ function Admin(){
 
   useEffect(() => {
     agentAPI.getAll().then(res => {
-      console.log(res.data);
       setAgents(res.data);
     });
     inquiryAPI.getAll().then(res => {
-      console.log(res.data);
       const unread = res.data.filter(inquiry => {
         return inquiry.deleted === false && inquiry.read === false;
       });
       const read = res.data.filter(inquiry => {
         return inquiry.deleted === false && inquiry.read === true;
       });
-      setInquiries(res.data);
+      // setInquiries(res.data);
       setRead(read);
       setUnread(unread);
     });
@@ -76,10 +72,8 @@ function Admin(){
   };
 
   const handleRefresh = () => {
-    // setEvents(undefined);
     setUpdate(update + 1);
   }
-
 
   return(
     <Container component="main" className={classes.main} maxWidth="xl">

@@ -19,7 +19,6 @@ const app = express();
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
-
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -27,30 +26,18 @@ app.use(cookieParser());
 app.use(session({ keys: ['samhill', 'dogpoop', 'cheese'] }));
 app.use(flash());
 
-// Configure passport middleware
 app.use(passport.initialize());
 app.use(passport.session());
 
 
-// https://github.com/saintedlama/passport-local-mongoose
-// Simplified Passport/Passport-Local Configuration
 passport.use(new LocalStrategy(User.authenticate()));
 
-// use static serialize and deserialize of model for passport session support
 passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
 
-// Serve up static assets (usually on heroku)
 if (process.env.NODE_ENV === "production") {
   app.use(express.static("client/build"));
 
-  // router.get("/", (req, res) => {
-  //   res.sendFile(path.join(__dirname, "./client/build/index.html"));
-  // });
-
-  // router.get("*", (req, res) => {
-  //   res.sendFile(path.join(__dirname, "./client/build/index.html"));
-  // });
 }
 
 app.use(routes);

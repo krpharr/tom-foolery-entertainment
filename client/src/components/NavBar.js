@@ -101,14 +101,12 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 function NavBar(props) {
-  const { width } = props;
   const classes = useStyles();
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
 
   const history = useHistory();
   const handleMenuItemClick = (text) => {
-    console.log(text);
     history.push(`/${text.toLowerCase().replace(" ", "")}`);
     handleDrawerClose();
   };

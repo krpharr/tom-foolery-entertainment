@@ -1,24 +1,18 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState} from 'react';
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import TextField from '@material-ui/core/TextField';
 import FormControl from '@material-ui/core/FormControl';
 import InputLabel from '@material-ui/core/InputLabel';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Select from '@material-ui/core/Select';
 import MenuItem from '@material-ui/core/MenuItem';
-import Checkbox from '@material-ui/core/Checkbox';
-import Link from '@material-ui/core/Link';
-import Grid from '@material-ui/core/Grid';
 import InfoIcon from '@material-ui/icons/Info';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import inquiryAPI from "../utils/inquiryAPI";
-import bandAPI from "../utils/bandAPI";
 import { useHistory } from "react-router-dom";
-import moment from "moment";
 import events from "../data/events";
 
 const bands = JSON.parse(localStorage.getItem("bands"));
@@ -28,10 +22,7 @@ const Background = "assets/images/jens-thekkeveettil-dBWvUqBoOU8-unsplash.jpg";
 
 const useStyles = makeStyles((theme) => ({
   main: {
-    // marginBottom: theme.spacing(2),
-    // height: "100vh",
     backgroundImage: `url(${Background})`,
-    // backgroundSize: "cover",
     backgroundPosition: "center"
   },
   paper: {
@@ -86,14 +77,11 @@ export default function ContactUs() {
       numHours: length,
       location: event.target.location.value
     }
-    console.log(inquiryObj);
     contactAPI(inquiryObj);
   };
 
   const contactAPI = (inquiryObj) => {
     inquiryAPI.post(inquiryObj).then(res => {
-      console.log(res);
-      // redirect to thank you page
       history.push("/thankyou");
     });
   };
@@ -126,7 +114,6 @@ export default function ContactUs() {
   };
 
   const handleEventChange = (event) => {
-    console.log(event.target.value);
     setEvent(event.target.value);
   };
 

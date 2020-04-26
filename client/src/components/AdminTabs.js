@@ -8,7 +8,6 @@ import Tab from '@material-ui/core/Tab';
 import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
 
-
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
 
@@ -73,7 +72,6 @@ export default function AdminTabs(props) {
         >
           <Tab label="New" {...a11yProps(0)} />
           <Tab label="Read" {...a11yProps(1)} />
-          {/* <Tab label="Past" {...a11yProps(2)} /> */}
         </Tabs>
       </AppBar>
       <SwipeableViews
@@ -87,9 +85,6 @@ export default function AdminTabs(props) {
         <TabPanel value={value} index={1} dir={theme.direction}>
             {props.read}
         </TabPanel>
-        {/* <TabPanel value={value} index={2} dir={theme.direction}>
-            {props.past}
-        </TabPanel> */}
       </SwipeableViews>
     </div>
   );

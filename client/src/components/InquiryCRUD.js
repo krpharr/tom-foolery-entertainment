@@ -20,11 +20,9 @@ function InquiryCRUD() {
 
   useEffect(() => {
     agentAPI.getAll().then(res => {
-      console.log(res.data);
       setAgents(res.data);
     });
     inquiryAPI.getAll().then(res => {
-      console.log(res.data);
       setInquiries(res.data);
     });
   }, []);
