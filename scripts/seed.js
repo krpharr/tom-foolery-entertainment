@@ -12,7 +12,7 @@ const bandSeed = [{
     description: "Engaging, high energy classic rock and blues band perfect for weddings, parties, and concerts.",
     images: ["https://www.rollingstone.com/wp-content/uploads/2018/06/rs-6094-rectangle.jpg"],
     videos: ["https://youtube.com/embed/Ef9QnZVpVd8"],
-    priceRange: [1000000, 10000000],
+    priceRange: [2000, 20000],
     genres: ["Classic Rock", "Blues"],
     reviews: [],
     upcomingEvents: [],
@@ -24,7 +24,7 @@ const bandSeed = [{
     description: "Classic Mowtown vocal group to bring all the love to your event.",
     images: ["https://d1dxs113ar9ebd.cloudfront.net/225batonrouge/2018/08/91I-h96o4L._SL1500_-e1533848976771.jpg"],
     videos: ["https://youtube.com/embed/C_CSjcm-z1w"],
-    priceRange: [1000000, 10000000],
+    priceRange: [2000, 20000],
     genres: ["Motown"],
     reviews: [],
     upcomingEvents: [],
@@ -36,7 +36,7 @@ const bandSeed = [{
     description: "Country with all the drama and life stories you will ever need.",
     images: ["https://cdn.mobsocmedia.com/uploads/sites/49/20180328195815/tammy-wynette-george-jones.jpg"],
     videos: ["https://youtube.com/embed/nhIKa1g5L6M"],
-    priceRange: [1000000, 10000000],
+    priceRange: [2000, 20000],
     genres: ["Country"],
     reviews: [],
     upcomingEvents: [],
@@ -48,7 +48,7 @@ const bandSeed = [{
     description: "Down home blues beyond compare.",
     images: ["https://media1.fdncms.com/ntslo/imager/u/original/8700551/musicartsculture_music1-1-81aa3c26bec2bb61.jpg"],
     videos: ["https://youtube.com/embed/N6O9DaIGy9M"],
-    priceRange: [1000000, 10000000],
+    priceRange: [2000, 20000],
     genres: ["Blues"],
     reviews: [],
     upcomingEvents: [],
@@ -60,7 +60,7 @@ const bandSeed = [{
     description: "Big band that swings like nobody's business.",
     images: ["https://www.wmky.org/sites/wmky/files/styles/medium/public/201506/count.jpg"],
     videos: ["https://youtube.com/embed/8FcWW-fMt90"],
-    priceRange: [1000000, 10000000],
+    priceRange: [2000, 20000],
     genres: ["Jazz", "Big Band", "Swing"],
     reviews: [],
     upcomingEvents: [],
@@ -72,7 +72,7 @@ const bandSeed = [{
     description: "Stand up for your rights and bring the deep bass groove to your event to take everyone to another level.",
     images: ["https://direct.rhapsody.com/imageserver/images/Art.56762/633x422.jpg"],
     videos: ["https://youtube.com/embed/enIfdOl83Pw"],
-    priceRange: [1000000, 10000000],
+    priceRange: [2000, 20000],
     genres: ["Reggae"],
     reviews: [],
     upcomingEvents: [],
@@ -84,7 +84,7 @@ const bandSeed = [{
     description: "Bring down the house with our most popular hip-hop group.",
     images: ["https://www.morrisonhotelgallery.com/images/big/09%20Run%20DMC.jpg"],
     videos: ["https://youtube.com/embed/JNua1lFDuDI"],
-    priceRange: [1000000, 10000000],
+    priceRange: [2000, 20000],
     genres: ["Hip-Hop", "Rap"],
     reviews: [],
     upcomingEvents: [],
@@ -96,7 +96,7 @@ const bandSeed = [{
     description: "Delivering the 80's classics.  No event too large or small.",
     images: ["https://i.pinimg.com/736x/83/eb/7a/83eb7a1f45f8232f67b21bf54b9674fd.jpg"],
     videos: ["https://youtube.com/embed/5JlbqWTlN2E"],
-    priceRange: [1000000, 10000000],
+    priceRange: [2000, 20000],
     genres: ["80's"],
     reviews: [],
     upcomingEvents: [],
@@ -108,7 +108,7 @@ const bandSeed = [{
     description: "Does not get much worse than this.",
     images: ["https://static.billboard.com/files/media/Backstreet-Boys-1997-portrait-billboard-1548-768x433.jpg"],
     videos: ["https://youtube.com/embed/jJ-ueetuZOk"],
-    priceRange: [1000000, 10000000],
+    priceRange: [2000, 20000],
     genres: ["90's"],
     reviews: [],
     upcomingEvents: [],
@@ -136,17 +136,17 @@ const inquirySeed = [{ firstName: "Vinni", lastName: "Guarin", email: "vguarin0@
   { firstName: "Darrell", lastName: "Bolderson", email: "dbolderson8@goo.ne.jp", phone: "2928482665", eventType: "Concert", band: "Duran Duran", numHours: 6, date: "08/14/2016", startTime: "14:14", location: "27008 Evergreen Plaza", read: false, deleted: false, createdAt: Date.now() }
 ];
 
-// db.Band
-//   .remove({})
-//   .then(() => db.Band.collection.insertMany(bandSeed))
-//   .then(data => {
-//     console.log(data.result.n + " records inserted!");
-//     process.exit(0);
-//   })
-//   .catch(err => {
-//     console.error(err);
-//     process.exit(1);
-//   });
+db.Band
+  .remove({})
+  .then(() => db.Band.collection.insertMany(bandSeed))
+  .then(data => {
+    console.log(data.result.n + " records inserted!");
+    process.exit(0);
+  })
+  .catch(err => {
+    console.error(err);
+    process.exit(1);
+  });
 
 // db.Agent
 //   .remove({})
@@ -160,14 +160,14 @@ const inquirySeed = [{ firstName: "Vinni", lastName: "Guarin", email: "vguarin0@
 //     process.exit(1);
 //   });
 
-// db.Inquiry
-//   .remove({})
-//   .then(() => db.Inquiry.collection.insertMany(inquirySeed))
-//   .then(data => {
-//     console.log(data.result.n + " records inserted!");
-//     process.exit(0);
-//   })
-//   .catch(err => {
-//     console.error(err);
-//     process.exit(1);
-//   });
+db.Inquiry
+  .remove({})
+  .then(() => db.Inquiry.collection.insertMany(inquirySeed))
+  .then(data => {
+    console.log(data.result.n + " records inserted!");
+    process.exit(0);
+  })
+  .catch(err => {
+    console.error(err);
+    process.exit(1);
+  });

@@ -12,5 +12,8 @@ export default {
   },
   update: function(id, agentObj) {
     return axios.put(`api/agent/${id}`, agentObj);
+  },
+  create: function(agentObj) {
+    return axios.post("api/agent", agentObj);
   }
 };

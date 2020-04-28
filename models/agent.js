@@ -32,6 +32,9 @@ const agentSchema = new Schema({
   username: {
     type: String,
   },
+  userId: {
+    type: String
+  },
   avatar: {
     type: String
   }

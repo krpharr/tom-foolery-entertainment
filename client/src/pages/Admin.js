@@ -3,7 +3,7 @@ import Container from '@material-ui/core/Container';
 import { makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
-import UserCRUD from "../components/UserCRUD";
+import AgentCRUD from "../components/AgentCRUD";
 import AdminTabs from "../components/AdminTabs";
 import Button from '@material-ui/core/Button';
 import InquiryCard from "../components/InquiryCard";
@@ -90,7 +90,7 @@ function Admin(){
           {tabDisplay()}
         </Grid>
         <Grid item xs={12} md={6}>
-          <UserCRUD />
+          <AgentCRUD />
         </Grid>
       </Grid>
     </Container>      
