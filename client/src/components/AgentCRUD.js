@@ -95,7 +95,6 @@ function AgentCRUD() {
 
   return (
     <div>
-      users
       <Button variant="outlined" color="primary" onClick={handleClickOpen}>
         New Agent
       </Button>

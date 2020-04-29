@@ -10,7 +10,7 @@ const Background = "assets/images/marcela-laskoski-YrtFlrLo2DQ-unsplash.jpg";
 
 const useStyles = makeStyles((theme) => ({
   main: {
-    height: "90vh",
+    height: "100vh",
     backgroundImage: `url(${Background})`,
     backgroundRepeat: "repeat-y",
     backgroundPosition: "center"

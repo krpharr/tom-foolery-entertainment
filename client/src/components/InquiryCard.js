@@ -11,6 +11,7 @@ import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Checkbox from '@material-ui/core/Checkbox';
 import Select from '@material-ui/core/Select';
 import inquiryAPI from "../utils/inquiryAPI";
+import moment from 'moment';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -35,6 +36,9 @@ export default function InquiryCard(props) {
   const [read, setRead] = React.useState(props.read);
   const [deleted, setDeleted] = React.useState(props.deleted);
   const [agent, setAgent] = React.useState(props.agentId);
+
+  const startTime = moment(props.startTime, 'HH:mm').format('hh:mm a');
+  
 
   const handleReadChange = (event) => {
     const check = read ? false : true;
@@ -91,7 +95,7 @@ export default function InquiryCard(props) {
           {`Event date: ${props.date}`}
         </Typography>
         <Typography variant="body2" component="p">
-          {`Start time: ${props.startTime}`}
+          {`Start time: ${startTime}`}
         </Typography>
         <Typography variant="body2" component="p">
           {`Event length (hours) ${props.numHours}`}

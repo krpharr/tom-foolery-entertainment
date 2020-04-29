@@ -10,6 +10,7 @@ import Typography from '@material-ui/core/Typography';
 import TextField from '@material-ui/core/TextField';
 import clientAPI from "../utils/clientAPI";
 import moment from "moment";
+import formatUtil from "../utils/formatUtil";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -27,6 +28,14 @@ const useStyles = makeStyles((theme) => ({
     minWidth: 120,
   }
 }));
+
+// const formatter = new Intl.NumberFormat('en-US', {
+//   maximumFractionDigits: 0, 
+//   minimumFractionDigits: 0, 
+//   style: 'currency',
+//   currency: 'USD',
+// });
+
 
 export default function ClientEventCard(props) {
   const classes = useStyles();
@@ -73,7 +82,7 @@ export default function ClientEventCard(props) {
           {`Email: ${agent.email}`}
         </Typography>
         <Typography variant="body2" component="p">
-          {`Phone: ${agent.phone}`}
+          {`Phone: ${formatUtil.formatPhoneNumber(agent.phone)}`}
         </Typography>      
       </div>  
     );
@@ -90,7 +99,7 @@ export default function ClientEventCard(props) {
           {`Email: ${client.email}`}
         </Typography>
         <Typography variant="body2" component="p">
-          {`Phone: ${client.phone}`}
+          {`Phone: ${formatUtil.formatPhoneNumber(client.phone)}`}
         </Typography>      
       </div>  
     );
@@ -100,7 +109,7 @@ export default function ClientEventCard(props) {
     <Card className={classes.root}>
       <CardContent>
         <Typography variant="body2" component="p">
-          {`Event date: ${props.date}`}
+          {`Event date: ${moment(props.date).format("MM-DD-YYYY")}`}
         </Typography>
         <Typography variant="body2" component="p">
           {`Event: ${props.type}`}
@@ -111,16 +120,16 @@ export default function ClientEventCard(props) {
           {`Band: ${props.bands[0]}`}
         </Typography>
         <Typography variant="body2" component="p">
-          {`Start time: ${props.startTime}`}
+          {`Start time: ${moment(props.startTime).format("hh:mma")}`}
         </Typography>
         <Typography variant="body2" component="p">
-          {`End time: ${props.endTime}`}
+          {`End time: ${moment(props.endTime).format("hh:mma")}`}
         </Typography>
         <Typography variant="body2" component="p">
           {`Event location: ${props.location}`}
         </Typography>
         <Typography variant="body2" component="p">
-          {`Total Price: ${props.totalPrice}`}
+          {`Total Price: ${formatUtil.formatCurrency(props.totalPrice)}`}
         </Typography>
         <TextField
             variant="outlined"

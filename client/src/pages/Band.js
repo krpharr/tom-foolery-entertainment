@@ -62,6 +62,15 @@ function Band(){
 
   }, [info]);
 
+  const formatter = new Intl.NumberFormat('en-US', {
+    maximumFractionDigits: 0, 
+    minimumFractionDigits: 0, 
+    style: 'currency',
+    currency: 'USD',
+  });
+  
+  // formatter.format(2500); 
+
   const displayInfo = () => {
     if(info === undefined || reviews === undefined)return;
     return(
@@ -73,7 +82,7 @@ function Band(){
           <Grid item xs={10} className={classes.bandInfo}>
             <h1>{info.name}</h1>
             <p>{info.genres.map(genre => {return `${genre} `})}</p>
-            <p>Price range: {info.priceRange[0]} {info.priceRange[1]}</p>
+            <p>Price range: {formatter.format(info.priceRange[0])} - {formatter.format(info.priceRange[1])}</p>
             <p>{info.description}</p>
           </Grid>
           <Grid item xs={12} sm={8} md={6}>

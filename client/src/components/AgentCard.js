@@ -25,16 +25,16 @@ export default function AgentCard(props) {
     <Card className={classes.root}>
       <CardContent>
         <Typography variant="body2" component="p">
-          {`${props.firstName} ${props.lastName}`}
+          {`Name: ${props.firstName} ${props.lastName}`}
         </Typography>
         <Typography variant="body2" component="p">
-          {props.email}
+          {`Email: ${props.email}`}
         </Typography>
         <Typography variant="body2" component="p">
-          {props.phone}
+          {`Phone: ${props.phone}`}
         </Typography>
         <Typography variant="body2" component="p">
-          {props.username}
+          {`Username: ${props.username}`}
         </Typography>
       </CardContent>
       <CardActions>
