@@ -12,6 +12,7 @@ import Checkbox from '@material-ui/core/Checkbox';
 import Select from '@material-ui/core/Select';
 import inquiryAPI from "../utils/inquiryAPI";
 import moment from 'moment';
+import formatUtil from '../utils/formatUtil';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -83,7 +84,7 @@ export default function InquiryCard(props) {
           {`Email: ${props.email}`}
         </Typography>
         <Typography variant="body2" component="p">
-          {`Phone: ${props.phone}`}
+          {`Phone: ${formatUtil.formatPhoneNumber(props.phone)}`}
         </Typography>
         <Typography variant="body2" component="p">
           {`Event: ${props.eventType}`}

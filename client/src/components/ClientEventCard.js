@@ -29,14 +29,6 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-// const formatter = new Intl.NumberFormat('en-US', {
-//   maximumFractionDigits: 0, 
-//   minimumFractionDigits: 0, 
-//   style: 'currency',
-//   currency: 'USD',
-// });
-
-
 export default function ClientEventCard(props) {
   const classes = useStyles();
 
@@ -79,10 +71,10 @@ export default function ClientEventCard(props) {
           {`Agent: ${agent.firstName} ${agent.lastName}`}
         </Typography>
         <Typography variant="body2" component="p">
-          {`Email: ${agent.email}`}
+          Email: <a href={`mailto:${agent.email}`}>{agent.email}</a>
         </Typography>
         <Typography variant="body2" component="p">
-          {`Phone: ${formatUtil.formatPhoneNumber(agent.phone)}`}
+          Phone: <a href={`tel:${agent.phone}`}>{formatUtil.formatPhoneNumber(agent.phone)}</a>
         </Typography>      
       </div>  
     );
@@ -96,10 +88,10 @@ export default function ClientEventCard(props) {
           {`Client: ${client.firstName} ${client.lastName}`}
         </Typography>
         <Typography variant="body2" component="p">
-          {`Email: ${client.email}`}
+          Email: <a href={`mailto:${client.email}`}>{client.email}</a>
         </Typography>
         <Typography variant="body2" component="p">
-          {`Phone: ${formatUtil.formatPhoneNumber(client.phone)}`}
+          Phone: <a href={`tel:${client.phone}`}>{formatUtil.formatPhoneNumber(client.phone)}</a>
         </Typography>      
       </div>  
     );

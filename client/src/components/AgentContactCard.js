@@ -15,6 +15,7 @@ import moment from "moment";
 import userAPI from "../utils/userAPI";
 import eventAPI from "../utils/eventAPI";
 import clientAPI from "../utils/clientAPI";
+import formatUtil from "../utils/formatUtil";
 
 const bands = JSON.parse(localStorage.getItem("bands"));
 
@@ -173,7 +174,7 @@ export default function AgentContactCard(props) {
             {`Email: `}<a href={email}>{props.email}</a>
           </Typography>
           <Typography variant="body2" component="p">
-            {`Phone: `}<a href={phone}>{props.phone}</a>
+            {`Phone: `}<a href={phone}>{formatUtil.formatPhoneNumber(props.phone)}</a>
           </Typography>
           <Typography variant="body2" component="p">
             {`Event: ${props.eventType}`}
@@ -196,7 +197,7 @@ export default function AgentContactCard(props) {
             {`Event date: ${props.date}`}
           </Typography>
           <Typography variant="body2" component="p">
-            {`Start time: ${props.startTime}`}
+            {`Start time: ${moment(props.startTime, "HH:mm").format("hh:mma")}`}
           </Typography>
           <Typography variant="body2" component="p">
             {`Event length (hours) ${props.numHours}`}
