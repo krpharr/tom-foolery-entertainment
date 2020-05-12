@@ -14,11 +14,11 @@ const useStyles = makeStyles((theme) => ({
 
 export default function SelectedAgentListItem(props) {
   const classes = useStyles();
-  const [selectedIndex, setSelectedIndex] = React.useState(1);
+  const [selectedIndex, setSelectedIndex] = React.useState(-1);
 
   const handleListItemClick = (event, index) => {
     setSelectedIndex(index);
-    props.handleListItemSelect(props.agents[index]._id);
+    props.handleListItemSelect(index);
   };
 
   const mapAgents = () => {

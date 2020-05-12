@@ -17,6 +17,7 @@ import AgentForm from '../components/AgentForm';
 import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
 import SelectedAgentListItem from '../components/SelectedAgentListItem';
+import { FormHelperText } from "@material-ui/core";
 
 
 
@@ -28,6 +29,22 @@ const useStyles = makeStyles((theme) => ({
   selectEmpty: {
     marginTop: theme.spacing(2),
   },
+  acContainer: {
+    border: "1px blue solid",
+    padding: "8px"
+  },
+  acListContainer: {
+    padding: "8px"
+  },
+  acFormComtainer: {
+    padding: "8px"
+  },
+  acBtnContainer: {
+    borderTop: "solid blue 1px",
+    padding: "8px",
+    display: "flex",
+    justifyContent: "space-around"
+  }
 }));
 
 function AgentCRUD() {
@@ -37,6 +54,14 @@ function AgentCRUD() {
   const [agents, setAgents] = useState();
   const [open, setOpen] = useState(false);
   const [update, setUpdate] = useState(0);
+
+  const newAgentObj = {
+    firstName: "",
+    lastName: "",
+    email: "",
+    phone: "",
+    avatar: ""
+  };
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -120,51 +145,7 @@ function AgentCRUD() {
     if(agent === undefined)return;
     return (
       <div>
-        <FormControl className={classes.formControl}>
-          {/* <InputLabel id="select-multiple-native" disableAnimation="true">Agent</InputLabel> */}
-          <Select
-            multiple="false"
-            native
-            labelId="select-multiple-native"
-            value={agent._id}
-            onChange={handleChange}
-            inputProps={{
-              id: 'select-multiple-native',
-            }}
-          >
-            {mapAgents()}
-          </Select>
-        </FormControl>
-
-      </div>
-    );
-  };
-
-  const handleListItemSelect = (selection) => {
-    console.log(selection);
-  };
-
-  const displayAgentList = () => {
-    if(agents === undefined)return;
-    return <SelectedAgentListItem agents={agents} handleListItemSelect={handleListItemSelect}/>;
-  };
-  
-  const handleChange = (event) => {
-    setAgent(event.target.value);
-    console.log("agent id: ", event.target.value);
-  };
-
-  return (
-    <div>
-      <Button variant="outlined" color="primary" onClick={handleClickOpen}>
-        New Agent
-      </Button>
-      <Container>
-
-      {displayAgentList()}
-        
-         {/* {displayAgentCrud()} */}
-         <form>
+        <form>
           {/* <label for="firstName">First Name:</label>
           <input 
             type="text" 
@@ -172,7 +153,7 @@ function AgentCRUD() {
             name="firstName">
             value={props.firstName}  
           </input> */}
-          {/* <TextField
+          <TextField
             autoFocus
             margin="dense"
             id="firstName"
@@ -219,10 +200,62 @@ function AgentCRUD() {
             value={agent.avatar}
             type="text"
             fullWidth
-          />           */}
+          />          
         </form>         
-      </Container>
 
+      </div>
+    );
+  };
+
+  const handleListItemSelect = (selection) => {
+    console.log(selection);
+    setAgent(agents[selection]);
+  };
+
+  const displayAgentList = () => {
+    if(agents === undefined)return;
+    return <SelectedAgentListItem agents={agents} handleListItemSelect={handleListItemSelect}/>;
+  };
+  
+  const handleChange = (event) => {
+    setAgent(agents[event.target.value]);
+    console.log("agent index: ", event.target.value);
+  };
+
+  const newAgent = () => {
+    setAgent(newAgentObj);
+  };
+
+  const updateAgent = () => {
+
+  };
+
+  const deleteAgent = () => {
+
+  };
+
+  return (
+    <div>
+       <Grid container className={classes.acContainer}>
+        <Grid item className={classes.acListContainer} xs={12} sm={4}>
+          {displayAgentList()}    
+        </Grid>
+        <Grid item className={classes.acFormContainer} xs={12} sm={8}>
+        {displayAgentCrud()} 
+        </Grid>
+        <Grid item xs={12} className={classes.acBtnContainer}>
+          <Button variant="outlined" color="primary" onClick={newAgent}>
+            New 
+          </Button>
+          <Button variant="outlined" color="primary" onClick={updateAgent}>
+            Update
+          </Button>
+          <Button variant="outlined" color="primary" onClick={deleteAgent}>
+            Remove
+          </Button>
+        </Grid>
+      </Grid>
+ 
     </div>
   );
 };
