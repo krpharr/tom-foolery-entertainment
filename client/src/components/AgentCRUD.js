@@ -13,8 +13,10 @@ import DialogContent from '@material-ui/core/DialogContent';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
+import AgentForm from '../components/AgentForm';
 import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
+import SelectedAgentListItem from '../components/SelectedAgentListItem';
 
 
 
@@ -83,8 +85,6 @@ function AgentCRUD() {
             handleClose();
             setUpdate(update + 1);
           });
-          
-
         });
       }
 
@@ -94,7 +94,9 @@ function AgentCRUD() {
 
   useEffect(() => {
     agentAPI.getAll().then(res => {
-      setAgent(res.data[0]);
+      if(agent === undefined){
+        setAgent(res.data[0]);
+      };
       setAgents(res.data);
     });
   }, [update]);
@@ -113,9 +115,43 @@ function AgentCRUD() {
     });
     return agentsMap;
   };
+
+  const displayAgentCrud = () =>{
+    if(agent === undefined)return;
+    return (
+      <div>
+        <FormControl className={classes.formControl}>
+          {/* <InputLabel id="select-multiple-native" disableAnimation="true">Agent</InputLabel> */}
+          <Select
+            multiple="false"
+            native
+            labelId="select-multiple-native"
+            value={agent._id}
+            onChange={handleChange}
+            inputProps={{
+              id: 'select-multiple-native',
+            }}
+          >
+            {mapAgents()}
+          </Select>
+        </FormControl>
+
+      </div>
+    );
+  };
+
+  const handleListItemSelect = (selection) => {
+    console.log(selection);
+  };
+
+  const displayAgentList = () => {
+    if(agents === undefined)return;
+    return <SelectedAgentListItem agents={agents} handleListItemSelect={handleListItemSelect}/>;
+  };
   
   const handleChange = (event) => {
     setAgent(event.target.value);
+    console.log("agent id: ", event.target.value);
   };
 
   return (
@@ -124,103 +160,69 @@ function AgentCRUD() {
         New Agent
       </Button>
       <Container>
-         {/* {mapAgents()} */}
-        <FormControl className={classes.formControl}>
-          <InputLabel id="demo-simple-select-label">Agent</InputLabel>
-          <Select
-            multiple
-            native
-            labelId="demo-simple-select-label"
-            id="demo-simple-select"
-            value={agent._id}
-            onChange={handleChange}
-          >
-            {mapAgents()}
-          </Select>
-        </FormControl>
+
+      {displayAgentList()}
+        
+         {/* {displayAgentCrud()} */}
+         <form>
+          {/* <label for="firstName">First Name:</label>
+          <input 
+            type="text" 
+            id="firstName" 
+            name="firstName">
+            value={props.firstName}  
+          </input> */}
+          {/* <TextField
+            autoFocus
+            margin="dense"
+            id="firstName"
+            label="First Name"
+            value={agent.firstName}
+            // defaultValue={agent.firstName}
+            type="text"
+            fullWidth
+            variant="outlined"
+          />
+          <TextField
+            autoFocus
+            margin="dense"
+            id="lastName"
+            label="Last Name"
+            value={agent.lastName}
+            type="text"
+            fullWidth
+            variant="outlined"
+          />
+          <TextField
+            autoFocus
+            margin="dense"
+            id="email"
+            label="Email"
+            value={agent.email}
+            type="text"
+            fullWidth
+          />
+          <TextField
+            autoFocus
+            margin="dense"
+            id="phone"
+            label="Phone"
+            value={agent.phone}
+            type="text"
+            fullWidth
+          />
+          <TextField
+            autoFocus
+            margin="dense"
+            id="avatar"
+            label="Avatar"
+            value={agent.avatar}
+            type="text"
+            fullWidth
+          />           */}
+        </form>         
       </Container>
-      <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title">
-        <form 
-          noValidate 
-          onSubmit={(event) => handleSubmit(event)}
-        >
-          <DialogTitle id="form-dialog-title">Create New User</DialogTitle>
-          <DialogContent>
-            <TextField
-              autoFocus
-              margin="dense"
-              id="firstName"
-              label="First Name"
-              type="text"
-              fullWidth
-            />
-            <TextField
-              autoFocus
-              margin="dense"
-              id="lastName"
-              label="Last Name"
-              type="text"
-              fullWidth
-            />
-            <TextField
-              autoFocus
-              margin="dense"
-              id="email"
-              label="Email"
-              type="text"
-              fullWidth
-            />
-            <TextField
-              autoFocus
-              margin="dense"
-              id="phone"
-              label="Phone"
-              type="text"
-              fullWidth
-            />
-            <TextField
-              autoFocus
-              margin="dense"
-              id="avatar"
-              label="Avatar"
-              type="text"
-              fullWidth
-            />
-            {/* <TextField
-              autoFocus
-              margin="dense"
-              id="username"
-              label="Username"
-              type="text"
-              fullWidth
-            />
-            <TextField
-              autoFocus
-              margin="dense"
-              id="password"
-              label="Password"
-              type="password"
-              fullWidth
-            />
-            <TextField
-              autoFocus
-              margin="dense"
-              id="type"
-              label="User type"
-              type="text"
-              fullWidth
-            /> */}
-          </DialogContent>
-          <DialogActions>
-            <Button onClick={handleClose} color="primary">
-              Cancel
-            </Button>
-            <Button type="submit" color="primary">
-              Create
-            </Button>
-          </DialogActions>
-        </form>
-      </Dialog>
+
     </div>
   );
 };
