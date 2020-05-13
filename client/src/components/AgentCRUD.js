@@ -18,6 +18,7 @@ import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
 import SelectedAgentListItem from '../components/SelectedAgentListItem';
 import { FormHelperText } from "@material-ui/core";
+import Typography from '@material-ui/core/Typography';
 
 
 
@@ -44,6 +45,15 @@ const useStyles = makeStyles((theme) => ({
     padding: "8px",
     display: "flex",
     justifyContent: "space-around"
+  },
+  active: {
+    opacity: "100%",
+    // color: "green",
+    // backgroundColor: "green"
+  },
+  inactive: {
+    opacity: "50%",
+    color: "red",
   }
 }));
 
@@ -52,8 +62,13 @@ function AgentCRUD() {
 
   const [agent, setAgent] = useState();
   const [agents, setAgents] = useState();
-  const [open, setOpen] = useState(false);
+  const [edit, setEdit] = useState(true);
   const [update, setUpdate] = useState(0);
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
+  const [email, setEmail] = useState("");
+  const [phone, setPhone] = useState("");
+  const [avatar, setAvatar] = useState("");
 
   const newAgentObj = {
     firstName: "",
@@ -61,14 +76,6 @@ function AgentCRUD() {
     email: "",
     phone: "",
     avatar: ""
-  };
-
-  const handleClickOpen = () => {
-    setOpen(true);
-  };
-
-  const handleClose = (event) => {
-    setOpen(false);
   };
 
   const handleSubmit = (event) => {
@@ -107,7 +114,7 @@ function AgentCRUD() {
           };
 
           agentAPI.create(agentObj).then(res => {
-            handleClose();
+            //  handleClose();
             setUpdate(update + 1);
           });
         });
@@ -141,6 +148,26 @@ function AgentCRUD() {
     return agentsMap;
   };
 
+  const handleInputChange = (event) => {
+    switch(event.target.id) {
+      case "firstName":
+        setFirstName(event.target.value);
+        break;
+      case "lastName":
+        setLastName(event.target.value);
+        break;
+      case "email":
+        setEmail(event.target.value);
+        break;
+      case "phone":
+        setPhone(event.target.value);
+        break;
+      case "avatar":
+        setAvatar(event.target.value);
+        break;
+    }
+  };
+
   const displayAgentCrud = () =>{
     if(agent === undefined)return;
     return (
@@ -158,7 +185,8 @@ function AgentCRUD() {
             margin="dense"
             id="firstName"
             label="First Name"
-            value={agent.firstName}
+            value={firstName}
+            onChange={handleInputChange}
             // defaultValue={agent.firstName}
             type="text"
             fullWidth
@@ -169,7 +197,8 @@ function AgentCRUD() {
             margin="dense"
             id="lastName"
             label="Last Name"
-            value={agent.lastName}
+            value={lastName}
+            onChange={handleInputChange}
             type="text"
             fullWidth
             variant="outlined"
@@ -179,7 +208,8 @@ function AgentCRUD() {
             margin="dense"
             id="email"
             label="Email"
-            value={agent.email}
+            value={email}
+            onChange={handleInputChange}
             type="text"
             fullWidth
           />
@@ -188,7 +218,8 @@ function AgentCRUD() {
             margin="dense"
             id="phone"
             label="Phone"
-            value={agent.phone}
+            value={phone}
+            onChange={handleInputChange}
             type="text"
             fullWidth
           />
@@ -197,7 +228,8 @@ function AgentCRUD() {
             margin="dense"
             id="avatar"
             label="Avatar"
-            value={agent.avatar}
+            value={avatar}
+            onChange={handleInputChange}
             type="text"
             fullWidth
           />          
@@ -207,9 +239,19 @@ function AgentCRUD() {
     );
   };
 
+  const setAgentForm= (agentObj) => {
+    setFirstName(agentObj.firstName);
+    setLastName(agentObj.lastName);
+    setEmail(agentObj.email);
+    setPhone(agentObj.phone);
+    setAvatar(agentObj.avatar);    
+  };
+
   const handleListItemSelect = (selection) => {
     console.log(selection);
+    setEdit(false);
     setAgent(agents[selection]);
+    setAgentForm(agents[selection]);
   };
 
   const displayAgentList = () => {
@@ -224,6 +266,14 @@ function AgentCRUD() {
 
   const newAgent = () => {
     setAgent(newAgentObj);
+    setAgentForm(newAgentObj);
+    setEdit(true);
+  };
+
+  const cancel = () => {
+    setAgent(newAgentObj);
+    setAgentForm(newAgentObj);
+    setEdit(false);
   };
 
   const updateAgent = () => {
@@ -237,20 +287,28 @@ function AgentCRUD() {
   return (
     <div>
        <Grid container className={classes.acContainer}>
-        <Grid item className={classes.acListContainer} xs={12} sm={4}>
+         <Grid item xs={12}>
+          <Typography variant="h4" component="h2">
+            Agent Panel
+          </Typography>
+        </Grid>
+        <Grid item className={classes.acListContainer, edit ? classes.inactive : classes.active} xs={12} sm={4}>
           {displayAgentList()}    
         </Grid>
         <Grid item className={classes.acFormContainer} xs={12} sm={8}>
         {displayAgentCrud()} 
         </Grid>
         <Grid item xs={12} className={classes.acBtnContainer}>
-          <Button variant="outlined" color="primary" onClick={newAgent}>
+          <Button variant="outlined" color="primary" onClick={newAgent} disabled={edit ? true : false}>
             New 
           </Button>
-          <Button variant="outlined" color="primary" onClick={updateAgent}>
-            Update
+          <Button variant="outlined" color="primary" onClick={cancel} disabled={edit ? false : true}>
+            Cancel 
           </Button>
-          <Button variant="outlined" color="primary" onClick={deleteAgent}>
+          <Button variant="outlined" color="primary" onClick={updateAgent}>
+            {edit ? "Save" : "Update"}
+          </Button>
+          <Button variant="outlined" color="primary" onClick={deleteAgent} disabled={edit ? true : false}>
             Remove
           </Button>
         </Grid>
