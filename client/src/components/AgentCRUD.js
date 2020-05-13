@@ -78,52 +78,6 @@ function AgentCRUD() {
     avatar: ""
   };
 
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    const username = event.target.email.value.split("@")[0];
-    const password = "password";
-    const type = "agent";
-    const firstName = event.target.firstName.value;
-    const lastName = event.target.lastName.value;
-    const email = event.target.email.value;
-    const phone = event.target.phone.value;
-    const avatar = event.target.avatar.value;
-
-    const userObj = {
-      username: username,
-      password: password,
-      type: type
-    }
-    console.log(userObj);
-    
-    userAPI.create(userObj).then(res => {
-      if(res.status === 200){
-        userAPI.getAll().then(res =>{
-          let users = res.data.filter(u => {
-            return u.username === username;
-          });
-
-          const agentObj = {
-            firstName: firstName,
-            lastName: lastName,
-            email: email,
-            phone: phone,
-            avatar: avatar,
-            username: username,
-            userId: users[0]._id
-          };
-
-          agentAPI.create(agentObj).then(res => {
-            //  handleClose();
-            setUpdate(update + 1);
-          });
-        });
-      }
-
-    });
-    
-  };
-
   useEffect(() => {
     agentAPI.getAll().then(res => {
       if(agent === undefined){
@@ -239,6 +193,63 @@ function AgentCRUD() {
     );
   };
 
+  const validation = () => {
+    let str = "";
+    if(firstName.trim() === '' || firstName.length < 2)str += "firstName invalid\n";
+    if(lastName.trim() === '' || lastName.length < 2)str += "lastName invalid\n";
+    if(email.trim() === '' || !email.includes('@'))str += "invalid email\n";
+    if(phone.trim() === '' || phone.length < 10)str += "invalid phone number\n";
+    if(avatar.trim() === '')str += "invalid avatar";
+    return str;
+  };
+
+
+  const createNewAgent = (cb) => {
+
+    //validation
+    let valid = validation();
+    if(valid !== '')return cb(valid);
+
+    const username = email.split("@")[0];
+    const password = "password";
+    const type = "agent";
+
+    const userObj = {
+      username: username,
+      password: password,
+      type: type
+    }
+    console.log(userObj);
+    
+    userAPI.create(userObj).then(res => {
+      if(res.status === 200){
+        userAPI.getAll().then(res =>{
+          let users = res.data.filter(u => {
+            return u.username === username;
+          });
+
+          const agentObj = {
+            firstName: firstName,
+            lastName: lastName,
+            email: email,
+            phone: phone,
+            avatar: avatar,
+            username: username,
+            userId: users[0]._id
+          };
+
+          agentAPI.create(agentObj).then(res => {
+            //  handleClose();
+            setUpdate(update + 1);
+            return cb("Agent created!")
+          });
+        });
+      }else{
+        return cb("Error creating user for new Agent.")
+      }
+    });    
+  };
+
   const setAgentForm= (agentObj) => {
     setFirstName(agentObj.firstName);
     setLastName(agentObj.lastName);
@@ -276,8 +287,35 @@ function AgentCRUD() {
     setEdit(false);
   };
 
-  const updateAgent = () => {
+  const updateAgentDB = (cb) => {
+    let valid = validation();
+    if(valid !== '')return cb(valid);
+    console.log(agent)
+    const agentObj = {
+      firstName: firstName,
+      lastName: lastName,
+      email: email,
+      phone: phone,
+      avatar: avatar,
+    };
+    agentAPI.update(agent._id, agentObj).then(res => {
+      console.log(res);
+      return cb("Agent Updated!")
+    });
+  };
 
+  const updateAgent = () => {
+    if(edit){
+      createNewAgent(msg =>{
+        console.log(msg);
+        setEdit(false);
+      });
+    }else{
+      updateAgentDB(msg=>{
+        console.log(msg);
+        setUpdate(update + 1);
+      });
+    }
   };
 
   const deleteAgent = () => {
