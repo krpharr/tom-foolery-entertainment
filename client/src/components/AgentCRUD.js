@@ -1,23 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { makeStyles } from '@material-ui/core/styles';
-import Container from '@material-ui/core/Container';
 import Grid from '@material-ui/core/Grid';
-import AgentCard from "./AgentCard";
 import userAPI from "../utils/userAPI";
 import agentAPI from "../utils/agentAPI";
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
-import Dialog from '@material-ui/core/Dialog';
-import DialogActions from '@material-ui/core/DialogActions';
-import DialogContent from '@material-ui/core/DialogContent';
-import DialogTitle from '@material-ui/core/DialogTitle';
-import FormControl from '@material-ui/core/FormControl';
-import Select from '@material-ui/core/Select';
-import AgentForm from '../components/AgentForm';
-import InputLabel from '@material-ui/core/InputLabel';
-import MenuItem from '@material-ui/core/MenuItem';
 import SelectedAgentListItem from '../components/SelectedAgentListItem';
-import { FormHelperText } from "@material-ui/core";
 import Typography from '@material-ui/core/Typography';
 import Modal from '@material-ui/core/Modal';
 
@@ -62,8 +50,6 @@ const useStyles = makeStyles((theme) => ({
   },
   active: {
     opacity: "100%",
-    // color: "green",
-    // backgroundColor: "green"
   },
   inactive: {
     opacity: "50%",
@@ -120,13 +106,6 @@ function AgentCRUD() {
 
   const mapAgents = () => {
     if(agents === undefined)return;
-    // const agentsMap = agents.map(a => {
-    //   return(
-    //     <Grid item key={a._id} >
-    //       <AgentCard {...a} />
-    //     </Grid>
-    //   );
-    // });
     const agentsMap = agents.map(a => {
       return <option key={a._id} value={a._id}>{`${a.firstName} ${a.lastName}`}</option>;
     });
@@ -158,13 +137,6 @@ function AgentCRUD() {
     return (
       <div>
         <form>
-          {/* <label for="firstName">First Name:</label>
-          <input 
-            type="text" 
-            id="firstName" 
-            name="firstName">
-            value={props.firstName}  
-          </input> */}
           <TextField
             autoFocus
             margin="dense"
@@ -172,7 +144,6 @@ function AgentCRUD() {
             label="First Name"
             value={firstName}
             onChange={handleInputChange}
-            // defaultValue={agent.firstName}
             type="text"
             fullWidth
             variant="outlined"
@@ -236,7 +207,6 @@ function AgentCRUD() {
 
 
   const createNewAgent = (cb) => {
-
     //validation
     let valid = validation();
     if(valid !== '')return cb(valid);
@@ -270,7 +240,6 @@ function AgentCRUD() {
           };
 
           agentAPI.create(agentObj).then(res => {
-            //  handleClose();
             setUpdate(update + 1);
             return cb("Agent created!")
           });
