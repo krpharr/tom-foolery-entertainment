@@ -3,6 +3,7 @@ import Container from '@material-ui/core/Container';
 import { makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
+import InquiryCRUD from '../components/InquiryCRUD';
 import AgentCRUD from "../components/AgentCRUD";
 import AdminTabs from "../components/AdminTabs";
 import Button from '@material-ui/core/Button';
@@ -60,7 +61,7 @@ function Admin(){
     return inquiriesMap;
   };
   
-  const tabDisplay = () =>{
+  const tabDisplay = () => {
     if(unread === undefined || read === undefined)return;
     const props = {
       unread: mapInquiries(unread),
@@ -81,13 +82,14 @@ function Admin(){
         Admin Page - {` ${userAuth.user.user}`}
       </Typography>
       <Grid container>
-        <Grid item xs={12}>
+        {/* <Grid item xs={12}>
           <Button className={classes.refreshButton} onClick={handleRefresh}variant="contained" color="primary">
             Refresh
           </Button>
-        </Grid>
+        </Grid> */}
         <Grid item xs={12}>
-          {tabDisplay()}
+          {/* {tabDisplay()} */}
+          <InquiryCRUD />
         </Grid>
         <Grid item xs={12} md={6}>
           <AgentCRUD />

@@ -25,13 +25,6 @@ function getModalStyle() {
 }
 
 const useStyles = makeStyles((theme) => ({
-  formControl: {
-    margin: theme.spacing(1),
-    minWidth: 120,
-  },
-  selectEmpty: {
-    marginTop: theme.spacing(2),
-  },
   acContainer: {
     border: "1px blue solid",
     padding: "8px"

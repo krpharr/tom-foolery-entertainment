@@ -12,7 +12,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function SelectedAgentListItem(props) {
+export default function SelectedInquiryListItem(props) {
   const classes = useStyles();
   const [selectedIndex, setSelectedIndex] = React.useState(-1);
 
@@ -21,8 +21,8 @@ export default function SelectedAgentListItem(props) {
     props.handleListItemSelect(index);
   };
 
-  const mapAgents = () => {
-    const agentMap = props.agents.map((agent, index) => {
+  const mapInquiries = () => {
+    const inquiryMap = props.inquiries.map((inquiry, index) => {
       return (
         <ListItem
           key={index}
@@ -30,17 +30,17 @@ export default function SelectedAgentListItem(props) {
           selected={selectedIndex === index}
           onClick={(event) => handleListItemClick(event, index)}
         >
-          <ListItemText primary={`${agent.firstName} ${agent.lastName}`}/>
+          <ListItemText primary={`${inquiry.firstName[0]} ${inquiry.lastName} ${inquiry.date}`}/>
         </ListItem>      
       );
     });
-    return agentMap;
+    return inquiryMap;
   };
   
   return (
     <div className={classes.root}>
-      <List component="nav" aria-label="Agents List">
-        {mapAgents()}
+      <List component="nav" aria-label="Inquiries List">
+        {mapInquiries()}
       </List>
     </div>
   );
