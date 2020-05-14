@@ -320,10 +320,18 @@ function AgentCRUD() {
 
   const deleteAgentDB = () => {
     userAPI.delete(agent.userId).then(res => {
-      console.log('delete user:',res)
+      if(res.status !== 200){
+        console.log('Error deleting user:', res)
+      }else {
+        console.log("User deleted.");
+      }
     });
     agentAPI.delete(agent._id).then(res => {
-      console.log('delete agent:',res);
+      if(res.status !== 200){
+        console.log('Error deleting agent:', res)
+      }else {
+        console.log("Agent deleted.");
+      }
       setUpdate(update + 1);
     });
   };
