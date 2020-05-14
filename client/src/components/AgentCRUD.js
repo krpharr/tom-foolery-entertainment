@@ -220,7 +220,6 @@ function AgentCRUD() {
       password: password,
       type: type
     }
-    console.log(userObj);
     
     userAPI.create(userObj).then(res => {
       if(res.status === 200){
@@ -259,7 +258,6 @@ function AgentCRUD() {
   };
 
   const handleListItemSelect = (selection) => {
-    console.log(selection);
     setEdit(false);
     setAgent(agents[selection]);
     setAgentForm(agents[selection]);
@@ -272,7 +270,6 @@ function AgentCRUD() {
   
   const handleChange = (event) => {
     setAgent(agents[event.target.value]);
-    console.log("agent index: ", event.target.value);
   };
 
   const newAgent = () => {
@@ -290,7 +287,6 @@ function AgentCRUD() {
   const updateAgentDB = (cb) => {
     let valid = validation();
     if(valid !== '')return cb(valid);
-    console.log(agent)
     const agentObj = {
       firstName: firstName,
       lastName: lastName,
@@ -299,8 +295,12 @@ function AgentCRUD() {
       avatar: avatar,
     };
     agentAPI.update(agent._id, agentObj).then(res => {
-      console.log(res);
-      return cb("Agent Updated!")
+      let msg;
+      if(res.status !== 200){
+        msg = "Error updating agent."
+      }else{
+        return cb("Agent Updated!")
+      }
     });
   };
 
@@ -320,10 +320,10 @@ function AgentCRUD() {
 
   const deleteAgentDB = () => {
     userAPI.delete(agent.userId).then(res => {
-      console.log(res)
+      console.log('delete user:',res)
     });
     agentAPI.delete(agent._id).then(res => {
-      console.log(res);
+      console.log('delete agent:',res);
       setUpdate(update + 1);
     });
   };

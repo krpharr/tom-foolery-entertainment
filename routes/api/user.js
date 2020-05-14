@@ -14,6 +14,13 @@ router.get("/", (req, res) => {
     });
 });
 
+router.delete('/:id', (req, res) => {
+  User.findById({ _id: req.params.id })
+    .then(dbUser => dbUser.remove())
+    .then(dbUser => res.json(dbUser))
+    .catch(err => res.status(422).json(err));
+});
+
 router.get('/register', function(req, res) {
   // is this needed ? todo? - prob just a page routed to by react with register form 
   console.log("register form");
