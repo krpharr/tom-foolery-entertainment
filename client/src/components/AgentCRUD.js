@@ -19,8 +19,22 @@ import MenuItem from '@material-ui/core/MenuItem';
 import SelectedAgentListItem from '../components/SelectedAgentListItem';
 import { FormHelperText } from "@material-ui/core";
 import Typography from '@material-ui/core/Typography';
+import Modal from '@material-ui/core/Modal';
 
+function rand() {
+  return Math.round(Math.random() * 20) - 10;
+}
 
+function getModalStyle() {
+  const top = 50 + rand();
+  const left = 50 + rand();
+
+  return {
+    top: `${top}%`,
+    left: `${left}%`,
+    transform: `translate(-${top}%, -${left}%)`,
+  };
+}
 
 const useStyles = makeStyles((theme) => ({
   formControl: {
@@ -54,6 +68,21 @@ const useStyles = makeStyles((theme) => ({
   inactive: {
     opacity: "50%",
     color: "red",
+  },
+  paper: {
+    position: 'absolute',
+    width: 400,
+    backgroundColor: theme.palette.background.paper,
+    border: '2px solid #000',
+    boxShadow: theme.shadows[5],
+    padding: theme.spacing(2, 4, 3),
+  },
+  modalBtnBar: {
+    display: "flex",
+    justifyContent: "space-around"
+  },
+  modalAlert: {
+    color: "red"
   }
 }));
 
@@ -69,6 +98,8 @@ function AgentCRUD() {
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
   const [avatar, setAvatar] = useState("");
+  const [modalStyle] = React.useState(getModalStyle);
+  const [open, setOpen] = React.useState(false);
 
   const newAgentObj = {
     firstName: "",
@@ -318,8 +349,32 @@ function AgentCRUD() {
     }
   };
 
-  const deleteAgent = () => {
+  const deleteAgentDB = () => {
+    userAPI.delete(agent.userId).then(res => {
+      console.log(res)
+    });
+    agentAPI.delete(agent._id).then(res => {
+      console.log(res);
+      setUpdate(update + 1);
+    });
+  };
 
+  const deleteAgent = () => {
+    handleOpen();
+  };
+
+  //modal functions
+  const handleOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
+
+  const handleDelete = () => {
+    handleClose();
+    deleteAgentDB();
   };
 
   return (
@@ -351,7 +406,21 @@ function AgentCRUD() {
           </Button>
         </Grid>
       </Grid>
- 
+      <Modal
+        open={open}
+        onClose={handleClose}
+        aria-labelledby="simple-modal-title"
+        aria-describedby="simple-modal-description"
+      >
+        <div style={modalStyle} className={classes.paper}>
+          <h3 className={classes.modalAlert}>! Delete Agent</h3>
+          <p>Are you sure you want to remove agent?</p>
+          <div className={classes.modalBtnBar}>
+            <Button variant="outlined" color="primary" onClick={handleClose}>Cancel</Button>
+            <Button variant="outlined" color="primary" onClick={handleDelete}>Yes</Button>
+          </div>
+        </div>
+      </Modal>
     </div>
   );
 };

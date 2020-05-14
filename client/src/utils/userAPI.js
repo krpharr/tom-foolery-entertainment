@@ -15,5 +15,8 @@ export default {
   },
   create: function(userObj) {
     return axios.post("api/user/register", userObj);
+  },
+  delete: function(id) {
+    return axios.delete(`api/user/${id}`);
   }
 };

@@ -15,5 +15,8 @@ export default {
   },
   create: function(agentObj) {
     return axios.post("api/agent", agentObj);
+  },
+  delete: function(id) {
+    return axios.delete(`api/agent/${id}`);
   }
 };
