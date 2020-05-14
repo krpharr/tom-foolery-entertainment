@@ -27,7 +27,8 @@ function getModalStyle() {
 const useStyles = makeStyles((theme) => ({
   acContainer: {
     border: "1px blue solid",
-    padding: "8px"
+    padding: "8px",
+    margin: "0 16px"
   },
   acListContainer: {
     padding: "8px"
@@ -359,7 +360,7 @@ function AgentCRUD() {
           {displayAgentList()}    
         </Grid>
         <Grid item className={classes.acFormContainer} xs={12} sm={8}>
-        {displayAgentCrud()} 
+          {displayAgentCrud()} 
         </Grid>
         <Grid item xs={12} className={classes.acBtnContainer}>
           <Button variant="outlined" color="primary" onClick={newAgent} disabled={edit ? true : false}>

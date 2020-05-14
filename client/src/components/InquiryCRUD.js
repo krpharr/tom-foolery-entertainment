@@ -25,9 +25,10 @@ function getModalStyle() {
 }
 
 const useStyles = makeStyles((theme) => ({
-  acContainer: {
+  icContainer: {
     border: "1px blue solid",
-    padding: "8px"
+    padding: "8px",
+    margin: "0 16px"
   },
   listContainer: {
     padding: "8px",
@@ -109,13 +110,21 @@ function InquiryCRUD() {
     if(inquiries === undefined)return;
     return <SelectedInquiryListItem inquiries={inquiries} handleListItemSelect={handleListItemSelect}/>;
   };
+
+  const displayInquiryUD = () => {
+    if(inquiry === undefined)return;
+    return <InquiryCard {...inquiry} agents={agents}/>
+  };
  
   return (
-    <Grid container>
+    <Grid container className={classes.icContainer}>
       {/* Inquiries
       {mapInquiries()} */}
-      <Grid item xs={12} sm={6} className={classes.listContainer}>
+      <Grid item xs={4} className={classes.listContainer}>
         {displayInquiryList()}
+      </Grid>
+      <Grid item xs={8} className={classes.listContainer}>
+        {displayInquiryUD()}
       </Grid>
       
     </Grid>
