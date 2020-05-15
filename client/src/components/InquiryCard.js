@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import CardActions from '@material-ui/core/CardActions';
@@ -10,6 +10,7 @@ import FormControl from '@material-ui/core/FormControl';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Checkbox from '@material-ui/core/Checkbox';
 import Select from '@material-ui/core/Select';
+import agentAPI from '../utils/agentAPI';
 import inquiryAPI from "../utils/inquiryAPI";
 import moment from 'moment';
 import formatUtil from '../utils/formatUtil';
@@ -34,12 +35,27 @@ const useStyles = makeStyles((theme) => ({
 export default function InquiryCard(props) {
   const classes = useStyles();
 
-  const [read, setRead] = React.useState(props.read);
-  const [deleted, setDeleted] = React.useState(props.deleted);
-  const [agent, setAgent] = React.useState(props.agentId);
-
+  const [read, setRead] = useState(props.read);
+  const [deleted, setDeleted] = useState(props.deleted);
+  const [agentId, setAgentId] = useState(props.agentId);
+  const [agent, setAgent] = useState();
+  const [update, setUpdate] = useState(0);
   const startTime = moment(props.startTime, 'HH:mm').format('hh:mm a');
   
+  useEffect(() => {
+    if(props.agentId !== undefined){
+      agentAPI.getById(agentId).then(res => {
+        if(res.status !== 200){
+          console.log("Error: agent not found.")
+        }else {
+          console.log("Inquiry agent: ", res.data);
+          setAgent(res.data);
+        }
+      });
+    }
+    // console.log("InquiryCard useEffect: agentId: ", props.agentId);
+  }, [update, agentId]);
+
 
   const handleReadChange = (event) => {
     const check = read ? false : true;
@@ -58,9 +74,16 @@ export default function InquiryCard(props) {
   }; 
 
   const handleAgentChange = (event) => {
+    console.log('handleAgentChange', event.target.value);
     setAgent(event.target.value);
     inquiryAPI.update(props._id, {agentId: event.target.value}).then(res => {
-    
+      if(res.status !== 200){
+        console.log("Error setting agent.");
+      }else{
+        console.log("Agent set");
+        //props.updateInquiry();
+        setUpdate(update + 1);
+      }
     });
   };
 
@@ -104,6 +127,12 @@ export default function InquiryCard(props) {
         <Typography variant="body2" component="p">
           {`Event location: ${props.location}`}
         </Typography>
+        <Typography variant="body2" component="p">
+          {`Agent ID: ${props.agentId}`}
+        </Typography>
+        <Typography variant="body2" component="p">
+          {`Agent: ${agent.firstName}`}
+        </Typography>
       </CardContent>
       <CardActions>
 
@@ -111,22 +140,27 @@ export default function InquiryCard(props) {
           <InputLabel id="agent-select-label">Set Agent</InputLabel>
           <Select
             labelId="agent-select-label"
-            id="agent-select"
+            className="agent-select"
+            defaultValue=""
+            displayEmpty
             value={agent}
             onChange={handleAgentChange}
           >
+            <MenuItem value="">
+            <em>None</em>
+          </MenuItem>
             {mapAgents()}
           </Select>
         </FormControl>
 
-        <FormControlLabel
+        {/* <FormControlLabel
           control={<Checkbox id={props._id} checked={read} onChange={handleReadChange} inputProps={{ 'aria-label': 'primary checkbox' }} />}
           label="Mark read"
         />
         <FormControlLabel
           control={<Checkbox id={props._id} checked={deleted} onChange={handleDeletedChange} inputProps={{ 'aria-label': 'primary checkbox' }} />}
           label="Delete"
-        />
+        /> */}
       </CardActions>
     </Card>
   );

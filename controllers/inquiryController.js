@@ -36,5 +36,5 @@ module.exports = {
       .then(dbInquiry => dbInquiry.remove())
       .then(dbInquiry => res.json(dbInquiry))
       .catch(err => res.status(422).json(err));
-  }
+  },
 };

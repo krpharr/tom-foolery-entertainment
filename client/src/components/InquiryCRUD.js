@@ -7,7 +7,10 @@ import inquiryAPI from "../utils/inquiryAPI";
 import agentAPI from "../utils/agentAPI";
 import SelectedInquiryListItem from '../components/SelectedInquiryListItem';
 import Typography from '@material-ui/core/Typography';
+import moment from 'moment';
+import formatUtil from '../utils/formatUtil';
 import Modal from '@material-ui/core/Modal';
+import Button from '@material-ui/core/Button';
 
 function rand() {
   return Math.round(Math.random() * 20) - 10;
@@ -38,7 +41,7 @@ const useStyles = makeStyles((theme) => ({
   acFormComtainer: {
     padding: "8px"
   },
-  acBtnContainer: {
+  btnContainer: {
     borderTop: "solid blue 1px",
     padding: "8px",
     display: "flex",
@@ -75,6 +78,8 @@ function InquiryCRUD() {
   const [inquiries, setInquiries] = useState();
   const [inquiry, setInquiry] = useState();
   const [agents, setAgents] = useState();
+  const [update, setUpdate] = useState(0);
+  const [agent, setAgent] = useState();
 
   useEffect(() => {
     agentAPI.getAll().then(res => {
@@ -83,7 +88,8 @@ function InquiryCRUD() {
     inquiryAPI.getAll().then(res => {
       setInquiries(res.data);
     });
-  }, []);
+
+  }, [update]);
 
   const mapInquiries = () => {
     if(inquiries === undefined || agents === undefined)return;
@@ -100,8 +106,43 @@ function InquiryCRUD() {
     return inquiriesMap;
   };
 
+  const mapAgent = () => {
+  
+    console.log("agent: ", agent, typeof agent);
+    console.log("inquiry.agentId: ", inquiry.agentId, typeof inquiry.agentId);
+     
+    if(inquiry.agentId === ""){
+      return (
+        <Typography variant="body2" component="p">
+          Agent: none
+      </Typography>        
+    );
+    } else{
+      return (
+        <div>
+          <Typography variant="body2" component="p">
+            {`Agent: ${agent.firstName} ${agent.lastName}`}
+          </Typography>        
+        </div>
+      );
+    }
+  };
+
   const handleListItemSelect = (selection) => {
     // setEdit(false);
+    console.log(inquiries[selection]);
+    if(inquiries[selection].agentId === undefined){
+      setAgent(undefined);
+    }else {
+      agentAPI.getById(inquiries[selection].agentId).then(res => {
+        if(res.status !== 200){
+          console.log("Error locating agent in database");
+        }else {
+          console.log(res.data);
+          setAgent(res.data);
+        }
+      })
+    }
     setInquiry(inquiries[selection]);
     // setAgentForm(agents[selection]);
   };
@@ -113,11 +154,66 @@ function InquiryCRUD() {
 
   const displayInquiryUD = () => {
     if(inquiry === undefined)return;
-    return <InquiryCard {...inquiry} agents={agents}/>
+    const startTime = moment(inquiry.startTime, 'HH:mm').format('hh:mm a');
+  
+    console.log("agentId: ",inquiry.agentId);
+    // return <InquiryCard {...inquiry} agents={agents} updateInquiry={updateInquiry}/>
+    return (
+      <div>
+        <Typography variant="body2" component="p">
+          {`Name: ${inquiry.firstName} ${inquiry.lastName}`}
+        </Typography>
+        <Typography variant="body2" component="p">
+          {`Email: ${inquiry.email}`}
+        </Typography>
+        <Typography variant="body2" component="p">
+          {`Phone: ${formatUtil.formatPhoneNumber(inquiry.phone)}`}
+        </Typography>
+        <Typography variant="body2" component="p">
+          {`Event: ${inquiry.eventType}`}
+        </Typography>
+        <Typography variant="body2" component="p">
+          {`Band: ${inquiry.band}`}
+        </Typography>
+        <Typography variant="body2" component="p">
+          {`Event date: ${inquiry.date}`}
+        </Typography>
+        <Typography variant="body2" component="p">
+          {`Start time: ${startTime}`}
+        </Typography>
+        <Typography variant="body2" component="p">
+          {`Event length (hours) ${inquiry.numHours}`}
+        </Typography>
+        <Typography variant="body2" component="p">
+          {`Event location: ${inquiry.location}`}
+        </Typography>
+        {/* <Typography variant="body2" component="p">
+          {`Agent ID: ${inquiry.agentId}`}
+        </Typography> */}
+        {mapAgent()}
+      </div>
+    );
+  };
+
+  const updateInquiry = () => {
+    setUpdate(update + 1);
+  };
+
+  const handleAssignAgent = () => {
+
+  };
+
+  const handleDeleteInquiry = () => {
+
   };
  
   return (
     <Grid container className={classes.icContainer}>
+      <Grid item xs={12}>
+        <Typography variant="h4" component="h2">
+            Inquiry Panel
+        </Typography>
+       </Grid>
       {/* Inquiries
       {mapInquiries()} */}
       <Grid item xs={4} className={classes.listContainer}>
@@ -126,7 +222,10 @@ function InquiryCRUD() {
       <Grid item xs={8} className={classes.listContainer}>
         {displayInquiryUD()}
       </Grid>
-      
+      <Grid item xs={12} className={classes.btnContainer}>
+        <Button variant="outlined" color="primary" onClick={handleAssignAgent}>Assign Agent</Button>
+        <Button variant="outlined" color="primary" onClick={handleDeleteInquiry}>Delete</Button>
+      </Grid>
     </Grid>
   );
 };
