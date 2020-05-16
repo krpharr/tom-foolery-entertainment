@@ -158,7 +158,7 @@ function InquiryCRUD() {
   
   const displayInquiryList = () => {
     if(inquiries === undefined)return;
-    return <SelectedInquiryListItem inquiries={inquiries} handleListItemSelect={handleListItemSelect}/>;
+    return <SelectedInquiryListItem  inquiries={inquiries} handleListItemSelect={handleListItemSelect}/>;
   };
 
   const displayInquiryUD = () => {
@@ -260,9 +260,9 @@ function InquiryCRUD() {
           }else {
             console.log(res.data);
             setAgent(res.data);
+            setUpdate(update + 1);
           }
         });
-        //setUpdate(update + 1);
       }
     });
   };
@@ -280,7 +280,11 @@ function InquiryCRUD() {
   const handleAgentChange = (event) => {
     console.log('handleAgentChange', event.target.value);
     setSelectAgent(event.target.value);
+    // if(agentId === "" || agentId === undefined){
+    //   setAgentId(event.target.value);
+    // }
     //setAgent(event.target.value);
+    setUpdate(update + 1);
 
   };
 
