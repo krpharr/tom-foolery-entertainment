@@ -152,7 +152,7 @@ function InquiryCRUD() {
           console.log(res.data);
           setAgent(res.data);
         }
-      })
+      });
     }
   };
   
@@ -217,7 +217,7 @@ function InquiryCRUD() {
       if(res.status !== 200){
         console.log("Error deleteing inquiry.");
       }else {
-        console.log(res);
+        console.log("Inquiry deleted.",res);
         setUpdate(update +1);
       }
     });
@@ -248,7 +248,23 @@ function InquiryCRUD() {
 
   const handleAssignAgentModalOk = () => {
     handleAssignAgentModalClose();
-    //todo
+    let str = selectAgent === "None" ? "" : selectAgent;
+    inquiryAPI.update(inquiry._id, {agentId: str}).then(res => {
+      if(res.status !== 200){
+        console.log("Error updating inquiry agentId");
+      }else {
+        console.log("Inquiry agent updated!",res);
+        agentAPI.getById(selectAgent).then(res => {
+          if(res.status !== 200){
+            console.log("Error locating agent in database");
+          }else {
+            console.log(res.data);
+            setAgent(res.data);
+          }
+        });
+        //setUpdate(update + 1);
+      }
+    });
   };
 
   const mapAgents = () => {
