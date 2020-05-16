@@ -11,6 +11,10 @@ import moment from 'moment';
 import formatUtil from '../utils/formatUtil';
 import Modal from '@material-ui/core/Modal';
 import Button from '@material-ui/core/Button';
+import MenuItem from '@material-ui/core/MenuItem';
+import FormControl from '@material-ui/core/FormControl';
+import InputLabel from '@material-ui/core/InputLabel';
+import Select from '@material-ui/core/Select';
 
 function rand() {
   return Math.round(Math.random() * 20) - 10;
@@ -63,6 +67,7 @@ const useStyles = makeStyles((theme) => ({
     padding: theme.spacing(2, 4, 3),
   },
   modalBtnBar: {
+    marginTop: "8px",
     display: "flex",
     justifyContent: "space-around"
   },
@@ -81,7 +86,9 @@ function InquiryCRUD() {
   const [update, setUpdate] = useState(0);
   const [agent, setAgent] = useState();
   const [modalStyle] = useState(getModalStyle);
-  const [open, setOpen] = useState(false);
+  const [openDelInqModal, setDelInqModalOpen] = useState(false);
+  const [openAssignAgentModal, setAssignAgentModalOpen] = useState(false);
+  const [selectAgent, setSelectAgent] = useState("None");
 
   useEffect(() => {
     agentAPI.getAll().then(res => {
@@ -120,6 +127,7 @@ function InquiryCRUD() {
       </Typography>        
     );
     } else{
+      if(agent === undefined)return;
       return (
         <div>
           <Typography variant="body2" component="p">
@@ -216,18 +224,50 @@ function InquiryCRUD() {
   };
 
   //modal functions
-  const handleOpen = () => {
-    setOpen(true);
+  const handleDelInqModalOpen = () => {
+    setDelInqModalOpen(true);
   };
 
-  const handleClose = () => {
-    setOpen(false);
+  const handleDelInqModalClose = () => {
+    setDelInqModalOpen(false);
   };
 
-  const handleDelete = () => {
-    handleClose();
+  const handleDelInqModalDelete = () => {
+    handleDelInqModalClose();
     deleteInquiryDB();
   };
+
+  const handleAssignAgentModalOpen = () => {
+    setAssignAgentModalOpen(true);
+  };
+
+  const handleAssignAgentModalClose = () => {
+    setAssignAgentModalOpen(false);
+    setSelectAgent("None")
+  };
+
+  const handleAssignAgentModalOk = () => {
+    handleAssignAgentModalClose();
+    //todo
+  };
+
+  const mapAgents = () => {
+    if(agents === undefined)return;
+    const agentMap = agents.map((agent, index) => {
+      return(
+        <MenuItem key={index} value={agent._id}>{`${agent.firstName} ${agent.lastName}`}</MenuItem>
+      );
+    });
+    return agentMap;
+  };
+
+  const handleAgentChange = (event) => {
+    console.log('handleAgentChange', event.target.value);
+    setSelectAgent(event.target.value);
+    //setAgent(event.target.value);
+
+  };
+
  
   return (
     <Grid container className={classes.icContainer}>
@@ -245,12 +285,12 @@ function InquiryCRUD() {
         {displayInquiryUD()}
       </Grid>
       <Grid item xs={12} className={classes.btnContainer}>
-        <Button variant="outlined" color="primary" onClick={handleAssignAgent}>Assign Agent</Button>
-        <Button variant="outlined" color="primary" onClick={handleOpen}>Delete</Button>
+        <Button variant="outlined" color="primary" onClick={handleAssignAgentModalOpen}>Assign Agent</Button>
+        <Button variant="outlined" color="primary" onClick={handleDelInqModalOpen}>Delete</Button>
       </Grid>
       <Modal
-        open={open}
-        onClose={handleClose}
+        open={openDelInqModal}
+        onClose={handleDelInqModalClose}
         aria-labelledby="simple-modal-title"
         aria-describedby="simple-modal-description"
       >
@@ -258,8 +298,39 @@ function InquiryCRUD() {
           <h3 className={classes.modalAlert}>! Delete Inquiry</h3>
           <p>Are you sure you want to remove inquiry?</p>
           <div className={classes.modalBtnBar}>
-            <Button variant="outlined" color="primary" onClick={handleClose}>Cancel</Button>
-            <Button variant="outlined" color="primary" onClick={handleDelete}>Yes</Button>
+            <Button variant="outlined" color="primary" onClick={handleDelInqModalClose}>Cancel</Button>
+            <Button variant="outlined" color="primary" onClick={handleDelInqModalDelete}>Yes</Button>
+          </div>
+        </div>
+      </Modal>
+      <Modal
+        open={openAssignAgentModal}
+        onClose={handleAssignAgentModalClose}
+        aria-labelledby="simple-modal-title"
+        aria-describedby="simple-modal-description"
+      >
+        <div style={modalStyle} className={classes.paper}>
+          <h3 className={classes.modalAlert}>Assign Agent</h3>
+          <p>Select agent to take call.</p>
+          <FormControl className={classes.formControl}>
+          <InputLabel id="agent-select-label">Set Agent</InputLabel>
+          <Select
+            labelId="agent-select-label"
+            className="agent-select"
+            defaultValue="None"
+            displayEmpty
+            value={selectAgent}
+            onChange={handleAgentChange}
+          >
+            <MenuItem key={-1} value="None">
+            <em>None</em>
+          </MenuItem>
+            {mapAgents()}
+          </Select>
+        </FormControl>
+          <div className={classes.modalBtnBar}>
+            <Button variant="outlined" color="primary" onClick={handleAssignAgentModalClose}>Cancel</Button>
+            <Button variant="outlined" color="primary" onClick={handleAssignAgentModalOk}>Ok</Button>
           </div>
         </div>
       </Modal>
