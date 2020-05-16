@@ -12,5 +12,8 @@ export default {
   },
   update: function(id, inquiryObj) {
     return axios.put(`api/inquiry/${id}`, inquiryObj);
+  },
+  delete: function(id) {
+    return axios.delete(`api/inquiry/${id}`);
   }
 };

@@ -80,6 +80,8 @@ function InquiryCRUD() {
   const [agents, setAgents] = useState();
   const [update, setUpdate] = useState(0);
   const [agent, setAgent] = useState();
+  const [modalStyle] = useState(getModalStyle);
+  const [open, setOpen] = useState(false);
 
   useEffect(() => {
     agentAPI.getAll().then(res => {
@@ -107,11 +109,11 @@ function InquiryCRUD() {
   };
 
   const mapAgent = () => {
-  
+    if(inquiry === undefined)return;
     console.log("agent: ", agent, typeof agent);
     console.log("inquiry.agentId: ", inquiry.agentId, typeof inquiry.agentId);
      
-    if(inquiry.agentId === ""){
+    if(inquiry.agentId === "" || inquiry.agentId === undefined){
       return (
         <Typography variant="body2" component="p">
           Agent: none
@@ -131,6 +133,7 @@ function InquiryCRUD() {
   const handleListItemSelect = (selection) => {
     // setEdit(false);
     console.log(inquiries[selection]);
+    setInquiry(inquiries[selection]);
     if(inquiries[selection].agentId === undefined){
       setAgent(undefined);
     }else {
@@ -143,8 +146,6 @@ function InquiryCRUD() {
         }
       })
     }
-    setInquiry(inquiries[selection]);
-    // setAgentForm(agents[selection]);
   };
   
   const displayInquiryList = () => {
@@ -203,8 +204,29 @@ function InquiryCRUD() {
 
   };
 
-  const handleDeleteInquiry = () => {
+  const deleteInquiryDB = () => {
+    inquiryAPI.delete(inquiry._id).then(res => {
+      if(res.status !== 200){
+        console.log("Error deleteing inquiry.");
+      }else {
+        console.log(res);
+        setUpdate(update +1);
+      }
+    });
+  };
 
+  //modal functions
+  const handleOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
+
+  const handleDelete = () => {
+    handleClose();
+    deleteInquiryDB();
   };
  
   return (
@@ -224,8 +246,23 @@ function InquiryCRUD() {
       </Grid>
       <Grid item xs={12} className={classes.btnContainer}>
         <Button variant="outlined" color="primary" onClick={handleAssignAgent}>Assign Agent</Button>
-        <Button variant="outlined" color="primary" onClick={handleDeleteInquiry}>Delete</Button>
+        <Button variant="outlined" color="primary" onClick={handleOpen}>Delete</Button>
       </Grid>
+      <Modal
+        open={open}
+        onClose={handleClose}
+        aria-labelledby="simple-modal-title"
+        aria-describedby="simple-modal-description"
+      >
+        <div style={modalStyle} className={classes.paper}>
+          <h3 className={classes.modalAlert}>! Delete Inquiry</h3>
+          <p>Are you sure you want to remove inquiry?</p>
+          <div className={classes.modalBtnBar}>
+            <Button variant="outlined" color="primary" onClick={handleClose}>Cancel</Button>
+            <Button variant="outlined" color="primary" onClick={handleDelete}>Yes</Button>
+          </div>
+        </div>
+      </Modal>
     </Grid>
   );
 };
