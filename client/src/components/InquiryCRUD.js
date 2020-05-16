@@ -216,10 +216,10 @@ function InquiryCRUD() {
        </Grid>
       {/* Inquiries
       {mapInquiries()} */}
-      <Grid item xs={4} className={classes.listContainer}>
+      <Grid item xs={12} sm={4} className={classes.listContainer}>
         {displayInquiryList()}
       </Grid>
-      <Grid item xs={8} className={classes.listContainer}>
+      <Grid item xs={12} sm={8} className={classes.listContainer}>
         {displayInquiryUD()}
       </Grid>
       <Grid item xs={12} className={classes.btnContainer}>
