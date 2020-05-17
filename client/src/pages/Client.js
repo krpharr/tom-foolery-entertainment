@@ -32,6 +32,18 @@ function Client(){
   const [update, setUpdate] = useState(0);
   useEffect(() => {
 
+    const sortEvents = () => {
+      const today = moment();
+      const past = events.filter(event => {
+        return moment(event.date).isBefore(today);
+      });
+      setPast(past);
+      const current = events.filter(event => {
+        return moment(event.date).isSameOrAfter(today);
+      });
+      setCurrent(current);    
+    };
+
     if(events === undefined){
       eventAPI.getAll().then(events => {
         clientAPI.getAll().then(res => {
@@ -50,18 +62,6 @@ function Client(){
     }
 
   }, [events, update]);  
-
-  const sortEvents = () => {
-    const today = moment();
-    const past = events.filter(event => {
-      return moment(event.date).isBefore(today);
-    });
-    setPast(past);
-    const current = events.filter(event => {
-      return moment(event.date).isSameOrAfter(today);
-    });
-    setCurrent(current);    
-  };
 
   const mapEvents = (eventArray) => {
     if(events === undefined || eventArray === undefined)return;

@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
-import InquiryCard from "./InquiryCard";
 import inquiryAPI from "../utils/inquiryAPI";
 import agentAPI from "../utils/agentAPI";
 import SelectedInquiryListItem from '../components/SelectedInquiryListItem';
@@ -98,21 +97,6 @@ function InquiryCRUD() {
     });
   }, [update, agent]);
 
-  const mapInquiries = () => {
-    if(inquiries === undefined || agents === undefined)return;
-    const filtered = inquiries.filter(inquiry => {
-      return inquiry.deleted === false;
-    });
-    const inquiriesMap = filtered.map(inquiry => {
-      return(
-        <Grid item key={inquiry._id} >
-          <InquiryCard {...inquiry} agents={agents}/>
-        </Grid>
-      );
-    });
-    return inquiriesMap;
-  };
-
   const mapAgent = () => {
     if(inquiry === undefined)return;     
     if(inquiry.agentId === "" || inquiry.agentId === undefined){
@@ -191,13 +175,13 @@ function InquiryCRUD() {
     );
   };
 
-  const updateInquiry = () => {
-    setUpdate(update + 1);
-  };
+  // const updateInquiry = () => {
+  //   setUpdate(update + 1);
+  // };
 
-  const handleAssignAgent = () => {
+  // const handleAssignAgent = () => {
 
-  };
+  // };
 
   const deleteInquiryDB = () => {
     inquiryAPI.delete(inquiry._id).then(res => {

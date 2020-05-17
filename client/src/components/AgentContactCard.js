@@ -93,27 +93,28 @@ export default function AgentContactCard(props) {
   };
 
   const handleCreateClient = () => {
-    if(user === undefined)return;
-
-
-    const clientObj = {
-      firstName: props.firstName,
-      lastName: props.lastName,
-      email: props.email,
-      phone: props.phone,
-      events: [],
-      userId: user._id,
-      username: clientUsername
-    }
-
-
-    clientAPI.create(clientObj).then(res => {
-      setClient(res.data);
+    // if(user === undefined)return;
+    createUser((res, newUser) => {
+      if(res === "User created."){
+        const clientObj = {
+          firstName: props.firstName,
+          lastName: props.lastName,
+          email: props.email,
+          phone: props.phone,
+          events: [],
+          userId: newUser._id,
+          username: clientUsername
+        }
+        clientAPI.create(clientObj).then(res => {
+          setClient(res.data);
+        });
+      }else{
+        console.log(res);
+      }
     });
-
   };
 
-  const handleCreateUser = () => {
+  const createUser = (cb) => {
     const password = "heroku";
     const userObj = {
       username: clientUsername,
@@ -127,7 +128,10 @@ export default function AgentContactCard(props) {
             return u.username === clientUsername;
           });
           setUser(users[0]);
+          return cb("User created.", users[0]);
         });
+      }else{
+        return cb("Error creating user.");
       }
     });
   };
@@ -149,8 +153,9 @@ export default function AgentContactCard(props) {
     eventAPI.create(eventObj).then(res => {
       setEvent(res.data);
       inquiryAPI.update(props._id, {deleted: true}).then(res =>{
-      
+        console.log("inquiry updated as deleted", res);
       });
+      props.handleRefresh();
     }); 
   };
 
@@ -218,9 +223,9 @@ export default function AgentContactCard(props) {
           />
         </CardContent>
         <CardActions>
-          <Button onClick={handleCreateUser} disabled={user ? true : false}>
+          {/* <Button onClick={handleCreateUser} disabled={user ? true : false}>
               Create User
-          </Button>
+          </Button> */}
           <Button onClick={handleCreateClient} disabled={client && user ? true : false}>
               Create Client
           </Button>

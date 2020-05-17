@@ -87,7 +87,7 @@ function Agent(){
     const inquiriesMap = filtered.map(inquiry => {
       return(
         <Grid item key={inquiry._id} >
-          <AgentContactCard {...inquiry} agentId={agentId}/>
+          <AgentContactCard {...inquiry} agentId={agentId} handleRefresh={handleRefresh}/>
         </Grid>
       );
     });

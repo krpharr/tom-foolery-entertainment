@@ -7,8 +7,6 @@ import Typography from '@material-ui/core/Typography';
 import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
 import FormControl from '@material-ui/core/FormControl';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import Checkbox from '@material-ui/core/Checkbox';
 import Select from '@material-ui/core/Select';
 import agentAPI from '../utils/agentAPI';
 import inquiryAPI from "../utils/inquiryAPI";
@@ -35,9 +33,9 @@ const useStyles = makeStyles((theme) => ({
 export default function InquiryCard(props) {
   const classes = useStyles();
 
-  const [read, setRead] = useState(props.read);
-  const [deleted, setDeleted] = useState(props.deleted);
-  const [agentId, setAgentId] = useState(props.agentId);
+  // const [read, setRead] = useState(props.read);
+  // const [deleted, setDeleted] = useState(props.deleted);
+  const [agentId] = useState(props.agentId);
   const [agent, setAgent] = useState();
   const [update, setUpdate] = useState(0);
   const startTime = moment(props.startTime, 'HH:mm').format('hh:mm a');
@@ -57,21 +55,21 @@ export default function InquiryCard(props) {
   }, [update, agentId]);
 
 
-  const handleReadChange = (event) => {
-    const check = read ? false : true;
-    setRead(check);
-    inquiryAPI.update(event.target.id, {read: check}).then(res => {
+  // const handleReadChange = (event) => {
+  //   const check = read ? false : true;
+  //   setRead(check);
+  //   inquiryAPI.update(event.target.id, {read: check}).then(res => {
     
-    });
-  }; 
+  //   });
+  // }; 
 
-  const handleDeletedChange = (event) => {
-    const check = deleted ? false : true;
-    setDeleted(check);
-    inquiryAPI.update(event.target.id, {deleted: check}).then(res => {
+  // const handleDeletedChange = (event) => {
+  //   const check = deleted ? false : true;
+  //   setDeleted(check);
+  //   inquiryAPI.update(event.target.id, {deleted: check}).then(res => {
     
-    });
-  }; 
+  //   });
+  // }; 
 
   const handleAgentChange = (event) => {
     console.log('handleAgentChange', event.target.value);
