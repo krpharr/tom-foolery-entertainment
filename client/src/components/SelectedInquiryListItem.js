@@ -12,14 +12,14 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: theme.palette.background.paper,
   },
   openEvent: {
-    backgroundColor: "red"
+    color: "red"
   },
   assignedEvent: {
-    backgroundColor: "lightgreen"
+    color: "lightgreen"
   },
   pastEvent: {
     opacity: "50%",
-    backgroundColor: "grey"
+    color: "grey"
   }
 }));
 

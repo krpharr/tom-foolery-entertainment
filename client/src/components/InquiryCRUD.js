@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import Container from '@material-ui/core/Container';
 import { makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import InquiryCard from "./InquiryCard";
@@ -97,8 +96,7 @@ function InquiryCRUD() {
     inquiryAPI.getAll().then(res => {
       setInquiries(res.data);
     });
-
-  }, [update]);
+  }, [update, agent]);
 
   const mapInquiries = () => {
     if(inquiries === undefined || agents === undefined)return;
@@ -116,10 +114,7 @@ function InquiryCRUD() {
   };
 
   const mapAgent = () => {
-    if(inquiry === undefined)return;
-    console.log("agent: ", agent, typeof agent);
-    console.log("inquiry.agentId: ", inquiry.agentId, typeof inquiry.agentId);
-     
+    if(inquiry === undefined)return;     
     if(inquiry.agentId === "" || inquiry.agentId === undefined){
       return (
         <Typography variant="body2" component="p">
@@ -140,7 +135,6 @@ function InquiryCRUD() {
 
   const handleListItemSelect = (selection) => {
     // setEdit(false);
-    console.log(inquiries[selection]);
     setInquiry(inquiries[selection]);
     if(inquiries[selection].agentId === undefined){
       setAgent(undefined);
@@ -149,7 +143,6 @@ function InquiryCRUD() {
         if(res.status !== 200){
           console.log("Error locating agent in database");
         }else {
-          console.log(res.data);
           setAgent(res.data);
         }
       });
@@ -164,9 +157,6 @@ function InquiryCRUD() {
   const displayInquiryUD = () => {
     if(inquiry === undefined)return;
     const startTime = moment(inquiry.startTime, 'HH:mm').format('hh:mm a');
-  
-    console.log("agentId: ",inquiry.agentId);
-    // return <InquiryCard {...inquiry} agents={agents} updateInquiry={updateInquiry}/>
     return (
       <div>
         <Typography variant="body2" component="p">
@@ -196,9 +186,6 @@ function InquiryCRUD() {
         <Typography variant="body2" component="p">
           {`Event location: ${inquiry.location}`}
         </Typography>
-        {/* <Typography variant="body2" component="p">
-          {`Agent ID: ${inquiry.agentId}`}
-        </Typography> */}
         {mapAgent()}
       </div>
     );
@@ -217,7 +204,7 @@ function InquiryCRUD() {
       if(res.status !== 200){
         console.log("Error deleteing inquiry.");
       }else {
-        console.log("Inquiry deleted.",res);
+        setInquiry(undefined);
         setUpdate(update +1);
       }
     });
@@ -253,14 +240,12 @@ function InquiryCRUD() {
       if(res.status !== 200){
         console.log("Error updating inquiry agentId");
       }else {
-        console.log("Inquiry agent updated!",res);
+        setInquiry(res.data);
         agentAPI.getById(selectAgent).then(res => {
           if(res.status !== 200){
             console.log("Error locating agent in database");
           }else {
-            console.log(res.data);
             setAgent(res.data);
-            setUpdate(update + 1);
           }
         });
       }
@@ -278,14 +263,8 @@ function InquiryCRUD() {
   };
 
   const handleAgentChange = (event) => {
-    console.log('handleAgentChange', event.target.value);
     setSelectAgent(event.target.value);
-    // if(agentId === "" || agentId === undefined){
-    //   setAgentId(event.target.value);
-    // }
-    //setAgent(event.target.value);
     setUpdate(update + 1);
-
   };
 
  
@@ -296,8 +275,6 @@ function InquiryCRUD() {
             Inquiry Panel
         </Typography>
        </Grid>
-      {/* Inquiries
-      {mapInquiries()} */}
       <Grid item xs={12} sm={4} className={classes.listContainer}>
         {displayInquiryList()}
       </Grid>
