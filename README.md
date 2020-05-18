@@ -2,13 +2,13 @@
 
 Tom Foolery entertainment is a mock entertainment agency website to attract new and manage current clients and events.  The agency showcases a select group of artists from a number of genres and specializes in special events such as weddings and corporate functions.
 
-![Home Page](media/tom-foolery.1.png)
+![Home Page](https://tom-foolery.s3.us-east-2.amazonaws.com/demo-quarter.gif)
 
 Test Accounts:
 
 * Admin - username: testAdmin password: password
 * Agent - username: hcassam0 password: password
-* Client - username: raulm password: heroku
+* Client - username: tanyaj password: heroku
 
 
 ## Built With
