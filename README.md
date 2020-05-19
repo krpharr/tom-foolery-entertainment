@@ -8,6 +8,8 @@ Tom Foolery entertainment is a mock entertainment agency website to attract new 
 
 <a href="https://tom-foolery.s3.us-east-2.amazonaws.com/demo-quarter.gif" target="_blank">full gif demo</a>
 
+Deployed Site: https://tom-foolery-entertainment.herokuapp.com/
+
 Test Accounts:
 
 * Admin - username: testAdmin password: password
